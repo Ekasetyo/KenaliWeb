@@ -163,7 +163,7 @@
                                 <i class="fa fa-cloud text-white fs-4"></i>
                             </div>
                             <h5 class="mb-3">Dashboard Web</h5>
-                            <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis esse aperiam libero magni qui enim ullam, ex ipsam nesciunt ut, modi et itaque mollitia sint unde officiis ipsa earum accusamus!</p>
+                            <p class="m-0"> sit amet consectetur adipisicing elit. Perferendis esse aperiam libero magni qui enim ullam, ex ipsam nesciunt ut, modi et itaque mollitia sint unde officiis ipsa earum accusamus!</p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
