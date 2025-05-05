@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Prediksi">
+    <meta name="description" content="Hasil Prediksi">
     <meta name="author" content="">
 
-    <title>Prediksi</title>
+    <title>Hasil Prediksi</title>
 
     <!-- Custom fonts for this template -->
     <link href="{{ asset('dashboard-assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -60,7 +60,7 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url('/dashboard/tables') }}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Prediksi</span>
@@ -68,7 +68,7 @@
             </li>
 
             <!-- Nav Item - Riwayat -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/dashboard/riwayat') }}">
                     <i class="fas fa-fw fa-history"></i>
                     <span>Riwayat</span>
@@ -103,29 +103,33 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Prediksi</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Riwayat Hasil Prediksi</h1>
 
-                    <!-- Form Input Prediksi -->
+                    <!-- Form Hasil Prediksi -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Masukkan Data untuk Prediksi</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Hasil Prediksi Berdasarkan Data</h6>
                         </div>
                         <div class="card-body">
-                            <form action="{{ url('/dashboard/predict') }}" method="POST">
+                            <form action="{{ url('/dashboard/riwayat') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="input1">Input 1:</label>
-                                    <input type="text" class="form-control" id="input1" name="input1" placeholder="Masukkan nilai input 1" required>
+                                    <input type="text" class="form-control" id="input1" name="input1" placeholder="Masukkan nilai input 1" readonly value="10">
                                 </div>
                                 <div class="form-group">
                                     <label for="input2">Input 2:</label>
-                                    <input type="text" class="form-control" id="input2" name="input2" placeholder="Masukkan nilai input 2" required>
+                                    <input type="text" class="form-control" id="input2" name="input2" placeholder="Masukkan nilai input 2" readonly value="20">
                                 </div>
                                 <div class="form-group">
                                     <label for="input3">Input 3:</label>
-                                    <input type="text" class="form-control" id="input3" name="input3" placeholder="Masukkan nilai input 3" required>
+                                    <input type="text" class="form-control" id="input3" name="input3" placeholder="Masukkan nilai input 3" readonly value="30">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Prediksi</button>
+                                <div class="form-group">
+                                    <label for="result">Hasil Prediksi:</label>
+                                    <input type="text" class="form-control" id="result" name="result" placeholder="Hasil prediksi" readonly value="60">
+                                </div>
+                                <a href="{{ url('/dashboard/tables') }}" class="btn btn-primary">Kembali ke Prediksi</a>
                             </form>
                         </div>
                     </div>
