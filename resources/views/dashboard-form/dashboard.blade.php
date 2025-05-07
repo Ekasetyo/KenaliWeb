@@ -31,7 +31,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Kenali <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Kenali</div>
             </a>
 
             <!-- Divider -->
@@ -49,18 +49,25 @@
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Data Master -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/dashboard/charts') }}">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data Master</span>
-                </a>
-            </li>
+<li class="nav-item {{ request()->is('dashboard/charts') || request()->is('dashboard/data-user') ? 'active' : '' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDataMaster" aria-expanded="true" aria-controls="collapseDataMaster">
+        <i class="fas fa-fw fa-database"></i>
+        <span>Data Master</span>
+    </a>
+    <div id="collapseDataMaster" class="collapse {{ request()->is('dashboard/charts') || request()->is('dashboard/data-user') ? 'show' : '' }}" aria-labelledby="headingDataMaster" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Submenu Data Master:</h6>
+            <a class="collapse-item {{ request()->is('dashboard/charts') ? 'active' : '' }}" href="{{ url('/dashboard/charts') }}">List Data Master</a>
+            <a class="collapse-item {{ request()->is('dashboard/data-user') ? 'active' : '' }}" href="{{ url('/dashboard/data-user') }}">Data User</a>
+        </div>
+    </div>
+</li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/dashboard/tables') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Prediksi</span>
+                    <span>Cek Risiko</span>
                 </a>
             </li>
 
@@ -192,7 +199,7 @@
 
             </div>
             <!-- End of Main Content -->
-
+             
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">

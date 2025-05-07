@@ -34,7 +34,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Kenali <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Kenali</div>
             </a>
 
             <!-- Divider -->
@@ -53,17 +53,24 @@
 
             <!-- Nav Item - Data Master -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('/dashboard/charts') }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDataMaster" aria-expanded="true" aria-controls="collapseDataMaster">
                     <i class="fas fa-fw fa-database"></i>
                     <span>Data Master</span>
                 </a>
+                <div id="collapseDataMaster" class="collapse" aria-labelledby="headingDataMaster" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Submenu Data Master:</h6>
+                        <a class="collapse-item" href="{{ url('/dashboard/charts') }}">List Data Master</a>
+                        <a class="collapse-item" href="{{ url('/dashboard/data-user') }}">Data User</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{ url('/dashboard/tables') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Prediksi</span>
+                    <span>Cek Risiko</span>
                 </a>
             </li>
 
@@ -103,7 +110,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Prediksi</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Cek Risiko</h1>
 
                     <!-- Form Input Prediksi -->
                     <div class="card shadow mb-4">
@@ -114,18 +121,60 @@
                             <form action="{{ url('/dashboard/predict') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="input1">Input 1:</label>
-                                    <input type="text" class="form-control" id="input1" name="input1" placeholder="Masukkan nilai input 1" required>
+                                    <label for="input3">Usia</label>
+                                    <input type="text" class="form-control" id="input1" name="input1" placeholder="Masukkan Usia " required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input2">Input 2:</label>
-                                    <input type="text" class="form-control" id="input2" name="input2" placeholder="Masukkan nilai input 2" required>
+                                    <label for="input2">Jenis Kelamin:</label>
+                                    <select class="form-control" id="input2" name="input2" required>
+                                        <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="input3">Input 3:</label>
-                                    <input type="text" class="form-control" id="input3" name="input3" placeholder="Masukkan nilai input 3" required>
+                                    <label for="input3">Riwayat Hipertensi:</label>
+                                    <select class="form-control" id="input3" name="input3" required>
+                                        <option value="" disabled selected>Pilih Riwayat Hipertensi</option>
+                                        <option value="Iya">Iya</option>
+                                        <option value="Tidak">Tidak</option>
+                                    </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Prediksi</button>
+                                <div class="form-group">
+                                    <label for="input3">Kadar Gula Darah</label>
+                                    <input type="text" class="form-control" id="input4" name="input4" placeholder="Masukkan nilai input 6" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input3">Indeks Massa Tubuh (BMI):</label>
+                                    <input type="text" class="form-control" id="input5" name="input5" placeholder="Masukkan nilai input 7" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input3">Status Merokok:</label>
+                                    <select class="form-control" id="input6" name="input6" required>
+                                        <option value="" disabled selected>Pilih Status Merokok</option>
+                                        <option value="Perokok">Perokok</option>
+                                        <option value="Mantan Perokok">Mantan Perokok</option>
+                                        <option value="Tidak Perokok">Tidak Perokok</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input3">Aktivitas Fisik:</label>
+                                    <select class="form-control" id="input7" name="input7" required>
+                                        <option value="" disabled selected>Pilih Aktivitas Fisik</option>
+                                        <option value="Rendah">Rendah</option>
+                                        <option value="Sedang">Sedang</option>
+                                        <option value="Berat">Berat</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input3">Status Pernikahan:</label>
+                                    <select class="form-control" id="input8" name="input8" required>
+                                        <option value="" disabled selected>Pilih Status Pernikahan</option>
+                                        <option value="Sudah Menikah">Sudah Menikah</option>
+                                        <option value="Belum Menikah">Belum Menikah</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Cek Risiko</button>
                             </form>
                         </div>
                     </div>
