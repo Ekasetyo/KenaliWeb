@@ -34,7 +34,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Kenali <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Kenali</div>
             </a>
 
             <!-- Divider -->
@@ -70,7 +70,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('/dashboard/tables') }}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Prediksi</span>
+                    <span>Cek Risiko</span>
                 </a>
             </li>
 
@@ -115,7 +115,7 @@
                     <!-- DataTables Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">List Data Master</h6>
+                        <a class="collapse-item" href="{{ url('/dashboard/charts') }}">List Data Master</a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

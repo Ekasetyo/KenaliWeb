@@ -11267,8 +11267,10 @@ form.user .btn-user {
 }
 
 footer.sticky-footer {
-  padding: 2rem 0;
-  flex-shrink: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1030; /* Pastikan berada di atas elemen lain jika diperlukan */
 }
 
 footer.sticky-footer .copyright {
@@ -11279,3 +11281,4 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
