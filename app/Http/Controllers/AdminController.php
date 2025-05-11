@@ -11,10 +11,10 @@ class AdminController extends Controller
         return view('admin.dashboard.index');
     }
 
-    public function dataUser()
-    {
-        return view('admin.user.index');
-    }
+    // public function dataUser()
+    // {
+    //     return view('admin.user.index');
+    // }
 
     public function dataArtikel()
     {

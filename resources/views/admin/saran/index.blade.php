@@ -25,10 +25,8 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>passwor</th>
-                                            <th>Status</th>
+                                            <th>Nama Pemberi</th>
+                                            <th>Saran</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -36,8 +34,6 @@
                                         <!-- Contoh data -->
                                         <tr>
                                             <td>John Doe</td>
-                                            <td>john.doe@example.com</td>
-                                            <td>08123456789</td>
                                             <td>Jl. Contoh No. 123</td>
                                             <td>
                                                 <button class="btn btn-warning btn-sm">Edit</button>

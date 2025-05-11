@@ -18,8 +18,7 @@
                     </div>
                     <div class="form-group">
                         <label for="saran">Saran</label>
-                        <input type="address" class="form-control" id="email" name="email"
-                            placeholder="Masukkan saran" required>
+                        <textarea class="form-control" id="textsaran" name="textsaran" rows="3" placeholder="Masukkan saran" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>

@@ -183,7 +183,7 @@
                                                 placeholder="Masukkan email" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="phone">Nomor Telepon:</label>
+                                            <label for="phone">Nomor Telepon:</label> 
                                             <input type="text" class="form-control" id="phone" name="phone"
                                                 placeholder="Masukkan nomor telepon" required>
                                         </div>
