@@ -43,7 +43,7 @@
                     style="{{ request()->is('admin/data-saran') ? 'color: #22937c;' : '' }}">Data Saran</a>
                 <a class="collapse-item {{ request()->is('admin/data-user') ? 'active' : '' }}"
                     href="{{ route('admin.data-user') }}"
-                    style="{{ request()->is('admin/data-user') ? 'color: #22937c;' : '' }}">Data User</a>
+                    style="{{ request()->is('admin/user') ? 'color: #22937c;' : '' }}">Data User</a>
             </div>
         </div>
     </li>
