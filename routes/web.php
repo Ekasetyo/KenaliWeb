@@ -41,7 +41,7 @@ Route::get('/dashboard/riwayat', function () {
 // routes/web.php
 Route::prefix('admin')->controller(AdminController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('admin.dashboard');
-    //Route::get('/data-user', 'dataUser')->name('admin.data-user');
+    Route::get('/data-user', 'dataUser')->name('admin.data-user');
     Route::get('/data-artikel', 'dataArtikel')->name('admin.data-artikel');
     Route::get('/data-saran', 'dataSaran')->name('admin.data-saran');
     Route::get('/hasil-prediksi', 'dataPrediksi')->name('admin.hasil-prediksi');
@@ -76,3 +76,13 @@ Route::get('/dashboard', function () {
 Route::get('/admin/data-user', [DatauserController::class, 'index'])->name('admin.data-user');
 Route::post('/admin/user', [DatauserController::class, 'store'])->name('admin.user.store');
 Route::delete('/admin/user/{id}', [DatauserController::class, 'destroy'])->name('admin.user.destroy');
+
+//User
+
+// routes/web.php
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::get('/dashboard', 'dashboard')->name('user.dashboard');
+    Route::get('/artikel', 'dataArtikel')->name('user.artikel');
+    Route::get('/riwayat-prediksi', 'dataPrediksi')->name('user.riwayat-prediksi');
+    Route::get('/laporan-visualisasi', 'laporan')->name('user.laporan');
+});
