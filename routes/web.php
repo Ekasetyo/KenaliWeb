@@ -88,3 +88,13 @@ Route::get('/admin/data-artikel/edit/{id}', [ArtikelController::class, 'edit'])-
 Route::put('/admin/data-artikel/update/{id}', [ArtikelController::class, 'update'])->name('admin.artikel.update');
 Route::delete('/admin/data-artikel/{id}', [ArtikelController::class, 'destroy'])->name('admin.artikel.destroy');
 
+
+//User
+
+// routes/web.php
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::get('/dashboard', 'dashboard')->name('user.dashboard');
+    Route::get('/artikel', 'artikel')->name('user.artikel');
+    Route::get('/riwayat-prediksi', 'riwayatPrediksi')->name('user.riwayat-prediksi');
+    Route::get('/laporan-visualisasi', 'laporan')->name('user.laporan-visualisasi');
+});

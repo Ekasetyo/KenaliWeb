@@ -220,46 +220,114 @@
         </div>
         <!-- Process Start -->
 
-        <!-- Testimonial Start -->
-        <div class="container-xxl py-5" id="review">
+        <!-- BMI Calculator Start -->
+        <div class="container-xxl py-5" id="bmi-calculator">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Developer</h5>
-                    <h1 class="mb-5">Team Pengembang Aplikasi</h1>
+                    <h5 class="text-primary-gradient fw-medium">Kalkulator BMI</h5>
+                    <h1 class="mb-5">Hitung Indeks Massa Tubuh Anda</h1>
                 </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('landing-assets/img/testimonial-2.jpg') }}" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Divisi AI</h5>
-                                <p class="mb-1">Eka Setyo Saputra</p>
+                <!-- Pilihan Gender -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-6 text-center">
+                        <div class="d-flex justify-content-center gap-4">
+                            <button type="button" class="btn btn-outline-primary rounded-circle p-4" id="male" onclick="selectGender('male')" style="width: 100px; height: 100px;">
+                                <i class="fa fa-mars fa-3x"></i>
+                                <p class="mt-2">Laki-Laki</p>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger rounded-circle p-4" id="female" onclick="selectGender('female')" style="width: 100px; height: 100px;">
+                                <i class="fa fa-venus fa-3x"></i>
+                                <p class="mt-2">Perempuan</p>
+                            </button>
+                        </div>
+                        <input type="hidden" id="gender" value="">
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <form id="bmiForm">
+                                <div class="row g-3">
+                                    <!-- Input Berat Badan -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="weight" placeholder="Berat Badan (kg)" min="0" required>
+                                            <label for="weight">Berat Badan (kg)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Input Tinggi Badan -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="height" placeholder="Tinggi Badan (cm)" min="0" required>
+                                            <label for="height">Tinggi Badan (cm)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Input Usia -->
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="age" placeholder="Usia (tahun)" min="0" required>
+                                            <label for="age">Usia (tahun)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Tombol Hitung -->
+                                    <div class="col-12 text-center">
+                                        <button type="button" class="btn btn-primary-gradient rounded-pill py-3 px-5" onclick="calculateBMI()">Hitung BMI</button>
+                                    </div>
+                                    <!-- Hasil BMI -->
+                                    <div class="col-12 text-center">
+                                        <p id="bmiResult" class="mt-3"></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BMI Calculator End -->
+
+        <!-- Artikel Start -->
+        <div class="container-xxl py-5" id="artikel">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Artikel</h5>
+                    <h1 class="mb-5">Artikel Terbaru</h1>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('landing-assets/img/article-1.jpg') }}" alt="Artikel 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Artikel 1</h5>
+                                <p class="card-text">Ini adalah ringkasan singkat dari artikel pertama. Artikel ini membahas topik yang sangat menarik.</p>
+                                <a href="#" class="btn btn-primary-gradient">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('landing-assets/img/testimonial-3.jpg') }}" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Divisi Website</h5>
-                                <p class="mb-1">Abd. A Rama & Farrel Ezza</p>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('landing-assets/img/article-2.jpg') }}" alt="Artikel 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Artikel 2</h5>
+                                <p class="card-text">Ini adalah ringkasan singkat dari artikel kedua. Artikel ini memberikan wawasan baru.</p>
+                                <a href="#" class="btn btn-primary-gradient">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('landing-assets/img/testimonial-4.jpg') }}" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Divisi Mobile</h5>
-                                <p class="mb-1">Ahmad Rizal & Moch. Rizki</p>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('landing-assets/img/article-3.jpg') }}" alt="Artikel 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Judul Artikel 3</h5>
+                                <p class="card-text">Ini adalah ringkasan singkat dari artikel ketiga. Artikel ini sangat penting untuk diketahui.</p>
+                                <a href="#" class="btn btn-primary-gradient">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Testimonial End -->
-
+        <!-- Artikel End -->
 
         <!-- Contact Start -->
         <div class="container-xxl py-5" id="contact">
