@@ -53,9 +53,6 @@ Route::prefix('admin')->controller(AdminController::class)->group(function () {
 
 
 
-
-
-
 //Login
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
@@ -87,6 +84,12 @@ Route::post('/admin/artikel', [ArtikelController::class, 'store'])->name('admin.
 Route::get('/admin/data-artikel/edit/{id}', [ArtikelController::class, 'edit'])->name('admin.artikel.edit');
 Route::put('/admin/data-artikel/update/{id}', [ArtikelController::class, 'update'])->name('admin.artikel.update');
 Route::delete('/admin/data-artikel/{id}', [ArtikelController::class, 'destroy'])->name('admin.artikel.destroy');
+
+
+
+
+
+
 
 
 //User
