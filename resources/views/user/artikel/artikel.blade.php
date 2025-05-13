@@ -23,8 +23,8 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Artikel -->
-    <li class="nav-item {{ request()->is('user/data-artikel') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('/user/data-artikel') }}">
+    <li class="nav-item {{ request()->is('user/artikel') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('/user/artikel') }}">
             <i class="fas fa-fw fa-newspaper"></i>
             <span>Artikel</span>
         </a>
@@ -40,7 +40,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/user/laporan') }}">
+        <a class="nav-link" href="{{ url('/user/laporan-visualisasi') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Laporan dan Visualisasi</span>
         </a>
@@ -48,7 +48,7 @@
 
     <!-- Nav Item - Riwayat -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/dashboard/riwayat') }}">
+        <a class="nav-link" href="{{ url('/login') }}">
             <i class="fas fa-fw fa-history"></i>
             <span>Logout</span>
         </a>

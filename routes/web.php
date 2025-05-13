@@ -76,3 +76,13 @@ Route::get('/dashboard', function () {
 Route::get('/admin/data-user', [DatauserController::class, 'index'])->name('admin.data-user');
 Route::post('/admin/user', [DatauserController::class, 'store'])->name('admin.user.store');
 Route::delete('/admin/user/{id}', [DatauserController::class, 'destroy'])->name('admin.user.destroy');
+
+//User
+
+// routes/web.php
+Route::prefix('user')->controller(UserController::class)->group(function () {
+    Route::get('/dashboard', 'dashboard')->name('user.dashboard');
+    Route::get('/artikel', 'artikel')->name('user.artikel');
+    Route::get('/riwayat-prediksi', 'riwayatPrediksi')->name('user.riwayat-prediksi');
+    Route::get('/laporan-visualisasi', 'laporan')->name('user.laporan-visualisasi');
+});
