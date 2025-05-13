@@ -1,13 +1,28 @@
 <?php
-// filepath: c:\xampp\htdocs\FinomalyWeb\app\Http\Controllers\UserController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function dashboard()
     {
-        return view('dashboard-form.user');
+        return view('user.dashboard.index');
+    }
+
+    public function artikel()
+    {
+        return view('user.artikel.index');
+    }
+
+    public function riwayatPrediksi()
+    {
+        return view('user.riwayat-prediksi.index');
+    }
+
+    public function laporan()
+    {
+        return view('user.laporan.index');
     }
 }
