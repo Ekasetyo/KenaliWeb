@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="{{ url('/admin/dashboard') }}">
+        <a class="nav-link" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -35,14 +35,11 @@
             aria-labelledby="headingDataMaster" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Submenu Data Master:</h6>
-                <a class="collapse-item {{ request()->is('admin/data-artikel') ? 'active' : '' }}"
-                    href="{{ route('admin.data-artikel') }}"
-                    style="{{ request()->is('admin/data-artikel') ? 'color: #22937c;' : '' }}">Data Artikel</a>
-                <a class="collapse-item {{ request()->is('admin/data-saran') ? 'active' : '' }}"
-                    href="{{ route('admin.data-saran') }}"
-                    style="{{ request()->is('admin/data-saran') ? 'color: #22937c;' : '' }}">Data Saran</a>
-                <a class="collapse-item {{ request()->is('admin/data-user') ? 'active' : '' }}"
-                    href="{{ route('admin.data-user') }}"
+                <a class="collapse-item {{ request()->is('admin/artikel') ? 'active' : '' }}"
+                    href="{{ route('admin.artikel.index') }}"
+                    style="{{ request()->is('admin/artikel') ? 'color: #22937c;' : '' }}">Data Artikel</a>
+                <a class="collapse-item {{ request()->is('admin/user') ? 'active' : '' }}"
+                    href="{{ route('admin.user.index') }}"
                     style="{{ request()->is('admin/user') ? 'color: #22937c;' : '' }}">Data User</a>
             </div>
         </div>

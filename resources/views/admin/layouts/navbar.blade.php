@@ -15,14 +15,13 @@
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
-    <!-- Nav Item - User Information -->
-    <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Eka ganteng</span>
-            <img class="img-profile rounded-circle" src="https://ui-avatars.com/api/?name=Eka+Ganteng&background=random" width="40" height="40">
-        </a>
-    </li>
-</ul>
-
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ session('user.name') }}</span>
+                <img class="img-profile rounded-circle" src="https://ui-avatars.com/api/?name={{ urlencode(session('user.name')) }}&background=random" width="40" height="40">
+            </a>
+        </li>
+    </ul>
 </nav>
 <!-- End of Topbar -->
