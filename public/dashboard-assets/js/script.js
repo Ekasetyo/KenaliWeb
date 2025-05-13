@@ -46,3 +46,27 @@ togglePassword.addEventListener("click", function (e) {
     // toggle the eye slash icon
     this.classList.toggle("fa-eye-slash");
 });
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.btn-edit').forEach(function (button) {
+            button.addEventListener('click', function () {
+                const userId = this.dataset.id;
+                fetch(`/admin/user/${userId}/edit`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('editUserForm').action = `/admin/user/${userId}`;
+                        document.getElementById('edit_name').value = data.name;
+                        document.getElementById('edit_email').value = data.email;
+                        document.getElementById('edit_jenis_kelamin').value = data.jenis_kelamin ?? '';
+                        document.getElementById('edit_tanggal_lahir').value = data.tanggal_lahir ?? '';
+                        document.getElementById('edit_no_telepon').value = data.no_telepon ?? '';
+                        document.getElementById('edit_alamat').value = data.alamat ?? '';
+                        document.getElementById('edit_status').value = data.status ?? 'user';
+
+                        $('#formEditUser').modal('show');
+                    });
+            });
+        });
+    });

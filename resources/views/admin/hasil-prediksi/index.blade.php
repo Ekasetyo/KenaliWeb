@@ -47,7 +47,6 @@
 
                     <!-- Form Input Data Master -->
                     <!-- Modal Tambah Data User -->
-                    @include('admin.saran.create')
                     <!-- /.container-fluid -->
 
                 </div>

@@ -6,25 +6,20 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function dashboard()
-    {
-        return view('admin.dashboard.index');
-    }
-
-    // public function dataUser()
+    // public function dashboard()
     // {
-    //     return view('admin.user.index');
+    //     return view('admin.dashboard.index');
     // }
 
-    public function dataArtikel()
-    {
-        return view('admin.artikel.index');
-    }
+    // public function layouts()
+    // {
+    //     return view('admin.layouts.index');
+    // }
 
-    public function dataSaran()
-    {
-        return view('admin.saran.index');
-    }
+    // public function dataArtikel()
+    // {
+    //     return view('admin.artikel.index');
+    // }
 
     public function dataPrediksi()
     {
