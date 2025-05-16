@@ -20,7 +20,7 @@ class User extends Eloquent implements AuthenticatableContract
         'password',
         'jenis_kelamin',
         'tanggal_lahir',
-        'telepon',
+        'no_telepon',
         'alamat',
         'status',
     ];

@@ -86,7 +86,7 @@
     @stack('scripts') {{-- Untuk halaman jika ingin menambahkan script khusus --}}
 
 
-
+    @include('sweetalert::alert')
     
 </body>
 
