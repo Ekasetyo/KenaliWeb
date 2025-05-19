@@ -17,19 +17,22 @@ class UserSeeder extends Seeder
             'jenis_kelamin' => 'Laki-laki',
             'tanggal_lahir' => '2000-01-09',
             'no_telepon' => '081234567888',
-            'alamat' => 'Jl. Contoh',
+            'alamat' => 'Jl. Polije',
             'status' => 'admin',
         ]);
+
 
         User::create([
             'name' => 'User Kenali',
             'email' => 'UserKenali@gmail.com',
             'password' => Hash::make('UserKenali123'),
             'jenis_kelamin' => 'Laki-laki',
-            'tanggal_lahir' => '2000-01-10',
-            'no_telepon' => '081234569981',
-            'alamat' => 'Jl. polije',
+            'tanggal_lahir' => '2000-01-20',
+            'no_telepon' => '081234569887',
+            'alamat' => 'Jl. Polije',
             'status' => 'user',
         ]);
+
+
     }
 }
