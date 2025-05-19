@@ -9,9 +9,8 @@ use App\Http\Controllers\DatauserController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\PrediksiController;
 
-Route::get('/', function () {
-    return view('landing-page.landing-page');
-});
+Route::get('/', [ArtikelController::class, 'landing']);
+
 
 Route::get('/login', function () {
     return view('login-register.login');
@@ -84,10 +83,7 @@ Route::post('/admin/artikel', [ArtikelController::class, 'store'])->name('admin.
 Route::get('/admin/data-artikel/edit/{id}', [ArtikelController::class, 'edit'])->name('admin.artikel.edit');
 Route::put('/admin/data-artikel/update/{id}', [ArtikelController::class, 'update'])->name('admin.artikel.update');
 Route::delete('/admin/data-artikel/{id}', [ArtikelController::class, 'destroy'])->name('admin.artikel.destroy');
-
-
-
-
+Route::get('/', [ArtikelController::class, 'landing']);
 
 
 
@@ -97,7 +93,9 @@ Route::delete('/admin/data-artikel/{id}', [ArtikelController::class, 'destroy'])
 // routes/web.php
 Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('user.dashboard');
-    Route::get('/artikel', 'artikel')->name('user.artikel');
     Route::get('/riwayat-prediksi', 'riwayatPrediksi')->name('user.riwayat-prediksi');
     Route::get('/laporan-visualisasi', 'laporan')->name('user.laporan-visualisasi');
+    Route::middleware(['auth'])->post('/user/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password');
+
+
 });

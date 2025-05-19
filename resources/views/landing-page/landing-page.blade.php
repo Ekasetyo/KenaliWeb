@@ -289,48 +289,29 @@
 
 
 
-<!-- Artikel Start -->
-        <div class="container-xxl py-5" id="artikel">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Artikel</h5>
-                    <h1 class="mb-5">Artikel Terbaru</h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ asset('landing-assets/img/stroke1.jpg') }}" alt="Pengertian Stroke" style="height: 220px; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">Pengertian Stroke</h5>
-                                <p class="card-text" style="text-align: justify;">Artikel ini membahas topik yang sangat menarik, yaitu pengenalan tentang stroke, faktor risiko, dan pentingnya deteksi dini untuk mencegah komplikasi serius.</p>
-                                <a href="https://www.alodokter.com/stroke" target="_blank" class="btn btn-primary-gradient">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ asset('landing-assets/img/stroke2.jpg') }}" alt="Pengobatan Stroke" style="height: 220px; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">Pengobatan Stroke</h5>
-                                <p class="card-text" style="text-align: justify;">Bagaimana memberikan wawasan baru mengenai berbagai metode pengobatan stroke, mulai dari penanganan darurat hingga rehabilitasi untuk meningkatkan kualitas.</p>
-                                <a href="https://www.alodokter.com/stroke/pengobatan" target="_blank" class="btn btn-primary-gradient">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="card">
-                            <img class="card-img-top" src="{{ asset('landing-assets/img/stroke3.jpg') }}" alt="Gejala Stroke" style="height: 220px; object-fit: cover;">
-                            <div class="card-body">
-                                <h5 class="card-title">Gejala Stroke</h5>
-                                <p class="card-text" style="text-align: justify;">Untuk diketahui karena membahas gejala-gejala stroke yang harus diwaspadai agar penanganan dapat dilakukan secepat mungkin.</p>
-                                <a href="https://www.alodokter.com/stroke/gejala" target="_blank" class="btn btn-primary-gradient">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Artikel Terbaru Start -->
+<div class="container-xxl py-5" id="artikel">
+    <div class="container py-5 px-lg-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
+            <h1 class="mb-5">Informasi & Tips</h1>
         </div>
-        <!-- Artikel End -->
+    <div class="row g-4">
+         @foreach($artikels as $artikel)
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-light rounded p-4">
+                    <h5>{{ $artikel->judul }}</h5>
+                        <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
+                        <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
+                     <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- Artikel Terbaru End -->
+
 
         <!-- Contact Start -->
         <div class="container-xxl py-5" id="contact">

@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'tanggal_lahir' => '2000-01-09',
             'no_telepon' => '081234567888',
             'alamat' => 'Jl. Contoh',
-            'status' => 'Admin',
+            'status' => 'admin',
         ]);
 
         User::create([
