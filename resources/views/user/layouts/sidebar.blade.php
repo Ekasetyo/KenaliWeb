@@ -22,13 +22,7 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
-    <!-- Nav Item - Artikel -->
-    <li class="nav-item {{ request()->is('user/artikel') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('/user/artikel') }}">
-            <i class="fas fa-fw fa-database"></i>
-            <span>Artikel</span>
-        </a>
-    </li>
+   
 
     <!-- Nav Item - Tables -->
     <li class="nav-item {{ request()->is('user/riwayat-prediksi') ? 'active' : '' }}">
