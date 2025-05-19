@@ -123,7 +123,7 @@ function selectGender(gender) {
 }
 
 function calculateBMI() {
-     const weight = parseFloat(document.getElementById('weight').value);
+    const weight = parseFloat(document.getElementById('weight').value);
     const height = parseFloat(document.getElementById('height').value);
     const age = parseInt(document.getElementById('age').value);
 

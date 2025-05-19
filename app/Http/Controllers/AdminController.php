@@ -8,31 +8,12 @@ class AdminController extends Controller
 {
     // public function dashboard()
     // {
-    //     return view('admin.dashboard.index');
+    // return view('admin.dashboard.index');
     // }
 
-    // public function layouts()
-    // {
-    //     return view('admin.layouts.index');
-    // }
-
-    // public function dataArtikel()
-    // {
-    //     return view('admin.artikel.index');
-    // }
-
-    public function dataPrediksi()
+    public function __construct()
     {
-        return view('admin.hasil-prediksi.index');
+        $this->middleware(['auth', 'admin']); // hanya admin yang bisa akses
     }
-
-    public function visualisasi()
-    {
-        return view('admin.visualisasi.index');
-    }
-
-    public function laporan()
-    {
-        return view('admin.laporan.index');
-    }
+    
 }

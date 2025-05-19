@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin.user.store') }}" method="POST">
+                <form action="{{ route('admin.user.store') }}" method="POST" id="userForm">
                     @csrf
                     <div class="form-group">
                         <label for="name">Nama:</label>
@@ -25,14 +25,32 @@
                         <label for="password">Password:</label>
                         <div class="input-group">
                             <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Masukkan password" required>
+                                placeholder="Masukkan password" required
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                title="Password harus mengandung minimal 8 karakter, termasuk huruf besar, huruf kecil, angka, dan karakter khusus">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i>
                                 </span>
                             </div>
                         </div>
+                        <small class="form-text text-muted">
+                            Password harus mengandung:
+                            <ul>
+                                <li id="length" class="text-danger">Minimal 8 karakter</li>
+                                <li id="capital" class="text-danger">Huruf kapital (A-Z)</li>
+                                <li id="number" class="text-danger">Angka (0-9)</li>
+                                <li id="special" class="text-danger">Karakter khusus (@$!%*?&)</li>
+                            </ul>
+                        </small>
                     </div>
+                    <div class="form-group">
+                        <label for="password_confirmation">Konfirmasi Password:</label>
+                        <input type="password" class="form-control" id="password_confirmation" 
+                            name="password_confirmation" placeholder="Masukkan ulang password" required>
+                        <div id="passwordMatch" class="invalid-feedback">Password tidak cocok</div>
+                    </div>
+                    <!-- Field lainnya tetap sama -->
                     <div class="form-group">
                         <label for="jenis_kelamin">Jenis Kelamin:</label>
                         <select class="form-control" id="jenis_kelamin" name="jenis_kelamin" required>
@@ -48,7 +66,12 @@
                     <div class="form-group">
                         <label for="no_telepon">No. Telepon:</label>
                         <input type="tel" class="form-control" id="no_telepon" name="no_telepon"
-                            placeholder="Masukkan nomor telepon" required>
+                            placeholder="Masukkan nomor telepon" 
+                            pattern="[0-9]*" 
+                            inputmode="numeric"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            required>
+                        <small class="form-text text-muted">Hanya angka yang diperbolehkan</small>
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat:</label>
