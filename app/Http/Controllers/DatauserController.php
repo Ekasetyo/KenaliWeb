@@ -77,7 +77,7 @@ class DatauserController extends Controller
         }
 
         try {
-            $user = User::create([
+            $users = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
