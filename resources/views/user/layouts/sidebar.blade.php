@@ -28,7 +28,7 @@
     <li class="nav-item {{ request()->is('user/riwayat-prediksi') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/user/riwayat-prediksi') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Riwayat Prediksi</span>
+            <span>Konsultasi</span>
         </a>
     </li>
 
@@ -36,7 +36,7 @@
     <li class="nav-item {{ request()->is('user/laporan-visualisasi') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/user/laporan-visualisasi') }}">
             <i class="fas fa-fw fa-file-alt"></i>
-            <span>Laporan dan Visualisasi</span>
+            <span>Prediksi & Visualisasi</span>
         </a>
     </li>
 

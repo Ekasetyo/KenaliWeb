@@ -3,27 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function ubahPassword(Request $request)
-    {
-        $request->validate([
-            'old_password' => 'required',
-            'new_password' => 'required|confirmed|min:6',
-        ]);
+{
+    $request->validate([
+        'old_password' => 'required',
+        'new_password' => 'required|confirmed|min:6',
+    ]);
 
-        $user = Auth::user();
+    $userId = session('user_id');
+    $user = User::find($userId);
 
-        if (!Hash::check($request->old_password, $user->password)) {
-            return back()->withErrors(['old_password' => 'Password lama salah']);
-        }
-
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        return redirect()->back()->with('success', 'Password berhasil diubah');
+    if (!$user) {
+        return back()->with('error', 'User belum login.');
     }
+
+    if (!Hash::check($request->old_password, $user->password)) {
+        return back()->with('error', 'Password lama salah.');
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return back()->with('success', 'Password berhasil diubah.');
+}
 
     public function dashboard()
     {

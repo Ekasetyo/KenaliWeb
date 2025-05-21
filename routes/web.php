@@ -95,7 +95,8 @@ Route::prefix('user')->controller(UserController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('user.dashboard');
     Route::get('/riwayat-prediksi', 'riwayatPrediksi')->name('user.riwayat-prediksi');
     Route::get('/laporan-visualisasi', 'laporan')->name('user.laporan-visualisasi');
-    Route::middleware(['auth'])->post('/user/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password');
 
-
+    Route::post('/ubah-password', 'ubahPassword')->name('user.ubahPassword');
 });
+
+
