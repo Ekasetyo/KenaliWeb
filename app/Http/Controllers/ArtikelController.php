@@ -62,6 +62,11 @@ class ArtikelController extends Controller
         Alert::success('Berhasil!', 'Artikel berhasil diperbarui');
         return redirect()->route('admin.artikel.index');
     }
+public function landing()
+{
+    $artikels = Artikel::orderBy('created_at', 'desc')->paginate(5);
+    return view('landing-page.landing-page', compact('artikels'));
+}   
 
     public function destroy($id)
     {
