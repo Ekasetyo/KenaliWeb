@@ -46,7 +46,14 @@ class DatauserController extends Controller
                 'email',
                 Rule::unique('users', 'email')
             ],
-            'password' => 'required|string|min:6',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'
+            ],
+            'password_confirmation' => 'required|same:password',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'tanggal_lahir' => 'required|date',
             'no_telepon' => [
@@ -59,7 +66,10 @@ class DatauserController extends Controller
             'status' => 'required|in:admin,user',
         ], [
             'email.unique' => 'Email ini sudah terdaftar',
-            'no_telepon.unique' => 'Nomor telepon ini sudah terdaftar'
+            'no_telepon.unique' => 'Nomor telepon ini sudah terdaftar',
+            'password.regex' => 'Password harus mengandung minimal 8 karakter yang terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus (@$!%*?&)',
+            'password.confirmed' => 'Konfirmasi password tidak cocok',
+            'password.min' => 'Password minimal harus 8 karakter'
         ]);
 
         if ($validator->fails()) {
@@ -99,7 +109,7 @@ class DatauserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
+        $rules = [
             'name' => 'required|string|max:255',
             'email' => [
                 'required',
@@ -116,9 +126,25 @@ class DatauserController extends Controller
             ],
             'alamat' => 'required|string',
             'status' => 'required|in:admin,user',
-        ], [
+        ];
+
+        // Jika password diisi, tambahkan validasi untuk password
+        if ($request->filled('password')) {
+            $rules['password'] = [
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'
+            ];
+            $rules['password_confirmation'] = 'required|same:password';
+        }
+
+        $validator = Validator::make($request->all(), $rules, [
             'email.unique' => 'Email ini sudah terdaftar',
-            'no_telepon.unique' => 'Nomor telepon ini sudah terdaftar'
+            'no_telepon.unique' => 'Nomor telepon ini sudah terdaftar',
+            'password.regex' => 'Password harus mengandung minimal 8 karakter yang terdiri dari huruf besar, huruf kecil, angka, dan karakter khusus (@$!%*?&)',
+            'password.confirmed' => 'Konfirmasi password tidak cocok',
+            'password.min' => 'Password minimal harus 8 karakter'
         ]);
 
         if ($validator->fails()) {
@@ -127,7 +153,14 @@ class DatauserController extends Controller
 
         try {
             $user = User::findOrFail($id);
-            $user->update($request->all());
+            $data = $request->except('password', 'password_confirmation');
+            
+            // Jika password diisi, hash password baru
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make($request->password);
+            }
+
+            $user->update($data);
 
             Alert::success('Berhasil!', 'Data user berhasil diperbarui');
             return redirect()->route('admin.user.index');
