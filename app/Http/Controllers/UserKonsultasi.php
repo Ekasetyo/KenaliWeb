@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
 use App\Models\PesanKonsultasi;
+use App\Models\PesanKonsultasi;
 use Illuminate\Support\Facades\Auth;
 
 class UserKonsultasi extends Controller
@@ -31,9 +32,15 @@ class UserKonsultasi extends Controller
         ]);
 
         PesanKonsultasi::create([
+
             'konsultasi_id' => $consultation->id,
             'sender' => 'user',
             'pesan' => $request->message,
+
+            'konsultasi_id' => $konsultasi->id,
+            'sender' => 'user',
+            'pesan' => $request->pesan,
+
         ]);
 
         return redirect()->back()->with('success', 'Konsultasi berhasil dikirim.');
@@ -42,14 +49,24 @@ class UserKonsultasi extends Controller
     public function reply(Request $request)
     {
         $request->validate([
+
             'konsultasi_id' => 'required|exists:consultations,id',
+
+            'konsultasi_id' => 'required|exists:konsultasi,id',
+
             'pesan' => 'required|string',
         ]);
 
         PesanKonsultasi::create([
+
             'konsultasi_id' => $request->consultation_id,
             'sender' => 'user',
             'pesan' => $request->message,
+
+            'konsultasi_id' => $request->konsultasi_id,
+            'sender' => 'user',
+            'pesan' => $request->pesan,
+
         ]);
 
         return redirect()->back()->with('success', 'Pesan berhasil dikirim.');

@@ -10,11 +10,9 @@ use App\Http\Controllers\DashboardadminController;
 use App\Http\Controllers\PrediksiController;
 use App\Http\Controllers\AdminDataPrediksi;
 use App\Http\Controllers\AdminVisualisasi;
-use App\Http\Controllers\AdminLaporan;  
-use App\Http\Controllers\ConsultationController;
-use App\Http\Controllers\AdminConsultationController;
+use App\Http\Controllers\AdminLaporan;
 use App\Http\Controllers\AdminKonsultasi;
-use App\Http\Controllers\UserKonsultasi;
+use App\Http\Controllers\UserKonsultasi; 
 
 // ==============================
 // Public Routes
@@ -36,12 +34,12 @@ Route::get('/dashboard/tables', fn () => view('dashboard-form.tables'))->name('d
 Route::get('/dashboard/riwayat', fn () => view('dashboard-form.riwayat'))->name('dashboard.riwayat');
 
 // Route Dashboard User (Backup / Fallback)
-// Route::get('/dashboard', function () {
-//     if (session('user')) {
-//         return view('dashboard-form.dashboard');
-//     }
-//     return redirect('/login');
-// })->name('user.dashboard');
+Route::get('/dashboard', function () {
+    if (session('user')) {
+        return view('dashboard-form.dashboard');
+    }
+    return redirect('/login');
+})->name('user.dashboard');
 
 // ==============================
 // Admin Routes
@@ -68,7 +66,7 @@ Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function (
 
     // Data Prediksi, Visualisasi, Laporan
     Route::get('/hasil-prediksi', [AdminDataPrediksi::class, 'dataPrediksi'])->name('admin.hasil-prediksi');
-     Route::get('/visualisasi', [AdminVisualisasi::class, 'visualisasi'])->name('admin.visualisasi');
+    Route::get('/visualisasi', [AdminVisualisasi::class, 'visualisasi'])->name('admin.visualisasi');
     Route::get('/laporan', [AdminLaporan::class, 'laporan'])->name('admin.laporan');
 
     // Konsultasi (View ada di views/laporan)
@@ -93,7 +91,7 @@ Route::middleware(['login.session'])->prefix('user')->controller(UserController:
 
 // User Consultation Routes
 Route::middleware(['auth'])->prefix('user')->group(function() {
-    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('user.consultations.index');
-    Route::post('/konsultasi', [UserKonsultasi::class, 'store'])->name('user.consultations.store');
-    Route::post('/konsultasi/reply', [UserKonsultasi::class, 'reply'])->name('user.consultations.reply');
+    Route::get('/konsultasi', [UserController::class, 'index'])->name('user.consultations.index');
+    Route::post('/konsultasi', [UserController::class, 'store'])->name('user.consultations.store');
+    Route::post('/konsultasi/reply', [UserController::class, 'reply'])->name('user.consultations.reply');
 });
