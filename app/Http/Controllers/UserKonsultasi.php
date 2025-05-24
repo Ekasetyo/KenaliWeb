@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
 use App\Models\PesanKonsultasi;
-use App\Models\PesanKonsultasi;
 use Illuminate\Support\Facades\Auth;
 
 class UserKonsultasi extends Controller
@@ -13,7 +12,7 @@ class UserKonsultasi extends Controller
     public function index()
     {
         $userId = session('user')->id; // Atau gunakan Auth::id() jika pakai Auth
-        $consultations = Konsultasi::where('user_id', $userId)->latest()->get();
+        $konsultasi = Konsultasi::where('user_id', $userId)->latest()->get();
 
         return view('laporan.konsultasi', compact('konsultasi'));
     }
@@ -25,7 +24,7 @@ class UserKonsultasi extends Controller
             'pesan' => 'required|string',
         ]);
 
-        $consultation = Konsultasi::create([
+        $konsultasi = Konsultasi::create([
             'user_id' => session('user')->id,
             'topic' => $request->topic,
             'status' => 'active',
@@ -33,7 +32,7 @@ class UserKonsultasi extends Controller
 
         PesanKonsultasi::create([
 
-            'konsultasi_id' => $consultation->id,
+            'konsultasi_id' => $konsultasi->id,
             'sender' => 'user',
             'pesan' => $request->message,
 
