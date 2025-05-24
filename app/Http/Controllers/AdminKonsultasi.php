@@ -10,10 +10,7 @@ class AdminKonsultasi extends Controller
 {
     public function index()
     {
-
         $konsultasi = Konsultasi::latest()->get();
-        $consultations = Konsultasi::latest()->get();
-
         return view('admin.konsultasi.index', compact('konsultasi'));
     }
 
@@ -21,7 +18,6 @@ class AdminKonsultasi extends Controller
     {
         $konsultasi = Konsultasi::findOrFail($id);
         $pesan = PesanKonsultasi::where('konsultasi_id', $id)->get();
-        $messages = PesanKonsultasi::where('konsultasi_id', $id)->get();
 
         return response()->json([
             'konsultasi' => $konsultasi,
@@ -32,9 +28,7 @@ class AdminKonsultasi extends Controller
     public function reply(Request $request)
     {
         $request->validate([
-
             'konsultasi_id' => 'required|exists:konsultasis,id',
-            'konsultasi_id' => 'required|exists:konsultasi,id',
             'pesan' => 'required|string',
         ]);
 
@@ -42,7 +36,6 @@ class AdminKonsultasi extends Controller
             'konsultasi_id' => $request->konsultasi_id,
             'sender' => 'admin',
             'pesan' => $request->pesan,
-            'pesan' => $request->message,
         ]);
 
         return response()->json(['success' => true]);
