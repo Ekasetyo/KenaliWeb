@@ -9,39 +9,6 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-2 text-gray-800">Konsultasi Pelanggan</h1>
 
-            <!-- Filter Section -->
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="status-filter">Filter Status</label>
-                        <select class="form-control" id="status-filter">
-                            <option value="all">Semua</option>
-                            <option value="active">Aktif</option>
-                            <option value="completed">Selesai</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="date-filter">Filter Tanggal</label>
-                        <input type="date" class="form-control" id="date-filter">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="search">Cari Konsultasi</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="search" placeholder="Cari...">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Consultation List -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
@@ -92,19 +59,6 @@
                                         </button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Citra Dewi</td>
-                                    <td>citra@example.com</td>
-                                    <td>Keluhan</td>
-                                    <td><span class="badge badge-primary">Aktif</span></td>
-                                    <td>13 Jun 2023 13:45</td>
-                                    <td>
-                                        <button class="btn btn-info btn-sm view-chat" data-id="3">
-                                            <i class="fas fa-comments"></i> Buka Chat
-                                        </button>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -130,28 +84,7 @@
                         
                         <!-- Chat Messages Container -->
                         <div id="chat-container" style="height: 300px; overflow-y: auto; margin-bottom: 20px; padding: 15px; border: 1px solid #e3e6f0; border-radius: 5px; background-color: #fafafa;">
-                            <!-- Sample Chat Messages -->
-                            <div class="message user-message mb-3">
-                                <div class="message-header">
-                                    <strong>Budi Santoso</strong>
-                                    <small class="text-muted">15 Jun 2023 10:30</small>
-                                </div>
-                                <div class="message-body">
-                                    Selamat pagi, saya ingin bertanya tentang produk X yang baru diluncurkan.
-                                </div>
-                            </div>
-                            
-                            <div class="message admin-message mb-3">
-                                <div class="message-header">
-                                    <strong>Anda</strong>
-                                    <small class="text-muted">15 Jun 2023 10:35</small>
-                                </div>
-                                <div class="message-body">
-                                    Selamat pagi Pak Budi, produk X tersedia dalam 3 varian. Apa yang ingin Anda ketahui?
-                                </div>
-                            </div>
-
-                            <!-- Chat will dynamically appear here -->
+                            <!-- Messages will be loaded here -->
                             <div id="chat-messages"></div>
                         </div>
                         
@@ -161,11 +94,8 @@
                                 <textarea class="form-control" id="message-input" rows="3" placeholder="Ketik balasan Anda..." required></textarea>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary mr-2">
-                                    <i class="fas fa-paper-plane"></i> Kirim
-                                </button>
-                                <button type="button" class="btn btn-success" id="mark-completed">
-                                    <i class="fas fa-check"></i> Tandai Selesai
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Balas
                                 </button>
                             </div>
                         </form>

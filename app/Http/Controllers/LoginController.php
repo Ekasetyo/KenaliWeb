@@ -77,7 +77,8 @@ class LoginController extends Controller
 
     public function logout()
     {
-        Session::forget('user');
-        return redirect('/')->with('success', 'Logout berhasil!');
+    Session::forget('user'); // Hapus session user
+    Session::flush(); // (Opsional) Hapus semua session jika perlu
+    return redirect('/')->with('success', 'Logout berhasil!');
     }
 }
