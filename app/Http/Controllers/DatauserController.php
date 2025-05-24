@@ -2,60 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use MongoDB\Client as MongoClient;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use MongoDB\BSON\ObjectId;
+use Illuminate\Validation\Rule;
+use RealRashid\SweetAlert\Facades\Alert;
+use MongoDB\BSON\UTCDateTime;
 
 class DatauserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Pastikan hanya admin yang bisa mengakses
         if (!Session::has('user') || Session::get('user')['status'] !== 'admin') {
-            return redirect('/login')->with('error', 'Anda tidak memiliki akses');
+            Alert::error('Akses Ditolak', 'Anda tidak memiliki akses');
+            return redirect('/login');
         }
 
         try {
-            $mongoClient = new MongoClient(env('DB_CONNECTION_STRING'));
-            $db = $mongoClient->kenali;
-            $collection = $db->users;
+            $search = $request->input('search');
+            
+            $users = User::when($search, function($query) use ($search) {
+                $query->where('name', 'like', "%$search%")
+                      ->orWhere('email', 'like', "%$search%")
+                      ->orWhere('no_telepon', 'like', "%$search%");
+            })
+            ->paginate(10); // 10 item per halaman
 
-            $users = $collection->find([], [
-                'projection' => [
-                    'password' => 0
-                ]
-            ]);
-
-            // Debugging: Cek data sebelum dikirim ke view
-            // dd(iterator_to_array($users));
-
-            $usersArray = iterator_to_array($users->toArray()); // Konversi ke array
-
-            return view('admin.user.index', [
-                'users' => $usersArray // Kirim array ke view
-            ]);
-
+            return view('admin.user.index', compact('users'));
         } catch (\Exception $e) {
-            return back()->with('error', 'Gagal mengambil data: '.$e->getMessage());
+            Alert::error('Error', 'Gagal mengambil data: ' . $e->getMessage());
+            return back();
         }
     }
 
-
     public function store(Request $request)
     {
-        // Validasi data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')
+            ],
             'password' => 'required|string|min:6',
             'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
             'tanggal_lahir' => 'required|date',
-            'no_telepon' => 'required|string|max:20',
+            'no_telepon' => [
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('users', 'no_telepon')
+            ],
             'alamat' => 'required|string',
             'status' => 'required|in:admin,user',
+        ], [
+            'email.unique' => 'Email ini sudah terdaftar',
+            'no_telepon.unique' => 'Nomor telepon ini sudah terdaftar'
         ]);
 
         if ($validator->fails()) {
@@ -63,41 +67,87 @@ class DatauserController extends Controller
         }
 
         try {
-            $mongoClient = new MongoClient(env('DB_CONNECTION_STRING'));
-            $db = $mongoClient->kenali;
-            $collection = $db->users;
-
-            // Enkripsi password
-            $hashedPassword = Hash::make($request->password);
-
-            // Siapkan data untuk disimpan
-            $userData = [
+            $users = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $hashedPassword,
+                'password' => Hash::make($request->password),
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'no_telepon' => $request->no_telepon,
                 'alamat' => $request->alamat,
                 'status' => $request->status,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ];
+            ]);
 
-            // Simpan data ke MongoDB
-            $insertOneResult = $collection->insertOne($userData);
-
-            if ($insertOneResult->getInsertedCount() > 0) {
-                return redirect()->route('admin.user.index')->with('success', 'User berhasil ditambahkan.');
-            } else {
-                return back()->with('error', 'Gagal menambahkan user.');
-            }
-
+            Alert::success('Berhasil!', 'User berhasil ditambahkan');
+            return redirect()->route('admin.user.index');
         } catch (\Exception $e) {
-            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+            Alert::error('Gagal!', 'Terjadi kesalahan: ' . $e->getMessage());
+            return back()->withInput();
         }
     }
 
+    public function edit($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            return view('admin.user.edit', compact('user'));
+        } catch (\Exception $e) {
+            Alert::error('Error', 'User tidak ditemukan');
+            return redirect()->route('admin.user.index');
+        }
+    }
 
-     
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($id, '_id')
+            ],
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'tanggal_lahir' => 'required|date',
+            'no_telepon' => [ 
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('users', 'no_telepon')->ignore($id, '_id')
+            ],
+            'alamat' => 'required|string',
+            'status' => 'required|in:admin,user',
+        ], [
+            'email.unique' => 'Email ini sudah terdaftar',
+            'no_telepon.unique' => 'Nomor telepon ini sudah terdaftar'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+
+            Alert::success('Berhasil!', 'Data user berhasil diperbarui');
+            return redirect()->route('admin.user.index');
+        } catch (\Exception $e) {
+            Alert::error('Gagal!', 'Terjadi kesalahan: ' . $e->getMessage());
+            return back()->withInput();
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+
+            Alert::success('Berhasil!', 'User berhasil dihapus');
+            return redirect()->route('admin.user.index');
+        } catch (\Exception $e) {
+            Alert::error('Gagal!', 'Terjadi kesalahan: ' . $e->getMessage());
+            return back();
+        }
+    }
 }

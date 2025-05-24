@@ -6,38 +6,15 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function dashboard()
-    {
-        return view('admin.dashboard.index');
-    }
-
-    // public function dataUser()
+    // public function dashboard()
     // {
-    //     return view('admin.user.index');
+    // return view('admin.dashboard.index');
     // }
 
-    public function dataArtikel()
+    public function __construct()
     {
-        return view('admin.artikel.index');
+        $this->middleware(['auth', 'admin']); // hanya admin yang bisa akses
     }
-
-    public function dataSaran()
-    {
-        return view('admin.saran.index');
-    }
-
-    public function dataPrediksi()
-    {
-        return view('admin.hasil-prediksi.index');
-    }
-
-    public function visualisasi()
-    {
-        return view('admin.visualisasi.index');
-    }
-
-    public function laporan()
-    {
-        return view('admin.laporan.index');
-    }
+    
+    
 }
