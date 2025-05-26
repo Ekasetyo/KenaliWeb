@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        MongoDB\Laravel\MongoDBServiceProvider::class,
         /*
          * Application Service Providers...
          */

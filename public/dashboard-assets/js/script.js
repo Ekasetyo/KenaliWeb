@@ -389,3 +389,59 @@ $(document).ready(function() {
             alert('Daftar konsultasi diperbarui');
         });
     });
+// ini coba
+   $(document).ready(function() {
+    $('.view-detail').click(function() {
+        const data = JSON.parse($(this).data('detail'));
+        
+        const content = `
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="font-weight-bold text-primary mb-3">Informasi Dasar</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="font-weight-bold">Nama Pengguna:</span>
+                            <span>${data.user ? data.user.name : '-'}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="font-weight-bold">Jenis Kelamin:</span>
+                            <span class="badge ${data.sex == 1 ? 'badge-info' : 'badge-pink'}">
+                                <i class="fas ${data.sex == 1 ? 'fa-male' : 'fa-female'} mr-1"></i>
+                                ${data.sex == 1 ? 'Laki-laki' : 'Perempuan'}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="font-weight-bold">Usia:</span>
+                            <span>${data.age || '-'} tahun</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="font-weight-bold text-primary mb-3">Informasi Kesehatan</h5>
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="font-weight-bold">Hipertensi:</span>
+                            <span class="badge ${data.hypertension ? 'badge-danger' : 'badge-success'}">
+                                ${data.hypertension ? 'Ya' : 'Tidak'}
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="font-weight-bold">Penyakit Jantung:</span>
+                            <span class="badge ${data.heart_disease ? 'badge-danger' : 'badge-success'}">
+                                ${data.heart_disease ? 'Ya' : 'Tidak'}
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert ${data.prediction && data.prediction.toLowerCase().includes('beresiko') ? 'alert-danger' : 'alert-success'} mt-3">
+                <h5 class="alert-heading">Hasil Prediksi</h5>
+                <p>${data.prediction || 'Tidak ada data prediksi'}</p>
+                <hr>
+                <p class="mb-0">Tanggal: ${data.created_at ? new Date(data.created_at).toLocaleString('id-ID') : '-'}</p>
+            </div>
+        `;
+        
+        $('#detailModalBody').html(content);
+    });
+});

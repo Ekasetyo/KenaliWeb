@@ -95,3 +95,24 @@ Route::middleware(['auth'])->prefix('user')->group(function() {
     Route::post('/konsultasi', [UserController::class, 'store'])->name('user.consultations.store');
     Route::post('/konsultasi/reply', [UserController::class, 'reply'])->name('user.consultations.reply');
 });
+
+// Di luar group middleware (untuk testing)
+Route::get('/test-mongo', function() {
+    try {
+        $count = \App\Models\Deteksi::count();
+        $sample = \App\Models\Deteksi::first();
+        
+        return response()->json([
+            'status' => 'success',
+            'count' => $count,
+            'sample_data' => $sample,
+            'collection' => (new \App\Models\Deteksi)->getTable()
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage(),
+            'trace' => $e->getTraceAsString()
+        ], 500);
+    }
+});
