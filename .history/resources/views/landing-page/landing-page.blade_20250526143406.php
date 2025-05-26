@@ -228,28 +228,32 @@
         </div>
         <!-- BMI Calculator End -->
 
-        <!-- Artikel Terbaru Start -->
-        <div class="container-xxl py-5" id="artikel">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
-                    <h1 class="mb-5">Informasi & Tips</h1>
-                </div>
-                <div class="row g-4">
-                    @foreach($artikels as $artikel)
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="bg-light rounded p-4">
-                                <h5>{{ $artikel->judul }}</h5>
-                                <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
-                                <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
-                                <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+
+
+
+<!-- Artikel Terbaru Start -->
+<div class="container-xxl py-5" id="artikel">
+    <div class="container py-5 px-lg-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
+            <h1 class="mb-5">Informasi & Tips</h1>
         </div>
-        <!-- Artikel Terbaru End -->
+    <div class="row g-4">
+         @foreach($artikels as $artikel)
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-light rounded p-4">
+                    <h5>{{ $artikel->judul }}</h5>
+                        <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
+                        <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
+                     <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- Artikel Terbaru End -->
+
 
         <!-- Contact Start -->
         <div class="container-xxl py-5" id="contact">
@@ -261,6 +265,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <!-- <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
                             <form>
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -333,7 +338,9 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Kenali</a>, All Right Reserved. 
-                            Designed By Team SIGAP
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By Team SIGAP
                             </br>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
@@ -348,6 +355,7 @@
             </div>
         </div>
         <!-- Footer End -->
+
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i
@@ -365,5 +373,6 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('landing-assets/js/main.js') }}"></script>
-    <script>
+</body>
+
 </html>

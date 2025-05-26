@@ -119,8 +119,6 @@
                     <h1 class="mb-5">Fitur Unggulan</h1>
                 </div>
                 <div class="row g-4">
-                    <!-- ... fitur ... -->
-                    <!-- (kode fitur tidak diubah, tetap seperti sebelumnya) -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item bg-light rounded p-4">
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
@@ -171,6 +169,47 @@
         </div>
         <!-- Features End -->
 
+
+        <!-- Process Start -->
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Cara Kerja</h5>
+                    <h1 class="mb-5">3 Langkah Mudah</h1>
+                </div>
+                <div class="row gy-5 gx-4 justify-content-center">
+                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                                <i class="fa fa-cog fa-3x text-white"></i>
+                            </div>
+                            <h5 class="mt-4 mb-3">Instal Aplikasi</h5>
+                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quidem fuga nemo dolore molestiae incidunt ut, sed minima ab quasi nobis sapiente maxime dolorum perspiciatis eaque. Culpa cupiditate qui quod?</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                                <i class="fa fa-address-card fa-3x text-white"></i>
+                            </div>
+                            <h5 class="mt-4 mb-3">Login & Setup Akun</h5>
+                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt necessitatibus vero cumque consequatur fugiat perspiciatis dicta asperiores, dolore quia doloribus eaque sed accusantium, est, error enim. Maiores eligendi magni labore?</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
+                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
+                                <i class="fa fa-check fa-3x text-white"></i>
+                            </div>
+                            <h5 class="mt-4 mb-3">Nikmati Fitur-Fiturnya</h5>
+                            <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt maxime natus assumenda voluptates? Ratione dolores similique voluptatem vitae doloremque quo saepe facilis, commodi ea maxime modi? Atque pariatur debitis ea.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Process Start -->
+
         <!-- BMI Calculator Start -->
         <div class="container-xxl py-5" id="bmi-calculator">
             <div class="container py-5 px-lg-5">
@@ -178,18 +217,27 @@
                     <h5 class="text-primary-gradient fw-medium">Kalkulator BMI</h5>
                     <h1 class="mb-5">Hitung Indeks Massa Tubuh Anda</h1>
                 </div>
+                <!-- Pilihan Gender -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-6 text-center">
+                        <div class="d-flex justify-content-center gap-4">
+                            <button type="button" class="btn btn-outline-primary rounded-circle p-4" id="male" onclick="selectGender('male')" style="width: 100px; height: 100px;">
+                                <i class="fa fa-mars fa-3x"></i>
+                                <p class="mt-2">Laki-Laki</p>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger rounded-circle p-4" id="female" onclick="selectGender('female')" style="width: 100px; height: 100px;">
+                                <i class="fa fa-venus fa-3x"></i>
+                                <p class="mt-2">Perempuan</p>
+                            </button>
+                        </div>
+                        <input type="hidden" id="gender" value="">
+                    </div>
+                </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
                             <form id="bmiForm">
                                 <div class="row g-3">
-                                    <!-- Input Gender Sederhana -->
-                                    <div class="col-md-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="gender" placeholder="Gender (male/female)" required>
-                                            <label for="gender">Gender (laki-laki/perempuan)</label>
-                                        </div>
-                                    </div>
                                     <!-- Input Berat Badan -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
@@ -228,28 +276,32 @@
         </div>
         <!-- BMI Calculator End -->
 
-        <!-- Artikel Terbaru Start -->
-        <div class="container-xxl py-5" id="artikel">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
-                    <h1 class="mb-5">Informasi & Tips</h1>
-                </div>
-                <div class="row g-4">
-                    @foreach($artikels as $artikel)
-                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="bg-light rounded p-4">
-                                <h5>{{ $artikel->judul }}</h5>
-                                <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
-                                <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
-                                <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+
+
+
+<!-- Artikel Terbaru Start -->
+<div class="container-xxl py-5" id="artikel">
+    <div class="container py-5 px-lg-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
+            <h1 class="mb-5">Informasi & Tips</h1>
         </div>
-        <!-- Artikel Terbaru End -->
+    <div class="row g-4">
+         @foreach($artikels as $artikel)
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-light rounded p-4">
+                    <h5>{{ $artikel->judul }}</h5>
+                        <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
+                        <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
+                     <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- Artikel Terbaru End -->
+
 
         <!-- Contact Start -->
         <div class="container-xxl py-5" id="contact">
@@ -261,6 +313,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <!-- <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
                             <form>
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -333,7 +386,9 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Kenali</a>, All Right Reserved. 
-                            Designed By Team SIGAP
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By Team SIGAP
                             </br>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
@@ -348,6 +403,7 @@
             </div>
         </div>
         <!-- Footer End -->
+
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i
@@ -365,5 +421,6 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('landing-assets/js/main.js') }}"></script>
-    <script>
+</body>
+
 </html>
