@@ -47,7 +47,6 @@
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     <h1 class="m-0">Kenali</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -57,7 +56,8 @@
                         <a href="#home" class="nav-item nav-link active">Home</a>
                         <a href="#about" class="nav-item nav-link">About</a>
                         <a href="#feature" class="nav-item nav-link">Fitur</a>
-                        <a href="#review" class="nav-item nav-link">Review</a>
+                        <a href="#bmi-calculator" class="nav-item nav-link">BMI</a>
+                        <a href="#artikel" class="nav-item nav-link">Artikel</a>
                         <a href="#contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="{{ url('/login') }}" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Login</a>
@@ -68,9 +68,8 @@
                 <div class="container px-lg-5">
                     <div class="row g-5"> 
                        <div class="col-lg-8 text-center text-lg-start">
-    <h1 class="text-white mb-4 animated slideInDown">Solusi Cerdas Untuk Apa?</h1>
-    <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
-                            <!-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a> -->
+                            <h1 class="text-white mb-4 animated slideInDown">Solusi Cerdas Untuk Apa?</h1>
+                            <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
                             <a href="#contact" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Hubungi Kami</a>
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
@@ -88,38 +87,19 @@
         <!-- Navbar & Hero End -->
 
         <!-- About Start -->
-<div class="container-xxl py-5" id="about">
-    <div class="container py-5 px-lg-5">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h5 class="text-primary-gradient fw-medium">Tentang Kenali</h5>
-                <h1 class="mb-4">#1 </h1>
-                <p class="mb-4" style="text-align: justify;">Stroke merupakan penyakit tidak menular yang menjadi penyebab utama kematian dan kecacatan, dan sering kali terjadi secara tiba-tiba tanpa gejala awal yang jelas. Sayangnya, masih banyak masyarakat yang belum menyadari risiko mereka terhadap penyakit ini, serta kurangnya akses terhadap layanan deteksi dini yang cepat dan efisien, terutama di wilayah terpencil. Pengembangan sistem ini diharapkan dapat membantu tenaga medis dalam proses skrining, meningkatkan kesadaran masyarakat akan pentingnya pencegahan stroke, dan pada akhirnya menurunkan angka kejadian stroke melalui deteksi dini berbasis data.</p>
-                <div class="row g-4 mb-4">
-                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="d-flex">
-                            <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
-                            <div class="ms-3">
-                                <h2 class="mb-0" data-toggle="counter-up">1234</h2>
-                                <p class="text-primary-gradient mb-0">Pengunduh</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
-                        <div class="d-flex">
-                            <i class="fa fa-comments fa-2x text-secondary-gradient flex-shrink-0 mt-1"></i>
-                            <div class="ms-3">
-                                <h2 class="mb-0" data-toggle="counter-up">1234</h2>
-                                <p class="text-secondary-gradient mb-0">Reviews</p>
-                            </div>
-                        </div>
+        <div class="container-xxl py-5" id="about">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <h5 class="text-primary-gradient fw-medium">Tentang Kenali</h5>
+                        <h1 class="mb-4">#1 </h1>
+                        <p class="mb-4" style="text-align: justify;">Stroke merupakan penyakit tidak menular yang menjadi penyebab utama kematian dan kecacatan, dan sering kali terjadi secara tiba-tiba tanpa gejala awal yang jelas. Sayangnya, masih banyak masyarakat yang belum menyadari risiko mereka terhadap penyakit ini, serta kurangnya akses terhadap layanan deteksi dini yang cepat dan efisien, terutama di wilayah terpencil. Pengembangan sistem ini diharapkan dapat membantu tenaga medis dalam proses skrining, meningkatkan kesadaran masyarakat akan pentingnya pencegahan stroke, dan pada akhirnya menurunkan angka kejadian stroke melalui deteksi dini berbasis data.</p>
+                        <div class="row g-4 mb-4"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- About End -->
+        <!-- About End -->
 
         <!-- Features Start -->
         <div class="container-xxl py-5" id="feature">
@@ -129,6 +109,8 @@
                     <h1 class="mb-5">Fitur Unggulan</h1>
                 </div>
                 <div class="row g-4">
+                    <!-- ... fitur ... -->
+                    <!-- (kode fitur tidak diubah, tetap seperti sebelumnya) -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item bg-light rounded p-4">
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
@@ -179,47 +161,6 @@
         </div>
         <!-- Features End -->
 
-
-        <!-- Process Start -->
-        <div class="container-xxl py-5">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Cara Kerja</h5>
-                    <h1 class="mb-5">3 Langkah Mudah</h1>
-                </div>
-                <div class="row gy-5 gx-4 justify-content-center">
-                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                                <i class="fa fa-cog fa-3x text-white"></i>
-                            </div>
-                            <h5 class="mt-4 mb-3">Instal Aplikasi</h5>
-                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio quidem fuga nemo dolore molestiae incidunt ut, sed minima ab quasi nobis sapiente maxime dolorum perspiciatis eaque. Culpa cupiditate qui quod?</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                                <i class="fa fa-address-card fa-3x text-white"></i>
-                            </div>
-                            <h5 class="mt-4 mb-3">Login & Setup Akun</h5>
-                            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt necessitatibus vero cumque consequatur fugiat perspiciatis dicta asperiores, dolore quia doloribus eaque sed accusantium, est, error enim. Maiores eligendi magni labore?</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="position-relative bg-light rounded pt-5 pb-4 px-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
-                                <i class="fa fa-check fa-3x text-white"></i>
-                            </div>
-                            <h5 class="mt-4 mb-3">Nikmati Fitur-Fiturnya</h5>
-                            <p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt maxime natus assumenda voluptates? Ratione dolores similique voluptatem vitae doloremque quo saepe facilis, commodi ea maxime modi? Atque pariatur debitis ea.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Process Start -->
-
         <!-- BMI Calculator Start -->
         <div class="container-xxl py-5" id="bmi-calculator">
             <div class="container py-5 px-lg-5">
@@ -227,27 +168,18 @@
                     <h5 class="text-primary-gradient fw-medium">Kalkulator BMI</h5>
                     <h1 class="mb-5">Hitung Indeks Massa Tubuh Anda</h1>
                 </div>
-                <!-- Pilihan Gender -->
-                <div class="row justify-content-center mb-4">
-                    <div class="col-md-6 text-center">
-                        <div class="d-flex justify-content-center gap-4">
-                            <button type="button" class="btn btn-outline-primary rounded-circle p-4" id="male" onclick="selectGender('male')" style="width: 100px; height: 100px;">
-                                <i class="fa fa-mars fa-3x"></i>
-                                <p class="mt-2">Laki-Laki</p>
-                            </button>
-                            <button type="button" class="btn btn-outline-danger rounded-circle p-4" id="female" onclick="selectGender('female')" style="width: 100px; height: 100px;">
-                                <i class="fa fa-venus fa-3x"></i>
-                                <p class="mt-2">Perempuan</p>
-                            </button>
-                        </div>
-                        <input type="hidden" id="gender" value="">
-                    </div>
-                </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
                             <form id="bmiForm">
                                 <div class="row g-3">
+                                    <!-- Input Gender Sederhana -->
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="gender" placeholder="Gender (male/female)" required>
+                                            <label for="gender">Gender (laki-laki/perempuan)</label>
+                                        </div>
+                                    </div>
                                     <!-- Input Berat Badan -->
                                     <div class="col-md-6">
                                         <div class="form-floating">
@@ -286,32 +218,28 @@
         </div>
         <!-- BMI Calculator End -->
 
-
-
-
-<!-- Artikel Terbaru Start -->
-<div class="container-xxl py-5" id="artikel">
-    <div class="container py-5 px-lg-5">
-        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-            <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
-            <h1 class="mb-5">Informasi & Tips</h1>
-        </div>
-    <div class="row g-4">
-         @foreach($artikels as $artikel)
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="bg-light rounded p-4">
-                    <h5>{{ $artikel->judul }}</h5>
-                        <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
-                        <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
-                     <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
-                    </div>
+        <!-- Artikel Terbaru Start -->
+        <div class="container-xxl py-5" id="artikel">
+            <div class="container py-5 px-lg-5">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
+                    <h1 class="mb-5">Informasi & Tips</h1>
                 </div>
-            @endforeach
+                <div class="row g-4">
+                    @foreach($artikels as $artikel)
+                        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="bg-light rounded p-4">
+                                <h5>{{ $artikel->judul }}</h5>
+                                <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
+                                <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
+                                <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<!-- Artikel Terbaru End -->
-
+        <!-- Artikel Terbaru End -->
 
         <!-- Contact Start -->
         <div class="container-xxl py-5" id="contact">
@@ -323,7 +251,6 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <!-- <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
                             <form>
                                 <div class="row g-3">
                                     <div class="col-md-6">
@@ -397,9 +324,7 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Kenali</a>, All Right Reserved. 
-							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By Team SIGAP
+                            Designed By Team SIGAP
                             </br>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
@@ -414,7 +339,6 @@
             </div>
         </div>
         <!-- Footer End -->
-
 
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up text-white"></i></a>
@@ -431,6 +355,5 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('landing-assets/js/main.js') }}"></script>
-</body>
-
+    <script>
 </html>
