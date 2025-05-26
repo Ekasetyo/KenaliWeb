@@ -1,9 +1,9 @@
 <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #22937c;">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/dashboard') }}">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
+        <div class="sidebar-brand-icon">
+            <img src="{{ asset('dashboard-assets/img/logo_putih.png') }}" alt="Logo" style="height: 30px;">
         </div>
         <div class="sidebar-brand-text mx-3">Kenali</div>
     </a>
@@ -28,7 +28,7 @@
     <li class="nav-item {{ request()->is('user/riwayat-prediksi') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/user/riwayat-prediksi') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Riwayat Prediksi</span>
+            <span>Konsultasi</span>
         </a>
     </li>
 
@@ -36,7 +36,7 @@
     <li class="nav-item {{ request()->is('user/laporan-visualisasi') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/user/laporan-visualisasi') }}">
             <i class="fas fa-fw fa-file-alt"></i>
-            <span>Laporan dan Visualisasi</span>
+            <span>Prediksi & Visualisasi</span>
         </a>
     </li>
 
