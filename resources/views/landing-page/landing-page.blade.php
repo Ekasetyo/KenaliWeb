@@ -67,19 +67,19 @@
             <div class="container-xxl bg-primary hero-header">
                 <div class="container px-lg-5">
                     <div class="row g-5"> 
-                        <div class="col-lg-8 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">Solusi Cerdas Untuk Apa?</h1>
-                            <p class="text-white pb-3 animated slideInDown">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt at amet, ut architecto harum laboriosam cum praesentium repudiandae quisquam atque quaerat dolorem voluptate blanditiis doloribus saepe vero fuga, cumque soluta?</p>
+                       <div class="col-lg-8 text-center text-lg-start">
+    <h1 class="text-white mb-4 animated slideInDown">Solusi Cerdas Untuk Apa?</h1>
+    <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
                             <!-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a> -->
                             <a href="#contact" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Hubungi Kami</a>
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                             <div class="owl-carousel screenshot-carousel">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/finomali_depan.png') }}" alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/finomali_depan2.png') }}" alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/finomali_login.png') }}" alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/finomali_register.png') }}" alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/finomali_dashboard.png') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_depan.png') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_aplikasi.png') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_login.png') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_register.png') }}" alt="">
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_dashboard.png') }}" alt="">
                             </div>
                         </div>
                 </div>
@@ -88,38 +88,38 @@
         <!-- Navbar & Hero End -->
 
         <!-- About Start -->
-        <div class="container-xxl py-5" id="about">
-            <div class="container py-5 px-lg-5">
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h5 class="text-primary-gradient fw-medium">Tentang Kenali</h5>
-                        <h1 class="mb-4">#1 </h1>
-                        <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto voluptates corporis delectus qui quasi! Animi totam perspiciatis labore nam at hic eius alias omnis, veritatis excepturi minus quibusdam rerum iste.</p>
-                        <div class="row g-4 mb-4">
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                                <div class="d-flex">
-                                    <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
-                                    <div class="ms-3">
-                                        <h2 class="mb-0" data-toggle="counter-up">1234</h2>
-                                        <p class="text-primary-gradient mb-0">Pengunduh</p>
-                                    </div>
-                                </div>
+<div class="container-xxl py-5" id="about">
+    <div class="container py-5 px-lg-5">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h5 class="text-primary-gradient fw-medium">Tentang Kenali</h5>
+                <h1 class="mb-4">#1 </h1>
+                <p class="mb-4" style="text-align: justify;">Stroke merupakan penyakit tidak menular yang menjadi penyebab utama kematian dan kecacatan, dan sering kali terjadi secara tiba-tiba tanpa gejala awal yang jelas. Sayangnya, masih banyak masyarakat yang belum menyadari risiko mereka terhadap penyakit ini, serta kurangnya akses terhadap layanan deteksi dini yang cepat dan efisien, terutama di wilayah terpencil. Pengembangan sistem ini diharapkan dapat membantu tenaga medis dalam proses skrining, meningkatkan kesadaran masyarakat akan pentingnya pencegahan stroke, dan pada akhirnya menurunkan angka kejadian stroke melalui deteksi dini berbasis data.</p>
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="d-flex">
+                            <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
+                            <div class="ms-3">
+                                <h2 class="mb-0" data-toggle="counter-up">1234</h2>
+                                <p class="text-primary-gradient mb-0">Pengunduh</p>
                             </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
-                                <div class="d-flex">
-                                    <i class="fa fa-comments fa-2x text-secondary-gradient flex-shrink-0 mt-1"></i>
-                                    <div class="ms-3">
-                                        <h2 class="mb-0" data-toggle="counter-up">1234</h2>
-                                        <p class="text-secondary-gradient mb-0">Reviews</p>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
+                        <div class="d-flex">
+                            <i class="fa fa-comments fa-2x text-secondary-gradient flex-shrink-0 mt-1"></i>
+                            <div class="ms-3">
+                                <h2 class="mb-0" data-toggle="counter-up">1234</h2>
+                                <p class="text-secondary-gradient mb-0">Reviews</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- About End -->
+    </div>
+</div>
+<!-- About End -->
 
         <!-- Features Start -->
         <div class="container-xxl py-5" id="feature">
@@ -220,45 +220,97 @@
         </div>
         <!-- Process Start -->
 
-        <!-- Testimonial Start -->
-        <div class="container-xxl py-5" id="review">
+        <!-- BMI Calculator Start -->
+        <div class="container-xxl py-5" id="bmi-calculator">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Developer</h5>
-                    <h1 class="mb-5">Team Pengembang Aplikasi</h1>
+                    <h5 class="text-primary-gradient fw-medium">Kalkulator BMI</h5>
+                    <h1 class="mb-5">Hitung Indeks Massa Tubuh Anda</h1>
                 </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('landing-assets/img/testimonial-2.jpg') }}" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Divisi AI</h5>
-                                <p class="mb-1">Eka Setyo Saputra</p>
-                            </div>
+                <!-- Pilihan Gender -->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-md-6 text-center">
+                        <div class="d-flex justify-content-center gap-4">
+                            <button type="button" class="btn btn-outline-primary rounded-circle p-4" id="male" onclick="selectGender('male')" style="width: 100px; height: 100px;">
+                                <i class="fa fa-mars fa-3x"></i>
+                                <p class="mt-2">Laki-Laki</p>
+                            </button>
+                            <button type="button" class="btn btn-outline-danger rounded-circle p-4" id="female" onclick="selectGender('female')" style="width: 100px; height: 100px;">
+                                <i class="fa fa-venus fa-3x"></i>
+                                <p class="mt-2">Perempuan</p>
+                            </button>
                         </div>
+                        <input type="hidden" id="gender" value="">
                     </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('landing-assets/img/testimonial-3.jpg') }}" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Divisi Website</h5>
-                                <p class="mb-1">Abd. A Rama & Farrel Ezza</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="img-fluid bg-white rounded flex-shrink-0 p-1" src="{{ asset('landing-assets/img/testimonial-4.jpg') }}" style="width: 85px; height: 85px;">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Divisi Mobile</h5>
-                                <p class="mb-1">Ahmad Rizal & Moch. Rizki</p>
-                            </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="wow fadeInUp" data-wow-delay="0.3s">
+                            <form id="bmiForm">
+                                <div class="row g-3">
+                                    <!-- Input Berat Badan -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="weight" placeholder="Berat Badan (kg)" min="0" required>
+                                            <label for="weight">Berat Badan (kg)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Input Tinggi Badan -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="height" placeholder="Tinggi Badan (cm)" min="0" required>
+                                            <label for="height">Tinggi Badan (cm)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Input Usia -->
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="age" placeholder="Usia (tahun)" min="0" required>
+                                            <label for="age">Usia (tahun)</label>
+                                        </div>
+                                    </div>
+                                    <!-- Tombol Hitung -->
+                                    <div class="col-12 text-center">
+                                        <button type="button" class="btn btn-primary-gradient rounded-pill py-3 px-5" onclick="calculateBMI()">Hitung BMI</button>
+                                    </div>
+                                    <!-- Hasil BMI -->
+                                    <div class="col-12 text-center">
+                                        <p id="bmiResult" class="mt-3"></p>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Testimonial End -->
+        <!-- BMI Calculator End -->
+
+
+
+
+<!-- Artikel Terbaru Start -->
+<div class="container-xxl py-5" id="artikel">
+    <div class="container py-5 px-lg-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="text-primary-gradient fw-medium">Artikel Terbaru</h5>
+            <h1 class="mb-5">Informasi & Tips</h1>
+        </div>
+    <div class="row g-4">
+         @foreach($artikels as $artikel)
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-light rounded p-4">
+                    <h5>{{ $artikel->judul }}</h5>
+                        <p class="mb-2"><small>Oleh {{ $artikel->penulis }}</small></p>
+                        <p class="mb-2" style="text-align: justify;">{{ Str::limit(strip_tags($artikel->deskripsi), 120) }}</p>
+                     <a href="{{ $artikel->sumber }}" target="_blank" class="btn btn-primary-gradient btn-sm">Baca Selengkapnya</a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- Artikel Terbaru End -->
 
 
         <!-- Contact Start -->
