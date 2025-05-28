@@ -11,8 +11,8 @@
             <h6 class="m-0 font-weight-bold text-primary">Daftar Prediksi</h6>
             <form action="{{ route('admin.hasil-prediksi') }}" method="GET" class="form-inline">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Cari..." 
-                           value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="Cari nama pengguna..." 
+                           value="{{ htmlspecialchars(request('search')) }}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search"></i>
@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>User ID</th>
+                            <th>Nama</th>
                             <th>Usia</th>
                             <th>Hasil Prediksi</th>
                             <th>Tanggal Prediksi</th>
@@ -38,10 +38,9 @@
                         @forelse ($data as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->user_id ?? '-' }}</td>
-                            <td>{{ $item->age ?? '-' }} tahun</td>
+                            <td>{{ $item->name ?? '-' }}</td>
+                            <td>{{ is_numeric($item->age) ? $item->age . ' tahun' : $item->age }}</td>
                             <td>
-                                
                                 <span class="badge {{ str_contains(strtolower($item->prediction ?? ''), 'beresiko') ? 'badge-danger' : 'badge-success' }}">
                                     {{ $item->prediction ?? 'Tidak ada data' }}
                                 </span>
@@ -51,7 +50,7 @@
                                 <button class="btn btn-info btn-sm view-detail" 
                                         data-toggle="modal" 
                                         data-target="#detailModal"
-                                        data-detail="{{ json_encode($item) }}">
+                                        data-detail="{{ htmlspecialchars(json_encode($item)) }}">
                                     <i class="fas fa-eye"></i> Detail
                                 </button>
                             </td>
@@ -72,23 +71,4 @@
     </div>
 </div>
 
-<!-- Modal Detail -->
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Detail Prediksi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="detailModalBody">
-                <!-- Detail akan diisi via JavaScript -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

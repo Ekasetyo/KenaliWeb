@@ -35,5 +35,7 @@ class User extends Eloquent implements AuthenticatableContract
         'email_verified_at' => 'datetime',
         'tanggal_lahir' => 'date',
         'password' => 'hashed',
+        '_id' => 'objectId',
     ];
+
 }
