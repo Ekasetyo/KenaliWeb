@@ -333,7 +333,9 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Kenali</a>, All Right Reserved. 
-                            Designed By Team SIGAP
+							
+							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+							Designed By Team SIGAP
                             </br>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
@@ -348,6 +350,7 @@
             </div>
         </div>
         <!-- Footer End -->
+
 
             <!-- Back to Top -->
             <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i
@@ -365,5 +368,6 @@
 
     <!-- Template Javascript -->
     <script src="{{ asset('landing-assets/js/main.js') }}"></script>
-    <script>
+</body>
+
 </html>

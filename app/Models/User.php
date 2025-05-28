@@ -13,6 +13,7 @@ class User extends Eloquent implements AuthenticatableContract
     use HasApiTokens, Notifiable, Authenticatable;
 
     protected $connection = 'mongodb';
+    protected $collection = 'users'; // Tambahkan ini untuk eksplisit
 
     protected $fillable = [
         'name',
@@ -34,5 +35,7 @@ class User extends Eloquent implements AuthenticatableContract
         'email_verified_at' => 'datetime',
         'tanggal_lahir' => 'date',
         'password' => 'hashed',
+        '_id' => 'objectId',
     ];
+
 }
