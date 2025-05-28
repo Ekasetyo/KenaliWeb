@@ -13,6 +13,10 @@ use App\Http\Controllers\AdminVisualisasi;
 use App\Http\Controllers\AdminLaporan;
 use App\Http\Controllers\AdminKonsultasi;
 use App\Http\Controllers\UserKonsultasi; 
+use App\Http\Controllers\UserRiwayatPrediksiController;
+use App\Http\Controllers\Auth\RegisterUserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 // ==============================
 // Public Routes
@@ -27,6 +31,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', function () {
     return view('login-register.register');
 })->name('register');
+Route::get('/register', [RegisterUserController::class, 'showRegistrationForm'])->name('register.form');
+Route::post('/register', [RegisterUserController::class, 'register'])->name('register');
 
 // Optional UI Components (Dashboard Templates)
 Route::get('/dashboard/charts', fn () => view('dashboard-form.chart'))->name('dashboard.charts');
@@ -80,18 +86,35 @@ Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function (
 // User Routes
 // ==============================
 
-Route::middleware(['login.session'])->prefix('user')->controller(UserController::class)->group(function () {
-    Route::get('/dashboard', 'dashboard')->name('user.dashboard');
-    Route::get('/artikel', 'artikel')->name('user.artikel');
-    Route::get('/riwayat-prediksi', 'riwayatPrediksi')->name('user.riwayat-prediksi');
-    Route::get('/laporan-visualisasi', 'laporan')->name('user.laporan-visualisasi');
+Route::middleware(['login.session'])->prefix('user')->group(function () {
+    // Route UserController
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/artikel', [UserController::class, 'artikel'])->name('user.artikel');
+    Route::get('/konsultasi', [UserController::class, 'konsultasi'])->name('user.konsultasi');
+    Route::get('/laporan-visualisasi', [UserController::class, 'laporan'])->name('user.laporan-visualisasi');
+    Route::post('/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password')->middleware('auth');
 
-    Route::middleware(['auth'])->post('/ubah-password', 'ubahPassword')->name('user.ubah-password');
-});
-
-// User Consultation Routes
-Route::middleware(['auth'])->prefix('user')->group(function() {
-    Route::get('/konsultasi', [UserController::class, 'index'])->name('user.consultations.index');
+    Route::get('/konsultasi', [UserController::class, 'konsultasi'])->name('user.konsultasi');
     Route::post('/konsultasi', [UserController::class, 'store'])->name('user.consultations.store');
     Route::post('/konsultasi/reply', [UserController::class, 'reply'])->name('user.consultations.reply');
+
+    // Route UserRiwayatPrediksiController (dipisah)
+    Route::get('/riwayat-deteksi', [UserRiwayatPrediksiController::class, 'dataPrediksi'])->name('user.riwayat-deteksi');
 });
+
+// Jika kamu masih pakai middleware auth terpisah untuk konsultasi:
+// Route::middleware(['auth'])->prefix('user')->group(function () {
+//     Route::get('/konsultasi', [UserController::class, 'index'])->name('user.consultations.index');
+//     Route::post('/konsultasi', [UserController::class, 'store'])->name('user.consultations.store');
+//     Route::post('/konsultasi/reply', [UserController::class, 'reply'])->name('user.consultations.reply');
+// });
+
+// Route publik / umum
+Route::get('/laporan', [UserController::class, 'laporan']);
+Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
+
+// Route untuk password reset, dll (tidak diubah)
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
