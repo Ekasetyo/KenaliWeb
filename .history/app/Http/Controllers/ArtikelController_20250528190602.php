@@ -37,7 +37,7 @@ class ArtikelController extends Controller
             'judul.min' => 'Judul minimal harus 10 karakter',
             'judul.max' => 'Judul maksimal 255 karakter',
             'deskripsi.required' => 'Deskripsi artikel wajib diisi',
-            'deskripsi.min' => 'Deskripsi minimal harus 20 karakter',
+            'deskripsi.min' => 'Deskripsi minimal harus 25 karakter',
             'penulis.required' => 'Nama penulis wajib diisi',
             'penulis.min' => 'Nama penulis minimal 3 karakter',
             'penulis.max' => 'Nama penulis maksimal 100 karakter',

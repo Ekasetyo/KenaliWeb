@@ -32,4 +32,3 @@ Route::post('/artikel', [ArtikelMobileController::class, 'getartikel'])->name('a
 
 Route::delete('/riwayat/{id}', [RiwayatDeteksiController::class, 'destroy'])->name('hapus.riwayat');
 Route::post('/update-profile', [UserMobileController::class, 'updateProfile'])->name('update.profile');
-Route::post('/update-password', [UserMobileController::class, 'updatePassword']);

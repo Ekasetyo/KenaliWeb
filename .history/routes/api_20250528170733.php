@@ -6,7 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RiwayatDeteksiController;
 use App\Http\Controllers\Api\ArtikelMobileController;
-use App\Http\Controllers\Api\UserMobileController;
+use App\Http\Controllers\Api\UserMobileController
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/deteksi', [DeteksiController::class, 'deteksi'])->name('deteksi');
 Route::post('riwayat', [RiwayatDeteksiController::class, 'getRiwayat'])->name('riwayat');
 Route::post('/artikel', [ArtikelMobileController::class, 'getartikel'])->name('artikel');
 
@@ -32,4 +33,3 @@ Route::post('/artikel', [ArtikelMobileController::class, 'getartikel'])->name('a
 
 Route::delete('/riwayat/{id}', [RiwayatDeteksiController::class, 'destroy'])->name('hapus.riwayat');
 Route::post('/update-profile', [UserMobileController::class, 'updateProfile'])->name('update.profile');
-Route::post('/update-password', [UserMobileController::class, 'updatePassword']);

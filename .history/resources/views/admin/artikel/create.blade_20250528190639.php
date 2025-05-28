@@ -24,7 +24,7 @@
                         <label for="deskripsi">Deskripsi:</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
                                   id="deskripsi" name="deskripsi" rows="5"
-                                  placeholder="Masukkan deskripsi artikel (minimal 20 karakter)" required>{{ old('deskripsi') }}</textarea>
+                                  placeholder="Masukkan deskripsi artikel (minimal 100 karakter)" required>{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

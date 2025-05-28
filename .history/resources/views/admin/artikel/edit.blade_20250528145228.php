@@ -17,9 +17,8 @@
 
                 <div class="form-group">
                     <label>Judul</label>
-                    <input type="text" name="judul" value="{{ old('judul', $artikel->judul) }}" 
-                           class="form-control @error('judul') is-invalid @enderror" 
-                           placeholder="Masukkan judul artikel (minimal 10 karakter)" required>
+                    <input type="text" name="judul" value="{{ $artikel->judul }}" 
+                           class="form-control @error('judul') is-invalid @enderror" required>
                     @error('judul')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -28,8 +27,7 @@
                 <div class="form-group">
                     <label>Deskripsi</label>
                     <textarea name="deskripsi" class="form-control @error('deskripsi') is-invalid @enderror" 
-                              rows="5" placeholder="Masukkan deskripsi artikel (minimal 100 karakter)" 
-                              required>{{ old('deskripsi', $artikel->deskripsi) }}</textarea>
+                              rows="5" required>{{ $artikel->deskripsi }}</textarea>
                     @error('deskripsi')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -37,9 +35,8 @@
 
                 <div class="form-group">
                     <label>Penulis</label>
-                    <input type="text" name="penulis" value="{{ old('penulis', $artikel->penulis) }}" 
-                           class="form-control @error('penulis') is-invalid @enderror" 
-                           placeholder="Masukkan nama penulis (minimal 3 karakter)" required>
+                    <input type="text" name="penulis" value="{{ $artikel->penulis }}" 
+                           class="form-control @error('penulis') is-invalid @enderror" required>
                     @error('penulis')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -47,9 +44,8 @@
 
                 <div class="form-group">
                     <label>Sumber (URL)</label>
-                    <input type="url" name="sumber" value="{{ old('sumber', $artikel->sumber) }}" 
-                           class="form-control @error('sumber') is-invalid @enderror" 
-                           placeholder="Masukkan URL sumber (contoh: https://example.com)" required>
+                    <input type="url" name="sumber" value="{{ $artikel->sumber }}" 
+                           class="form-control @error('sumber') is-invalid @enderror" required>
                     @error('sumber')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

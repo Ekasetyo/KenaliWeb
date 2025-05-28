@@ -15,7 +15,7 @@
                         <label for="judul">Judul:</label>
                         <input type="text" class="form-control @error('judul') is-invalid @enderror" 
                                id="judul" name="judul" value="{{ old('judul') }}"
-                               placeholder="Masukkan judul artikel (minimal 5 karakter)" required>
+                               placeholder="Masukkan judul artikel (minimal 10 karakter)" required>
                         @error('judul')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -24,7 +24,7 @@
                         <label for="deskripsi">Deskripsi:</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
                                   id="deskripsi" name="deskripsi" rows="5"
-                                  placeholder="Masukkan deskripsi artikel (minimal 20 karakter)" required>{{ old('deskripsi') }}</textarea>
+                                  placeholder="Masukkan deskripsi artikel (minimal 100 karakter)" required>{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

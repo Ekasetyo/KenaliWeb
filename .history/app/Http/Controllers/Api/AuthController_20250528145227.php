@@ -40,7 +40,7 @@ class AuthController extends Controller
                 ], 401);
             }
 
-            // Generate token (gunakan Sanctum atau JWT untuk produksi)
+            // Generate token (gunakan Sanctum atau JWT)
             $token = $this->generateToken($user);
 
             RateLimiter::clear($this->throttleKey($request));
@@ -53,11 +53,7 @@ class AuthController extends Controller
                     'id' => (string)$user->_id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'status' => $user->status,
-                    'jenis_kelamin' => $user->jenis_kelamin ?? 'Tidak Diketahui',
-                    'tanggal_lahir' => $user->tanggal_lahir ? $user->tanggal_lahir->toDateTime()->format('Y-m-d') : null,
-                    'no_telepon' => $user->no_telepon ?? '',
-                    'alamat' => $user->alamat ?? '',
+                    'status' => $user->status
                 ]
             ]);
 
