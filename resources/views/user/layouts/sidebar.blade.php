@@ -25,18 +25,18 @@
    
 
     <!-- Nav Item - Tables -->
-    <li class="nav-item {{ request()->is('user/riwayat-prediksi') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('/user/riwayat-prediksi') }}">
+    <li class="nav-item {{ request()->is('user/konsultasi') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('/user/konsultasi') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Konsultasi</span>
         </a>
     </li>
 
     <!-- Nav Item - Laporan -->
-    <li class="nav-item {{ request()->is('user/laporan-visualisasi') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ url('/user/laporan-visualisasi') }}">
+    <li class="nav-item {{ request()->is('user/riwayat-deteksi') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ url('/user/riwayat-deteksi') }}">
             <i class="fas fa-fw fa-file-alt"></i>
-            <span>Prediksi & Visualisasi</span>
+            <span>Riwayat Deteksi</span>
         </a>
     </li>
 
