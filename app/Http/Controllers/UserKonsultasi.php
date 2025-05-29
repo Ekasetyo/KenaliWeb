@@ -10,7 +10,7 @@ class UserKonsultasi extends Controller
 {
     public function index()
     {
-        $userId = session('user')->id; // Atau gunakan Auth::id() jika pakai Auth
+        $userId = session('user')->id;
         $konsultasi = Konsultasi::where('user_id', $userId)->latest()->get();
 
         return view('laporan.konsultasi', compact('konsultasi'));
