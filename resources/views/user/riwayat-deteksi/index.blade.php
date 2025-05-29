@@ -1,4 +1,4 @@
-@extends('admin.dashboard-admin')
+@extends('user.dashboard-user')
 
 @section('title', 'Data Hasil Prediksi')
 
@@ -9,7 +9,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
             <h6 class="m-0 font-weight-bold text-primary">Daftar Prediksi</h6>
-            <form action="{{ route('admin.hasil-prediksi') }}" method="GET" class="form-inline">
+            <form action="{{ route('user.riwayat-deteksi') }}" method="GET" class="form-inline">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Cari nama pengguna..." 
                            value="{{ htmlspecialchars(request('search')) }}">

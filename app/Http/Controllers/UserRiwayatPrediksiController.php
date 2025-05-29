@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use MongoDB\BSON\ObjectId;
 use Carbon\Carbon;
 
-class AdminDataPrediksi extends Controller
+class UserRiwayatPrediksiController extends Controller
 {
     public function dataPrediksi(Request $request)
     {
@@ -64,14 +64,15 @@ class AdminDataPrediksi extends Controller
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
-        return view('admin.hasil-prediksi.index', [
-            'data' => $data,
-            'usersRaw' => collect($dataArray)->mapWithKeys(function ($item) {
-                return [$item->user_id => (object) [
-                    'name' => $item->name,
-                    'tanggal_lahir' => $item->user->tanggal_lahir ?? null
-                ]];
-            })
-        ]);
+        return view('user.riwayat-deteksi.index', [
+    'data' => $data,
+    'usersRaw' => collect($dataArray)->mapWithKeys(function ($item) {
+        return [$item->user_id => (object) [
+            'name' => $item->name,
+            'tanggal_lahir' => $item->user->tanggal_lahir ?? null
+        ]];
+    })
+]);
+
     }
 }
