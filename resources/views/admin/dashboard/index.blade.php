@@ -47,6 +47,24 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Deteksi Card -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Deteksi</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $deteksiCount }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-search fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Chart Row -->
@@ -71,7 +89,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow h-100 py-2">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-success">Deteksi per Bulan</h6>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="deteksiChart"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
     <!-- /.container-fluid -->
 </div>
@@ -81,6 +110,7 @@
 <script>
     const usersPerMonth = {!! json_encode($usersPerMonthArray) !!};
     const artikelsPerMonth = {!! json_encode($artikelsPerMonthArray) !!};
+    const deteksisPerMonth = {!! json_encode($deteksisPerMonthArray) !!};
 
     // User Chart
     var ctx1 = document.getElementById('userChart').getContext('2d');
@@ -90,49 +120,31 @@
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'User',
-                data: usersPerMonth.map(Math.floor), // Pastikan tidak ada desimal
+                data: usersPerMonth.map(Math.floor),
                 backgroundColor: 'rgba(54, 162, 235, 0.8)',
                 borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 0, // Tanpa garis batas
+                borderWidth: 0,
                 barThickness: 30,
-                hoverBackgroundColor: 'rgba(54, 162, 235, 1)', // Warna saat hover
+                hoverBackgroundColor: 'rgba(54, 162, 235, 1)',
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             animation: {
-                duration: 1000, // Durasi animasi
-                easing: 'easeOutBounce' // Jenis animasi
+                duration: 1000,
+                easing: 'easeOutBounce'
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        display: false // Menghilangkan garis grid
-                    },
-                    ticks: {
-                        display: false // Menghilangkan angka pada sumbu y
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false // Menghilangkan garis grid
-                    },
-                    title: {
-                        display: true,
-                        text: 'Bulan'
-                    }
-                }
+                y: { beginAtZero: true, grid: { display: false }, ticks: { display: false }},
+                x: { grid: { display: false }, title: { display: true, text: 'Bulan' }}
             },
             plugins: {
-                legend: {
-                    display: false, // Menghilangkan legend jika tidak diperlukan
-                },
+                legend: { display: false },
                 tooltip: {
                     callbacks: {
                         label: function(tooltipItem) {
-                            return tooltipItem.dataset.label + ': ' + Math.floor(tooltipItem.raw); // Menampilkan label tanpa angka
+                            return tooltipItem.dataset.label + ': ' + Math.floor(tooltipItem.raw);
                         }
                     }
                 }
@@ -148,49 +160,71 @@
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             datasets: [{
                 label: 'Artikel',
-                data: artikelsPerMonth.map(Math.floor), // Pastikan tidak ada desimal
+                data: artikelsPerMonth.map(Math.floor),
                 backgroundColor: 'rgba(255, 99, 132, 0.8)',
                 borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 0, // Tanpa garis batas
+                borderWidth: 0,
                 barThickness: 30,
-                hoverBackgroundColor: 'rgba(255, 99, 132, 1)', // Warna saat hover
+                hoverBackgroundColor: 'rgba(255, 99, 132, 1)',
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             animation: {
-                duration: 1000, // Durasi animasi
-                easing: 'easeOutBounce' // Jenis animasi
+                duration: 1000,
+                easing: 'easeOutBounce'
             },
             scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        display: false // Menghilangkan garis grid
-                    },
-                    ticks: {
-                        display: false // Menghilangkan angka pada sumbu y
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false // Menghilangkan garis grid
-                    },
-                    title: {
-                        display: true,
-                        text: 'Bulan'
-                    }
-                }
+                y: { beginAtZero: true, grid: { display: false }, ticks: { display: false }},
+                x: { grid: { display: false }, title: { display: true, text: 'Bulan' }}
             },
             plugins: {
-                legend: {
-                    display: false, // Menghilangkan legend jika tidak diperlukan
-                },
+                legend: { display: false },
                 tooltip: {
                     callbacks: {
                         label: function(tooltipItem) {
-                            return tooltipItem.dataset.label + ': ' + Math.floor(tooltipItem.raw); // Menampilkan label tanpa angka
+                            return tooltipItem.dataset.label + ': ' + Math.floor(tooltipItem.raw);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Deteksi Chart
+    var ctx4 = document.getElementById('deteksiChart').getContext('2d');
+    var deteksiChart = new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                label: 'Deteksi',
+                data: deteksisPerMonth.map(Math.floor),
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 0,
+                barThickness: 30,
+                hoverBackgroundColor: 'rgba(75, 192, 192, 1)',
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+                duration: 1000,
+                easing: 'easeOutBounce'
+            },
+            scales: {
+                y: { beginAtZero: true, grid: { display: false }, ticks: { display: false }},
+                x: { grid: { display: false }, title: { display: true, text: 'Bulan' }}
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.dataset.label + ': ' + Math.floor(tooltipItem.raw);
                         }
                     }
                 }
