@@ -25,7 +25,7 @@ class LoginController extends Controller
         // Cek apakah sudah ada sesi aktif, jika ada, hapus sesi sebelumnya
         if (Session::has('user')) {
             $currentUser = Session::get('user');
-            Session::forget('user');
+            Session::forget('user'); // Hapus sesi sebelumnya
             Log::info('Sesi sebelumnya dihapus untuk user:', ['email' => $currentUser['email']]);
         }
 
