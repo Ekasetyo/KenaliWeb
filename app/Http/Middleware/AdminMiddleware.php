@@ -16,13 +16,6 @@ class AdminMiddleware
         }
         return redirect('/login')->with('error', 'Akses hanya untuk admin!');
     }
-}
-{
-    
-    $user = session('user');
-    if ($user && $user['status'] === 'admin') {
-        return $next($request);
-    }
-    return redirect('/login')->with('error', 'Akses hanya untuk admin!');
 };
+
 
