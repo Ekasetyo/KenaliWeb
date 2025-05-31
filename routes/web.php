@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminDataPrediksi;
 use App\Http\Controllers\AdminVisualisasi;
 use App\Http\Controllers\AdminLaporan;
 use App\Http\Controllers\AdminKonsultasi;
-use App\Http\Controllers\UserKonsultasi; 
+use App\Http\Controllers\UserKonsultasi;
 use App\Http\Controllers\UserRiwayatPrediksiController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
@@ -30,9 +30,6 @@ Route::get('/', [ArtikelController::class, 'landing']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/register', function () {
-    return view('login-register.register');
-})->name('register');
 Route::get('/register', [RegisterUserController::class, 'showRegistrationForm'])->name('register.form');
 Route::post('/register', [RegisterUserController::class, 'register'])->name('register');
 
@@ -54,7 +51,6 @@ Route::get('/dashboard', function () {
 // ==============================
 
 Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function () {
-
     // Dashboard
     Route::get('/dashboard', [DashboardadminController::class, 'index'])->name('admin.dashboard');
 
@@ -77,11 +73,10 @@ Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function (
     Route::get('/visualisasi', [AdminVisualisasi::class, 'visualisasi'])->name('admin.visualisasi');
     Route::get('/laporan', [AdminLaporan::class, 'laporan'])->name('admin.laporan');
 
-    // Konsultasi (View ada di views/laporan)
-    Route::get('/konsultasi', [AdminKonsultasi::class, 'index'])->name('admin.consultations.index');
-    Route::get('/konsultasi/{id}', [AdminKonsultasi::class, 'show'])->name('admin.consultations.show');
-    Route::post('/konsultasi/reply', [AdminKonsultasi::class, 'reply'])->name('admin.consultations.reply');
-    Route::post('/konsultasi/{id}/close', [AdminKonsultasi::class, 'close'])->name('admin.consultations.close');
+    // Konsultasi
+    Route::get('/konsultasi', [AdminKonsultasi::class, 'index'])->name('admin.konsultasi.index');
+    Route::get('/konsultasi/{id}', [AdminKonsultasi::class, 'show'])->name('admin.konsultasi.show');
+    Route::post('/konsultasi/reply', [AdminKonsultasi::class, 'reply'])->name('admin.konsultasi.reply');
 });
 
 // ==============================
@@ -92,31 +87,30 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
     // Route UserController
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
     Route::get('/artikel', [UserController::class, 'artikel'])->name('user.artikel');
-    Route::get('/konsultasi', [UserController::class, 'konsultasi'])->name('user.konsultasi');
     Route::get('/laporan-visualisasi', [UserController::class, 'laporan'])->name('user.laporan-visualisasi');
     Route::post('/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password')->middleware('auth');
 
-    Route::get('/konsultasi', [UserController::class, 'konsultasi'])->name('user.konsultasi');
-    Route::post('/konsultasi', [UserController::class, 'store'])->name('user.consultations.store');
-    Route::post('/konsultasi/reply', [UserController::class, 'reply'])->name('user.consultations.reply');
+    // Konsultasi
+    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('konsultasi.index');
+    Route::post('/konsultasi', [UserKonsultasi::class, 'store'])->name('konsultasi.store');
+    Route::get('/konsultasi/create', [UserKonsultasi::class, 'create'])->name('konsultasi.create');
+    Route::get('/konsultasi/{id}', [UserKonsultasi::class, 'show'])->name('konsultasi.show');
+    Route::delete('/konsultasi/{id}', [UserKonsultasi::class, 'destroy'])->name('konsultasi.destroy');
 
-    // Route UserRiwayatPrediksiController (dipisah)
+    // Route UserRiwayatPrediksiController
     Route::get('/riwayat-deteksi', [UserRiwayatPrediksiController::class, 'dataPrediksi'])->name('user.riwayat-deteksi');
 });
-
-// Jika kamu masih pakai middleware auth terpisah untuk konsultasi:
-// Route::middleware(['auth'])->prefix('user')->group(function () {
-//     Route::get('/konsultasi', [UserController::class, 'index'])->name('user.consultations.index');
-//     Route::post('/konsultasi', [UserController::class, 'store'])->name('user.consultations.store');
-//     Route::post('/konsultasi/reply', [UserController::class, 'reply'])->name('user.consultations.reply');
-// });
 
 // Route publik / umum
 Route::get('/laporan', [UserController::class, 'laporan']);
 Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
 
+
 // Tampilan input nama (Forgot)
 // Tampilkan form input nama (forgot password step 1)
+
+// Route untuk password reset
+
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 
 // Proses input nama dan tampilkan form reset password

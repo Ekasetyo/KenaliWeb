@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RiwayatDeteksiController;
 use App\Http\Controllers\Api\ArtikelMobileController;
+use App\Http\Controllers\Api\UserMobileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,4 @@ Route::post('/artikel', [ArtikelMobileController::class, 'getartikel'])->name('a
 
 
 Route::delete('/riwayat/{id}', [RiwayatDeteksiController::class, 'destroy'])->name('hapus.riwayat');
+Route::post('/update-profile', [UserMobileController::class, 'updateProfile'])->name('update.profile');

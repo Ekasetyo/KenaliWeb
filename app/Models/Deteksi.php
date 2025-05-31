@@ -24,4 +24,5 @@ class Deteksi extends Model
         'prediction',
         'created_at'
     ];
+
 }

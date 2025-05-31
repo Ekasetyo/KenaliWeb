@@ -53,7 +53,11 @@ class AuthController extends Controller
                     'id' => (string)$user->_id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'status' => $user->status
+                    'status' => $user->status,
+                    'jenis_kelamin' => $user->jenis_kelamin ?? 'Tidak Diketahui',
+                    'tanggal_lahir' => $user->tanggal_lahir ? $user->tanggal_lahir->toDateTime()->format('Y-m-d') : null,
+                    'no_telepon' => $user->no_telepon ?? '',
+                    'alamat' => $user->alamat ?? '',
                 ]
             ]);
 
@@ -68,7 +72,6 @@ class AuthController extends Controller
 
     protected function generateToken($user)
     {
-        // Contoh sederhana (gunakan Sanctum/JWT untuk produksi)
         return base64_encode(json_encode([
             'user_id' => (string)$user->_id,
             'expires_at' => now()->addDays(7)->timestamp

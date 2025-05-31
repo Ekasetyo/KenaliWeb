@@ -50,8 +50,8 @@
     </li>
 
     <!-- Nav Item - Konsultasi -->
-    <li class="nav-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.laporan') }}">
+    <li class="nav-item {{ request()->routeIs('admin.konsultasi.index') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('admin.konsultasi.index') }}">
             <i class="fas fa-fw fa-comments"></i>
             <span>Konsultasi</span>
         </a>
