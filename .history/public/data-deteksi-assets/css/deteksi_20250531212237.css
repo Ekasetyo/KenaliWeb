@@ -1,0 +1,24 @@
+/* Admin */
+
+.card {
+        transition: transform 0.3s ease-in-out;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    .card-title {
+        color: #4e73df;
+        font-weight: bold;
+    }
+    .border-left-primary {
+        border-left: 5px solid #4e73df !important;
+    }
+    .border-left-success {
+        border-left: 5px solid #1cc88a !important;
+    }
+    .border-left-info {
+        border-left: 5px solid #36b9cc !important;
+    }
+    .border-left-warning {
+        border-left: 5px solid #f6c23e !important;
+    }

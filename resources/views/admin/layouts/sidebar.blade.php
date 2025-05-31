@@ -45,7 +45,7 @@
     <li class="nav-item {{ request()->routeIs('admin.hasil-prediksi') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('admin.hasil-prediksi') }}">
             <i class="fas fa-fw fa-table"></i>
-            <span>Riwayat Prediksi</span>
+            <span>Riwayat Deteksi User</span>
         </a>
     </li>
 

@@ -1,14 +1,14 @@
 @extends('admin.dashboard-admin')
 
-@section('title', 'Data Hasil Prediksi')
+@section('title', 'Data Hasil Deteksi')
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Data Hasil Prediksi Stroke</h1>
+    <h1 class="h3 mb-2 text-gray-800">Data Hasil Deteksi Risiko Stroke para User</h1>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Prediksi</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Daftar Deteksi Para User</h6>
             <form action="{{ route('admin.hasil-prediksi') }}" method="GET" class="form-inline">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Cari nama pengguna..." 
@@ -27,10 +27,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Nama Akun</th>
                             <th>Usia</th>
-                            <th>Hasil Prediksi</th>
-                            <th>Tanggal Prediksi</th>
+                            <th>Hasil Deteksi</th>
+                            <th>Tanggal Deteksi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -60,17 +60,14 @@
                             </td>
                             <td>{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') : '-' }}</td>
                             <td>
-                                <button class="btn btn-info btn-sm view-detail" 
-                                        data-toggle="modal" 
-                                        data-target="#detailModal"
-                                        data-detail="{{ htmlspecialchars(json_encode($item)) }}">
+                                <a href="{{ route('admin.hasil-prediksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-eye"></i> Detail
-                                </button>
+                                </a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada data prediksi</td>
+                            <td colspan="6" class="text-center">Tidak ada data Deteksi</td>
                         </tr>
                         @endforelse
                     </tbody>
@@ -85,3 +82,4 @@
 </div>
 
 @endsection
+

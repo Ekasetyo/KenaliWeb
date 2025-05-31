@@ -54,7 +54,7 @@
 
                     </div>
                     <div class="signup-image">
-                        <figure><img src="{{ asset('login-assets/images/signup-image.jpg') }}" alt="sign up image"></figure>
+                        <figure><img src="{{ asset('login-assets/images/sign_up.png') }}" alt="sign up image"></figure>
                         <a href="{{ url('/login') }}" class="signup-image-link">Back to Login</a>
                     </div>
                 </div>
