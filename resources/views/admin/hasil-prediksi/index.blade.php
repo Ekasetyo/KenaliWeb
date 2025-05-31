@@ -41,9 +41,22 @@
                             <td>{{ $item->name ?? '-' }}</td>
                             <td>{{ is_numeric($item->age) ? $item->age . ' tahun' : $item->age }}</td>
                             <td>
-                                <span class="badge {{ str_contains(strtolower($item->prediction ?? ''), 'beresiko') ? 'badge-danger' : 'badge-success' }}">
-                                    {{ $item->prediction ?? 'Tidak ada data' }}
-                                </span>
+                                @php
+                                    $predictionText = strtolower($item->prediction ?? '');
+                                @endphp
+                                @if ($predictionText === 'anda beresiko terkena stroke')
+                                    <span class="badge badge-danger">
+                                        {{ $item->prediction }}
+                                    </span>
+                                @elseif ($predictionText === 'anda tidak beresiko')
+                                    <span class="badge badge-success">
+                                        {{ $item->prediction }}
+                                    </span>
+                                @else
+                                    <span class="badge badge-secondary">
+                                        {{ $item->prediction ?? 'Tidak ada data' }}
+                                    </span>
+                                @endif
                             </td>
                             <td>{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') : '-' }}</td>
                             <td>

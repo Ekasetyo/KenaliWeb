@@ -107,6 +107,11 @@ h6,
     z-index: 1;
 }
 
+.logout-button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .btn.btn-primary-gradient::after,
 .btn.btn-secondary-gradient::after {
     position: absolute;

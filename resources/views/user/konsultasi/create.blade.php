@@ -20,7 +20,7 @@
                         <p><strong>Keluhan:</strong> Jelaskan keluhan Anda secara rinci, beserta hasil deteksi yang sudah di
                             lakukan di aplikasi mobile Contoh: "Saya sudah melakukan deteksi dini untuk saya sendiri/orang
                             tua/orang lain pada aplikasi kenali selama 1 bulan dengan hasil deteksi beresiko terkena stroke.
-                            Dalam 2 minggu pertama saya mengalmi gejala seperti kepala terasa berat dan sering terasa lelah.
+                            Dalam 2 minggu pertama saya mengalami gejala seperti kepala terasa berat dan sering terasa lelah.
                             Namun 2 minggu terakhir gejala itu mulai hilang namun kadang-kadang kembali lagi. Apa yang harus
                             saya lakukan? apakah gejala tersebut menjadi tanda saya terkena stroke?"</p>
                     </div>

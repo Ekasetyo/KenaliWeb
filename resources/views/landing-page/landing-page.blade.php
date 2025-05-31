@@ -366,4 +366,4 @@
     <!-- Template Javascript -->
     <script src="{{ asset('landing-assets/js/main.js') }}"></script>
     <script>
-</html>
+

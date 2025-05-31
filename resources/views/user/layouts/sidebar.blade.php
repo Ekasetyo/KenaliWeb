@@ -42,10 +42,11 @@
 
     <!-- Nav Item - Logout -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/login') }}">
+        <form method="POST" action="{{ route('logout') }}">
+        <button type="submit" class="nav-link btn btn-link logout-button focus:outline-none focus:ring-0" style="color: white; text-align: left;">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>
-        </a>
+        </button>
     </li>
 
     <!-- Divider -->
