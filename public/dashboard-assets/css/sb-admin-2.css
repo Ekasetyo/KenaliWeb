@@ -41,6 +41,16 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+
+.alert-warning-custom {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
 *,
 *::before,
 *::after {
@@ -10357,6 +10367,7 @@ a:focus {
 .sidebar {
   width: 6.5rem;
   min-height: 100vh;
+  position: fixed;
 }
 
 .sidebar .nav-item {
@@ -11316,4 +11327,25 @@ footer.sticky-footer .copyright {
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
+
+/* ini nyoba data prediksi */
+
+    .bg-danger {
+        background-color: #dc3545 !important;
+        color: white;
+    }
+    .bg-success {
+        background-color: #28a745 !important;
+        color: white;
+    }
+    .badge {
+        padding: 0.35em 0.65em;
+        font-size: 0.75em;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: 0.25rem;
+    }
 

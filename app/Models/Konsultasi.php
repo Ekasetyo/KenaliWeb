@@ -2,22 +2,30 @@
 
 namespace App\Models;
 
+use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Konsultasi extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'topic', 'status'];
+    protected $connection = 'mongodb';
+    protected $collection = 'konsultasis';
 
-    public function Pesan()
-    {
-        return $this->hasMany(PesanKonsultasi::class);
-    }
+    protected $fillable = [
+        'id_pengguna', 'identitas', 'keluhan', 'jawaban', 'nama_pemberi_jawaban'
+    ];
 
-    public function user()
+    protected $dates = ['created_at', 'updated_at'];
+
+    protected $casts = [
+        'id_pengguna' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function pengguna()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_pengguna', '_id');
     }
 }
