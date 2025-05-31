@@ -30,17 +30,13 @@ class Deteksi extends Model
     ];
 
     // Nonaktifkan casting untuk debugging
-    // protected $casts = [
-    //     'created_at' => 'datetime:Y-m-d\TH:i:s.u',
-    // ];
-
     protected $dates = [];
 
     public static function boot()
     {
         parent::boot();
         static::retrieved(function ($model) {
-            Log::info('Deteksi Model Retrieved:', ['collection' => $model->getCollection(), 'data' => $model->toArray()]);
+            Log::info('Deteksi Model Retrieved:', ['collection' => $model->getCollection()]);
         });
     }
 }

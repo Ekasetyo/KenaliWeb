@@ -74,7 +74,16 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Debug Data -->
+            <div>
+                <h3>Debug Data</h3>
+                <p>Users per Month: {{ json_encode($usersPerMonthArray) }}</p>
+                <p>Artikels per Month: {{ json_encode($artikelsPerMonthArray) }}</p>
+                <p>Deteksis per Month: {{ json_encode($deteksisPerMonthArray) }}</p>
+                <p>Konsultasis per Month: {{ json_encode($konsultasisPerMonthArray) }}</p>
+            </div>
+
             <!-- Chart Row -->
             <div class="row">
                 <div class="col-lg-6 mb-4">

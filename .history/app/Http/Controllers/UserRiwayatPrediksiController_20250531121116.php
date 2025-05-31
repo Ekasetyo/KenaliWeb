@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use MongoDB\BSON\ObjectId;
 use Carbon\Carbon;

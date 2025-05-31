@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use MongoDB\BSON\ObjectId;
 use Carbon\Carbon;
@@ -12,33 +11,27 @@ class UserRiwayatPrediksiController extends Controller
 {
     public function dataPrediksi(Request $request)
     {
-        // Ambil id user yang sedang login dari sesi
-        $user = Session::get('user');
-        if (!$user || !isset($user['id'])) {
-            return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-        $userId = new ObjectId($user['id']);
-
         $search = $request->input('search');
 
-        // Ambil data dari hasil_deteksi berdasarkan user_id yang login
+        // Ambil data dari hasil_deteksi
         $dataCursor = DB::connection('mongodb')
             ->getMongoDB()
             ->selectCollection('hasil_deteksi')
-            ->find(['user_id' => $userId]); // Filter berdasarkan user_id
+            ->find(); // Sesuaikan query Anda
 
         $dataArray = iterator_to_array($dataCursor);
 
-        // Ambil data dari users untuk user yang login (opsional, jika perlu data tambahan)
+        // Ambil data dari users
+        $userIds = array_column($dataArray, 'user_id');
         $usersCursor = DB::connection('mongodb')
             ->getMongoDB()
             ->selectCollection('users')
-            ->find(['_id' => $userId]);
+            ->find(['_id' => ['$in' => array_map(function($id) { return new ObjectId($id); }, $userIds)]]);
         
         $usersArray = iterator_to_array($usersCursor);
         $usersMap = [];
-        foreach ($usersArray as $userData) {
-            $usersMap[(string)$userData->_id] = $userData; // Simpan dalam array dengan _id sebagai key
+        foreach ($usersArray as $user) {
+            $usersMap[(string)$user->_id] = $user; // Simpan dalam array dengan _id sebagai key
         }
 
         // Gabungkan data
@@ -72,13 +65,14 @@ class UserRiwayatPrediksiController extends Controller
         );
 
         return view('user.riwayat-deteksi.index', [
-            'data' => $data,
-            'usersRaw' => collect($dataArray)->mapWithKeys(function ($item) {
-                return [$item->user_id => (object) [
-                    'name' => $item->name,
-                    'tanggal_lahir' => $item->user->tanggal_lahir ?? null
-                ]];
-            })
-        ]);
+    'data' => $data,
+    'usersRaw' => collect($dataArray)->mapWithKeys(function ($item) {
+        return [$item->user_id => (object) [
+            'name' => $item->name,
+            'tanggal_lahir' => $item->user->tanggal_lahir ?? null
+        ]];
+    })
+]);
+
     }
 }

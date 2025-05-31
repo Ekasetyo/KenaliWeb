@@ -168,33 +168,16 @@ class DashboardAdminController extends Controller
                 ->selectCollection('hasil_deteksi')
                 ->aggregate([
                     [
-                        // Potong created_at untuk mengambil hanya 3 digit milidetik dan tambahkan Z
-                        '$addFields' => [
-                            'created_at_trimmed' => [
-                                '$concat' => [
-                                    ['$substrCP' => ['$created_at', 0, 23]], // Ambil hingga 3 digit milidetik (misal: 2025-05-18T21:03:05.624)
-                                    'Z'
-                                ]
-                            ]
-                        ],
-                    ],
-                    [
-                        // Konversi created_at_trimmed ke tanggal
+                        // Konversi created_at dari string ke date
                         '$addFields' => [
                             'created_at_date' => [
                                 '$dateFromString' => [
-                                    'dateString' => '$created_at_trimmed',
+                                    'dateString' => '$created_at',
                                     'format' => '%Y-%m-%dT%H:%M:%S.%LZ',
                                     'onError' => null,
                                     'onNull' => null,
                                 ],
                             ],
-                        ],
-                    ],
-                    [
-                        // Debug: Log dokumen setelah konversi
-                        '$addFields' => [
-                            'debug_created_at_date' => '$created_at_date',
                         ],
                     ],
                     [

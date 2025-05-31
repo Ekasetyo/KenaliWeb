@@ -4,7 +4,6 @@ namespace App\Models;
 
 use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Log;
 
 class Deteksi extends Model
 {
@@ -29,18 +28,11 @@ class Deteksi extends Model
         'created_at'
     ];
 
-    // Nonaktifkan casting untuk debugging
-    // protected $casts = [
-    //     'created_at' => 'datetime:Y-m-d\TH:i:s.u',
-    // ];
+    protected $dates = ['created_at', 'updated_at'];
 
-    protected $dates = [];
-
-    public static function boot()
-    {
-        parent::boot();
-        static::retrieved(function ($model) {
-            Log::info('Deteksi Model Retrieved:', ['collection' => $model->getCollection(), 'data' => $model->toArray()]);
-        });
-    }
+    protected $casts = [
+        'user_id' => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
 }

@@ -1,3 +1,4 @@
+<DOCUMENT filename="index.blade.php">
 @extends('admin.dashboard-admin')
 
 @section('title', 'Dashboard Admin')
@@ -74,7 +75,16 @@
                     </div>
                 </div>
             </div>
-            
+
+            <!-- Debug Data -->
+            <div>
+                <h3>Debug Data</h3>
+                <p>Users per Month: {{ json_encode($usersPerMonthArray) }}</p>
+                <p>Artikels per Month: {{ json_encode($artikelsPerMonthArray) }}</p>
+                <p>Konsultasis per Month: {{ json_encode($konsultasisPerMonthArray) }}</p>
+                <p>Deteksis per User: {{ json_encode($deteksisPerUserArray) }}</p>
+            </div>
+
             <!-- Chart Row -->
             <div class="row">
                 <div class="col-lg-6 mb-4">
@@ -100,10 +110,10 @@
                 <div class="col-lg-6 mb-4">
                     <div class="card shadow h-100 py-2">
                         <div class="card-header">
-                            <h6 class="m-0 font-weight-bold text-success">Deteksi per Bulan</h6>
+                            <h6 class="m-0 font-weight-bold text-success">Deteksi per User</h6>
                         </div>
                         <div class="card-body">
-                            @if (array_sum($deteksisPerMonthArray) > 0)
+                            @if (count($deteksisPerUserArray) > 0)
                                 <canvas id="deteksiChart"></canvas>
                             @else
                                 <p>Tidak ada data deteksi untuk ditampilkan.</p>
@@ -131,14 +141,8 @@
         <script>
             const usersPerMonth = {!! json_encode($usersPerMonthArray) !!};
             const artikelsPerMonth = {!! json_encode($artikelsPerMonthArray) !!};
-            const deteksisPerMonth = {!! json_encode($deteksisPerMonthArray) !!};
+            const deteksisPerUser = {!! json_encode($deteksisPerUserArray) !!};
             const konsultasisPerMonth = {!! json_encode($konsultasisPerMonthArray) !!};
-
-            // Debug data di console
-            console.log('Users per Month:', usersPerMonth);
-            console.log('Artikels per Month:', artikelsPerMonth);
-            console.log('Deteksis per Month:', deteksisPerMonth);
-            console.log('Konsultasis per Month:', konsultasisPerMonth);
 
             // User Chart
             var ctx1 = document.getElementById('userChart').getContext('2d');
@@ -190,16 +194,16 @@
                 }
             });
 
-            // Deteksi Chart (per Bulan)
-            if (deteksisPerMonth.reduce((a, b) => a + b, 0) > 0) {
+            // Deteksi Chart (per User)
+            if (deteksisPerUser.length > 0) {
                 var ctx3 = document.getElementById('deteksiChart').getContext('2d');
                 new Chart(ctx3, {
                     type: 'bar',
                     data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        labels: deteksisPerUser.map(item => item._id || 'Unknown'),
                         datasets: [{
                             label: 'Deteksi',
-                            data: deteksisPerMonth.map(Math.floor),
+                            data: deteksisPerUser.map(item => Math.floor(item.count || 0)),
                             backgroundColor: 'rgba(75, 192, 192, 0.8)',
                             borderColor: 'rgba(75, 192, 192, 1)',
                             borderWidth: 0,
@@ -211,7 +215,7 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         animation: { duration: 1000, easing: 'easeOutBounce' },
-                        scales: { y: { beginAtZero: true, grid: { display: false }, ticks: { display: false } }, x: { grid: { display: false }, title: { display: true, text: 'Bulan' } } },
+                        scales: { y: { beginAtZero: true, grid: { display: false }, ticks: { display: false } }, x: { grid: { display: false }, title: { display: true, text: 'User ID' } } },
                         plugins: { legend: { display: false }, tooltip: { callbacks: { label: tooltipItem => tooltipItem.dataset.label + ': ' + Math.floor(tooltipItem.raw) } } }
                     }
                 });
@@ -244,3 +248,22 @@
         </script>
     @endpush
 @endsection
+</DOCUMENT>
+
+---
+
+### **Penjelasan**
+- **Kode Dipadatkan:** Skrip JavaScript disederhanakan dengan format satu baris untuk mengurangi kekacauan, sambil mempertahankan fungsionalitas.
+- **Penanganan Data Kosong:** Tetap menggunakan `@if (count($deteksisPerUserArray) > 0)` dan `if (deteksisPerUser.length > 0)` untuk menghindari error jika data tidak ada.
+- **Konsistensi:** Pastikan semua chart menggunakan data yang dikirim dari controller (terutama `$deteksisPerUserArray` untuk "Deteksi per User").
+
+### **Langkah Verifikasi**
+- Jalankan aplikasi dan periksa dashboard.
+- Periksa log di `storage/logs/laravel.log` untuk memastikan `$deteksisPerUserArray` terisi.
+- Jika chart "Deteksi per User" tidak muncul, tambahkan data dummy di MongoDB:
+  ```
+  use kenali
+  db.hasil_deteksi.insertOne({"user_id": "6829d77e9a57468c54072513", "sex": 1, "age": 18, "hypertension": 1, "heart_disease": 1, "ever_married": 1, "work_type": 2, "Residence_type": 1, "avg_glucose_level": 128, "bmi": 35, "smoking_status": 1, "prediction": "anda beresiko terkena stroke", "created_at": "2025-05-18T21:03:05.624127"})
+  ```
+
+Beri tahu saya jika masih ada masalah!
