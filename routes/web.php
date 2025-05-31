@@ -17,6 +17,8 @@ use App\Http\Controllers\UserRiwayatPrediksiController;
 use App\Http\Controllers\Auth\RegisterUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ProfileController;
+
 
 // ==============================
 // Public Routes
@@ -113,8 +115,18 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
 Route::get('/laporan', [UserController::class, 'laporan']);
 Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
 
-// Route untuk password reset, dll (tidak diubah)
+// Tampilan input nama (Forgot)
+// Tampilkan form input nama (forgot password step 1)
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+// Proses input nama dan tampilkan form reset password
+Route::get('password/reset-form', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.form');
+
+// Simpan password baru
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+// pengaturan profile   
+Route::middleware('login.session')->group(function () {
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+});

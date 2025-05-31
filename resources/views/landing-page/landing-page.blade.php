@@ -61,7 +61,6 @@
                         <a href="#feature" class="nav-item nav-link">Fitur</a>
                         <a href="#bmi-calculator" class="nav-item nav-link">BMI</a>
                         <a href="#artikel" class="nav-item nav-link">Artikel</a>
-                        <a href="#contact" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="{{ url('/login') }}"
                         class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Login</a>
@@ -171,62 +170,123 @@
         </div>
         <!-- Features End -->
 
-        <!-- BMI Calculator Start -->
-        <div class="container-xxl py-5" id="bmi-calculator">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Kalkulator BMI</h5>
-                    <h1 class="mb-5">Hitung Indeks Massa Tubuh Anda</h1>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-6">
-                        <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <form id="bmiForm">
-                                <div class="row g-3">
-                                    <!-- Input Gender Sederhana -->
-                                    <div class="col-md-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="gender" placeholder="Gender (male/female)" required>
-                                            <label for="gender">Gender (laki-laki/perempuan)</label>
-                                        </div>
-                                    </div>
-                                    <!-- Input Berat Badan -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="number" class="form-control" id="weight" placeholder="Berat Badan (kg)" min="0" required>
-                                            <label for="weight">Berat Badan (kg)</label>
-                                        </div>
-                                    </div>
-                                    <!-- Input Tinggi Badan -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="number" class="form-control" id="height" placeholder="Tinggi Badan (cm)" min="0" required>
-                                            <label for="height">Tinggi Badan (cm)</label>
-                                        </div>
-                                    </div>
-                                    <!-- Input Usia -->
-                                    <div class="col-md-12">
-                                        <div class="form-floating">
-                                            <input type="number" class="form-control" id="age" placeholder="Usia (tahun)" min="0" required>
-                                            <label for="age">Usia (tahun)</label>
-                                        </div>
-                                    </div>
-                                    <!-- Tombol Hitung -->
-                                    <div class="col-12 text-center">
-                                        <button type="button" class="btn btn-primary-gradient rounded-pill py-3 px-5" onclick="calculateBMI()">Hitung BMI</button>
-                                    </div>
-                                    <!-- Hasil BMI -->
-                                    <div class="col-12 text-center">
-                                        <p id="bmiResult" class="mt-3"></p>
-                                    </div>
+       <!-- BMI Calculator Start -->
+<div class="container-xxl py-5" id="bmi-calculator">
+    <div class="container py-5 px-lg-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="text-primary-gradient fw-medium">Kalkulator BMI</h5>
+            <h1 class="mb-5">Hitung Indeks Massa Tubuh Anda</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form id="bmiForm">
+                        <div class="row g-3">
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <select class="form-select" id="gender" required>
+                                        <option value="" disabled selected>Pilih Gender</option>
+                                        <option value="laki-laki">Laki-laki</option>
+                                        <option value="perempuan">Perempuan</option>
+                                    </select>
+                                    <label for="gender">Gender</label>
                                 </div>
-                            </form>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="weight" placeholder="Berat Badan (kg)" min="0" step="0.1" required>
+                                    <label for="weight">Berat Badan (kg)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="height" placeholder="Tinggi Badan (cm)" min="0" step="1" required>
+                                    <label for="height">Tinggi Badan (cm)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="number" class="form-control" id="age" placeholder="Usia (tahun)" min="0" required>
+                                    <label for="age">Usia (tahun)</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center mt-4">
+                                <div id="bmiResultContainer" class="p-3 border rounded" style="background-color: #f0f8ff;">
+                                    <p class="mb-0 text-muted">Isi data di atas untuk menghitung BMI Anda.</p>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- BMI Calculator End -->
+    </div>
+</div>
+<script>
+    function calculateBMI() {
+        const gender = document.getElementById("gender").value;
+        const weight = parseFloat(document.getElementById("weight").value);
+        const height = parseFloat(document.getElementById("height").value);
+        const age = parseInt(document.getElementById("age").value);
+
+        const bmiResultContainer = document.getElementById("bmiResultContainer");
+
+        // Validasi input
+        if (!gender || isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) {
+            bmiResultContainer.innerHTML = '<p class="text-danger mb-0">Mohon isi semua field dengan benar dan pastikan nilainya positif.</p>';
+            return;
+        }
+
+        // Konversi tinggi badan dari cm ke meter
+        const heightInMeter = height / 100;
+
+        // Hitung BMI
+        const bmi = weight / (heightInMeter * heightInMeter);
+        const bmiRounded = bmi.toFixed(2); // Bulatkan 2 angka di belakang koma
+
+        // Tentukan kategori BMI
+        let category = "";
+        if (bmi < 18.5) {
+            category = "Kekurangan Berat Badan";
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            category = "Normal";
+        } else if (bmi >= 25 && bmi <= 29.9) {
+            category = "Kelebihan Berat Badan";
+        } else { // bmi >= 30
+            category = "Obesitas";
+        }
+
+        // Penentuan teks gender dengan emoji
+        let genderText = "";
+        if (gender === "laki-laki") {
+            genderText = "Laki-laki ♂️";
+        } else if (gender === "perempuan") {
+            genderText = "Perempuan ♀️";
+        }
+
+        // Tampilkan hasil di satu elemen output
+        bmiResultContainer.innerHTML = `
+            <h4 class="mb-2">Hasil BMI Anda:</h4>
+            <p class="fs-4 fw-bold mb-1">BMI: ${bmiRounded} (${category})</p>
+            <p class="mb-1">Usia: ${age} tahun</p>
+            <p class="mb-0">Gender: ${genderText}</p>
+        `;
+    }
+
+    // Pemicu perhitungan saat input berubah (selain tombol klik)
+    document.getElementById('gender').addEventListener('change', calculateBMI);
+    document.getElementById('weight').addEventListener('input', calculateBMI);
+    document.getElementById('height').addEventListener('input', calculateBMI);
+    document.getElementById('age').addEventListener('input', calculateBMI);
+
+    // Panggil sekali saat halaman dimuat untuk menampilkan placeholder awal
+    document.addEventListener('DOMContentLoaded', calculateBMI);
+</script>
 
         <!-- Artikel Terbaru Start -->
         <div class="container-xxl py-5" id="artikel">
@@ -251,52 +311,6 @@
         </div>
         <!-- Artikel Terbaru End -->
 
-        <!-- Contact Start -->
-        <div class="container-xxl py-5" id="contact">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Contact</h5>
-                    <h1 class="mb-5">Hubungi Kami</h1>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-9">
-                        <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Nama Anda</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                            <label for="email">Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                            <label for="subject">Subjek</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                            <label for="message">Pesan</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 text-center">
-                                        <button class="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Kirim Pesan</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Contact End -->
 
 
         <!-- Footer Start -->
