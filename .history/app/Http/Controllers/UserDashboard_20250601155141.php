@@ -159,7 +159,7 @@ class UserDashboard extends Controller
         ];
     }
 
-    private function getStrokeData()
+     private function getStrokeData()
     {
         $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
 
@@ -180,39 +180,5 @@ class UserDashboard extends Controller
     }
 
 
-    private function getAgeRiskData()
-    {
-        $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
-
-        // Inisialisasi array untuk menghitung jumlah pasien per usia dari 18 hingga 100
-        // Menggunakan key sebagai usia langsung, PHP akan otomatis memperluas array
-        $ageCounts = [];
-        $strokeCounts = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $ageCounts[$i] = 0;
-            $strokeCounts[$i] = 0;
-        }
-
-
-        foreach ($data as $item) {
-            $age = (int)$item->age; // Pastikan usia adalah integer
-            // Pastikan usia dalam rentang 18-100
-            if ($age >= 18 && $age <= 100) {
-                $ageCounts[$age]++;
-                if ($item->stroke == 1) { // Jika pasien mengalami stroke
-                    $strokeCounts[$age]++;
-                }
-            }
-        }
-
-        // Hitung rata-rata risiko stroke untuk setiap usia
-        $riskData = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $riskData[$i] = $ageCounts[$i] > 0 ? ($strokeCounts[$i] / $ageCounts[$i]) : 0;
-        }
-
-        return [
-            'ageRiskData' => array_values($riskData), // Mengambil hanya nilai-nilainya untuk urutan yang benar di Chart.js
-        ];
-    }
+    
 }

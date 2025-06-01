@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\PredictionHistory; // Import model Prediction
+use App\Models\PredictionHistory;
 
 class UserController extends Controller
 {
@@ -39,10 +39,10 @@ class UserController extends Controller
         return back()->with('success', 'Password berhasil diubah.');
     }
 
-    public function dashboard()
-    {
-        return view('user.dashboard.index');
-    }
+    // public function dashboard()
+    // {
+    //     return view('user.dashboard.index');
+    // }
 
     public function konsultasi()
     {

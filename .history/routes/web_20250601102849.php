@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserDashboard;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DatauserController;
@@ -86,9 +86,13 @@ Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function (
 // ==============================
 
 Route::middleware(['login.session'])->prefix('user')->group(function () {
-
     // Route UserDashboard
-    Route::get('/dashboard', [UserDashboard::class, 'dashboard'])->name('user.dashboard');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
+
+    // Route UserController
+    Route::get('/artikel', [UserController::class, 'artikel'])->name('user.artikel');
+    Route::get('/laporan-visualisasi', [UserController::class, 'laporan'])->name('user.laporan-visualisasi');
+    Route::post('/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password')->middleware('auth');
 
     // Konsultasi
     Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('konsultasi.index');
@@ -104,8 +108,8 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
 });
 
 // Route publik / umum
-//Route::get('/laporan', [UserController::class, 'laporan']);
-//Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
+Route::get('/laporan', [UserController::class, 'laporan']);
+Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
 
 
 // Tampilan input nama (Forgot)

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserDashboard;
+use App\Http\Controllers\UserDashboard ;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DatauserController;

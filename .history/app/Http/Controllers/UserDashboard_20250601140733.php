@@ -27,17 +27,14 @@ class UserDashboard extends Controller
             'deteksiRisk' => ['Beresiko' => 0, 'Tidak Beresiko' => 0],
             'konsultasiCount' => 0,
             'konsultasiPerMonth' => array_fill(0, 12, 0),
-            'genderCounts' => ['Laki-laki' => 0, 'Perempuan' => 0],
         ];
 
         // Ambil data untuk dashboard
         $deteksiData = $this->getDeteksiData($userId);
         $konsultasiData = $this->getKonsultasiData($userId);
-        $strokeData = $this->getStrokeData();
-        $ageRiskData = $this->getAgeRiskData();
 
         // Gabungkan data dengan default
-        $data = array_merge($data, $deteksiData, $konsultasiData, $strokeData, $ageRiskData);
+        $data = array_merge($data, $deteksiData, $konsultasiData);
 
         Log::info('Final Dashboard Data:', $data);
 
@@ -57,37 +54,12 @@ class UserDashboard extends Controller
                 ->aggregate([
                     [
                         '$match' => [
-                            'user_id' => (string)$userId,
+                            'user_id' => new \MongoDB\BSON\ObjectId($userId),
                         ],
                     ],
                     [
-                        // Potong created_at untuk mengambil hanya 3 digit milidetik dan tambahkan Z
-                        '$addFields' => [
-                            'created_at_trimmed' => [
-                                '$concat' => [
-                                    ['$substrCP' => ['$created_at', 0, 23]], // Ambil hingga 3 digit milidetik
-                                    'Z'
-                                ]
-                            ]
-                        ],
-                    ],
-                    [
-                        // Konversi created_at_trimmed ke tanggal
-                        '$addFields' => [
-                            'created_at_date' => [
-                                '$dateFromString' => [
-                                    'dateString' => '$created_at_trimmed',
-                                    'format' => '%Y-%m-%dT%H:%M:%S.%LZ',
-                                    'onError' => null,
-                                    'onNull' => null,
-                                ],
-                            ],
-                        ],
-                    ],
-                    [
-                        // Ambil data deteksi per bulan
                         '$group' => [
-                            '_id' => ['$month' => '$created_at_date'],
+                            '_id' => ['$month' => '$created_at'],
                             'count' => ['$sum' => 1],
                         ],
                     ],
@@ -95,7 +67,6 @@ class UserDashboard extends Controller
                 ]);
 
             $deteksisPerMonthArrayRaw = iterator_to_array($deteksisPerMonth);
-            Log::info('Deteksis Per Month Raw Result for User ' . $userId . ':', $deteksisPerMonthArrayRaw);
 
             foreach ($deteksisPerMonthArrayRaw as $data) {
                 $monthIndex = $data['_id'] - 1;
@@ -121,6 +92,7 @@ class UserDashboard extends Controller
         $konsultasisPerMonthArray = array_fill(0, 12, 0);
 
         try {
+            // Ambil data konsultasi per bulan
             $konsultasisPerMonth = DB::connection('mongodb')
                 ->getMongoDB()
                 ->selectCollection('konsultasis')
@@ -156,63 +128,6 @@ class UserDashboard extends Controller
         return [
             'konsultasiCount' => $konsultasiCount,
             'konsultasiPerMonth' => $konsultasisPerMonthArray,
-        ];
-    }
-
-    private function getStrokeData()
-    {
-        $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
-
-        $genderCounts = ['Laki-laki' => 0, 'Perempuan' => 0];
-
-        foreach ($data as $item) {
-            // Hitung berdasarkan jenis kelamin
-            if ($item->sex == 1) {
-                $genderCounts['Laki-laki']++;
-            } else {
-                $genderCounts['Perempuan']++;
-            }
-        }
-
-        return [
-            'genderCounts' => $genderCounts,
-        ];
-    }
-
-
-    private function getAgeRiskData()
-    {
-        $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
-
-        // Inisialisasi array untuk menghitung jumlah pasien per usia dari 18 hingga 100
-        // Menggunakan key sebagai usia langsung, PHP akan otomatis memperluas array
-        $ageCounts = [];
-        $strokeCounts = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $ageCounts[$i] = 0;
-            $strokeCounts[$i] = 0;
-        }
-
-
-        foreach ($data as $item) {
-            $age = (int)$item->age; // Pastikan usia adalah integer
-            // Pastikan usia dalam rentang 18-100
-            if ($age >= 18 && $age <= 100) {
-                $ageCounts[$age]++;
-                if ($item->stroke == 1) { // Jika pasien mengalami stroke
-                    $strokeCounts[$age]++;
-                }
-            }
-        }
-
-        // Hitung rata-rata risiko stroke untuk setiap usia
-        $riskData = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $riskData[$i] = $ageCounts[$i] > 0 ? ($strokeCounts[$i] / $ageCounts[$i]) : 0;
-        }
-
-        return [
-            'ageRiskData' => array_values($riskData), // Mengambil hanya nilai-nilainya untuk urutan yang benar di Chart.js
         ];
     }
 }

@@ -34,10 +34,9 @@ class UserDashboard extends Controller
         $deteksiData = $this->getDeteksiData($userId);
         $konsultasiData = $this->getKonsultasiData($userId);
         $strokeData = $this->getStrokeData();
-        $ageRiskData = $this->getAgeRiskData();
 
         // Gabungkan data dengan default
-        $data = array_merge($data, $deteksiData, $konsultasiData, $strokeData, $ageRiskData);
+        $data = array_merge($data, $deteksiData, $konsultasiData);
 
         Log::info('Final Dashboard Data:', $data);
 
@@ -163,9 +162,30 @@ class UserDashboard extends Controller
     {
         $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
 
+        $ageGroups = [
+            '0-10' => 0,
+            '11-25' => 0,
+            '26-50' => 0,
+            '51-75' => 0,
+            '76+' => 0
+        ];
+
         $genderCounts = ['Laki-laki' => 0, 'Perempuan' => 0];
 
         foreach ($data as $item) {
+            // Hitung kelompok usia
+            if ($item->age >= 0 && $item->age <= 10) {
+                $ageGroups['0-10']++;
+            } elseif ($item->age >= 11 && $item->age <= 25) {
+                $ageGroups['11-25']++;
+            } elseif ($item->age >= 26 && $item->age <= 50) {
+                $ageGroups['26-50']++;
+            } elseif ($item->age >= 51 && $item->age <= 75) {
+                $ageGroups['51-75']++;
+            } else {
+                $ageGroups['76+']++;
+            }
+
             // Hitung berdasarkan jenis kelamin
             if ($item->sex == 1) {
                 $genderCounts['Laki-laki']++;
@@ -175,44 +195,8 @@ class UserDashboard extends Controller
         }
 
         return [
+            'ageGroups' => $ageGroups,
             'genderCounts' => $genderCounts,
-        ];
-    }
-
-
-    private function getAgeRiskData()
-    {
-        $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
-
-        // Inisialisasi array untuk menghitung jumlah pasien per usia dari 18 hingga 100
-        // Menggunakan key sebagai usia langsung, PHP akan otomatis memperluas array
-        $ageCounts = [];
-        $strokeCounts = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $ageCounts[$i] = 0;
-            $strokeCounts[$i] = 0;
-        }
-
-
-        foreach ($data as $item) {
-            $age = (int)$item->age; // Pastikan usia adalah integer
-            // Pastikan usia dalam rentang 18-100
-            if ($age >= 18 && $age <= 100) {
-                $ageCounts[$age]++;
-                if ($item->stroke == 1) { // Jika pasien mengalami stroke
-                    $strokeCounts[$age]++;
-                }
-            }
-        }
-
-        // Hitung rata-rata risiko stroke untuk setiap usia
-        $riskData = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $riskData[$i] = $ageCounts[$i] > 0 ? ($strokeCounts[$i] / $ageCounts[$i]) : 0;
-        }
-
-        return [
-            'ageRiskData' => array_values($riskData), // Mengambil hanya nilai-nilainya untuk urutan yang benar di Chart.js
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserDashboard;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\DatauserController;
@@ -86,8 +86,6 @@ Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function (
 // ==============================
 
 Route::middleware(['login.session'])->prefix('user')->group(function () {
-
-    // Route UserDashboard
     Route::get('/dashboard', [UserDashboard::class, 'dashboard'])->name('user.dashboard');
 
     // Konsultasi

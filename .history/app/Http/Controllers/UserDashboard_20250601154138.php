@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
-use MongoDB\BSON\UTCDateTime;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +23,6 @@ class UserDashboard extends Controller
         // Inisialisasi data default
         $data = [
             'deteksiCount' => 0,
-            'deteksiRisk' => ['Beresiko' => 0, 'Tidak Beresiko' => 0],
             'konsultasiCount' => 0,
             'konsultasiPerMonth' => array_fill(0, 12, 0),
             'genderCounts' => ['Laki-laki' => 0, 'Perempuan' => 0],
@@ -34,10 +32,9 @@ class UserDashboard extends Controller
         $deteksiData = $this->getDeteksiData($userId);
         $konsultasiData = $this->getKonsultasiData($userId);
         $strokeData = $this->getStrokeData();
-        $ageRiskData = $this->getAgeRiskData();
 
         // Gabungkan data dengan default
-        $data = array_merge($data, $deteksiData, $konsultasiData, $strokeData, $ageRiskData);
+        $data = array_merge($data, $deteksiData, $konsultasiData, $strokeData);
 
         Log::info('Final Dashboard Data:', $data);
 
@@ -61,33 +58,9 @@ class UserDashboard extends Controller
                         ],
                     ],
                     [
-                        // Potong created_at untuk mengambil hanya 3 digit milidetik dan tambahkan Z
-                        '$addFields' => [
-                            'created_at_trimmed' => [
-                                '$concat' => [
-                                    ['$substrCP' => ['$created_at', 0, 23]], // Ambil hingga 3 digit milidetik
-                                    'Z'
-                                ]
-                            ]
-                        ],
-                    ],
-                    [
-                        // Konversi created_at_trimmed ke tanggal
-                        '$addFields' => [
-                            'created_at_date' => [
-                                '$dateFromString' => [
-                                    'dateString' => '$created_at_trimmed',
-                                    'format' => '%Y-%m-%dT%H:%M:%S.%LZ',
-                                    'onError' => null,
-                                    'onNull' => null,
-                                ],
-                            ],
-                        ],
-                    ],
-                    [
                         // Ambil data deteksi per bulan
                         '$group' => [
-                            '_id' => ['$month' => '$created_at_date'],
+                            '_id' => ['$month' => '$created_at'],
                             'count' => ['$sum' => 1],
                         ],
                     ],
@@ -95,7 +68,6 @@ class UserDashboard extends Controller
                 ]);
 
             $deteksisPerMonthArrayRaw = iterator_to_array($deteksisPerMonth);
-            Log::info('Deteksis Per Month Raw Result for User ' . $userId . ':', $deteksisPerMonthArrayRaw);
 
             foreach ($deteksisPerMonthArrayRaw as $data) {
                 $monthIndex = $data['_id'] - 1;
@@ -176,43 +148,6 @@ class UserDashboard extends Controller
 
         return [
             'genderCounts' => $genderCounts,
-        ];
-    }
-
-
-    private function getAgeRiskData()
-    {
-        $data = DB::connection('mongodb')->selectCollection('data_stroke')->find([]);
-
-        // Inisialisasi array untuk menghitung jumlah pasien per usia dari 18 hingga 100
-        // Menggunakan key sebagai usia langsung, PHP akan otomatis memperluas array
-        $ageCounts = [];
-        $strokeCounts = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $ageCounts[$i] = 0;
-            $strokeCounts[$i] = 0;
-        }
-
-
-        foreach ($data as $item) {
-            $age = (int)$item->age; // Pastikan usia adalah integer
-            // Pastikan usia dalam rentang 18-100
-            if ($age >= 18 && $age <= 100) {
-                $ageCounts[$age]++;
-                if ($item->stroke == 1) { // Jika pasien mengalami stroke
-                    $strokeCounts[$age]++;
-                }
-            }
-        }
-
-        // Hitung rata-rata risiko stroke untuk setiap usia
-        $riskData = [];
-        for ($i = 18; $i <= 100; $i++) {
-            $riskData[$i] = $ageCounts[$i] > 0 ? ($strokeCounts[$i] / $ageCounts[$i]) : 0;
-        }
-
-        return [
-            'ageRiskData' => array_values($riskData), // Mengambil hanya nilai-nilainya untuk urutan yang benar di Chart.js
         ];
     }
 }
