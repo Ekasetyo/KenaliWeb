@@ -284,7 +284,7 @@
                             max: 100, // Maksimal 100%
                             title: {
                                 display: true,
-                                text: 'Persentase Tingkat Stroke (%)'
+                                text: 'Persentase Ti Stroke (%)'
                             },
                             ticks: {
                                 callback: function(value) {

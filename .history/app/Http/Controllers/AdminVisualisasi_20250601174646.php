@@ -19,7 +19,7 @@ class AdminVisualisasi extends Controller
         $allData = DB::connection('mongodb')->selectCollection('data_stroke')->find([])->toArray();
 
         // --- 1. Data untuk Distribusi Kasus Stroke (Bar Chart) ---
-        $strokeCounts = [0 => 0, 1 => 0]; // 0: Tidak Stroke, 1: Stroke
+        $strokeCounts = [0 => 0, 1 => 0];
         foreach ($allData as $item) {
             if (isset($item->stroke)) {
                 $strokeCounts[(int)$item->stroke]++;
@@ -32,23 +32,40 @@ class AdminVisualisasi extends Controller
         $strokeFemalesCount = 0;
         foreach ($allData as $item) {
             if (isset($item->sex) && isset($item->stroke) && (int)$item->stroke === 1) {
-                if ((int)$item->sex === 1) { // 1: Laki-laki
+                if ((int)$item->sex === 1) { // Laki-laki
                     $strokeMalesCount++;
-                } else { // 0: Perempuan
+                } else { // Perempuan
                     $strokeFemalesCount++;
                 }
             }
         }
         $genderStrokeCounts = [
-            'Laki-laki Stroke' => $strokeMalesCount,
-            'Perempuan Stroke' => $strokeFemalesCount,
+            'Laki-laki' => $strokeMalesCount,
+            'Perempuan' => $strokeFemalesCount,
         ];
 
 
         // --- 3. Data untuk Tingkat Kejadian Stroke per Kelompok Usia (Line Chart) ---
+        $ageBins = []; // Untuk menyimpan total pasien dan pasien stroke per kelompok usia
+        $ageGroupLabels = []; // Label kelompok usia
+
+        // Definisikan kelompok usia (misal: 18-29, 30-39, ..., 90-100)
+        for ($i = 10; $i <= 100; $i += 10) { // Mulai dari 10 untuk mencakup usia muda, jika ada
+            $startAge = $i;
+            if ($i == 10) $startAge = 0; // Sesuaikan jika ada data usia < 10
+            $endAge = $i + 9;
+            if ($i == 100) $endAge = 100; // Pastikan tidak melebihi 100
+
+            $label = ($startAge == 0) ? "<18" : "{$startAge}-{$endAge}"; // Label khusus untuk <18
+            if ($startAge >= 18) { // Hanya sertakan kelompok usia 18 ke atas
+                $ageGroupLabels[] = $label;
+                $ageBins[$label] = ['total' => 0, 'stroke' => 0];
+            }
+        }
+        
+        // Tambahkan bin khusus untuk usia 18-29, 30-39, dst. hingga 100
         $definedAgeGroups = [];
-        // Definisikan kelompok usia dari 10-19, 20-29, ..., 90-100
-        for ($i = 10; $i <= 90; $i += 10) {
+        for ($i = 18; $i <= 90; $i += 10) {
             $label = "{$i}-" . ($i + 9);
             $definedAgeGroups[$label] = ['total' => 0, 'stroke' => 0];
         }
@@ -66,7 +83,7 @@ class AdminVisualisasi extends Controller
                         if ($hasStroke === 1) {
                             $counts['stroke']++;
                         }
-                        break;
+                        break; // Hentikan setelah menemukan kelompok usia yang cocok
                     }
                 }
             }
@@ -76,52 +93,63 @@ class AdminVisualisasi extends Controller
         $ageGroupLabelsForChart = array_keys($definedAgeGroups);
         foreach ($definedAgeGroups as $label => $counts) {
             $incidence = ($counts['total'] > 0) ? ($counts['stroke'] / $counts['total']) * 100 : 0;
-            $strokeIncidencePerAgeGroup[] = round($incidence, 2);
+            $strokeIncidencePerAgeGroup[] = round($incidence, 2); // Persentase kejadian stroke
         }
 
 
-        // --- 4. Data untuk Rata-rata Kadar Glukosa Pasien Stroke vs. Non-Stroke (Bar Chart) ---
-        $glucoseStrokeSum = 0;
-        $glucoseStrokeCount = 0;
-        $glucoseNoStrokeSum = 0;
-        $glucoseNoStrokeCount = 0;
+        // --- 4. Data untuk Rata-rata BMI Pasien Stroke vs. Non-Stroke (Bar Chart) ---
+        $bmiStrokeSum = 0;
+        $bmiStrokeCount = 0;
+        $bmiNoStrokeSum = 0;
+        $bmiNoStrokeCount = 0;
 
         foreach ($allData as $item) {
-            if (isset($item->avg_glucose_level) && isset($item->stroke)) {
-                $glucose = (float)$item->avg_glucose_level;
+            if (isset($item->bmi) && isset($item->stroke)) {
+                $bmi = (float)$item->bmi;
                 if ((int)$item->stroke === 1) {
-                    $glucoseStrokeSum += $glucose;
-                    $glucoseStrokeCount++;
+                    $bmiStrokeSum += $bmi;
+                    $bmiStrokeCount++;
                 } else {
-                    $glucoseNoStrokeSum += $glucose;
-                    $glucoseNoStrokeCount++;
+                    $bmiNoStrokeSum += $bmi;
+                    $bmiNoStrokeCount++;
                 }
             }
         }
-        $avgGlucoseStroke = ($glucoseStrokeCount > 0) ? round($glucoseStrokeSum / $glucoseStrokeCount, 2) : 0;
-        $avgGlucoseNoStroke = ($glucoseNoStrokeCount > 0) ? round($glucoseNoStrokeSum / $glucoseNoStrokeCount, 2) : 0;
+        $avgBmiStroke = ($bmiStrokeCount > 0) ? round($bmiStrokeSum / $bmiStrokeCount, 2) : 0;
+        $avgBmiNoStroke = ($bmiNoStrokeCount > 0) ? round($bmiNoStrokeSum / $bmiNoStrokeCount, 2) : 0;
 
 
-        // --- 5. Data untuk Prevalensi Hipertensi dan Penyakit Jantung berdasarkan Status Stroke (Grouped Bar Chart) ---
-        $hypertensionStroke = 0;
-        $hypertensionNoStroke = 0;
-        $heartDiseaseStroke = 0;
-        $heartDiseaseNoStroke = 0;
+        // --- 5. Data untuk Rata-rata BMI Berdasarkan Tipe Pekerjaan (Line Chart) ---
+        $workTypeMap = [
+            0 => 'Tidak Bekerja',
+            1 => 'Anak-anak',
+            2 => 'PNS',
+            3 => 'Wiraswasta',
+            4 => 'Lainnya/Tidak Diketahui', // Asumsi 4 adalah kategori lain
+        ];
+        $bmiPerWorkType = []; // Menyimpan total BMI dan hitungan per tipe pekerjaan
+
+        foreach ($workTypeMap as $key => $label) {
+            $bmiPerWorkType[$label] = ['sum' => 0, 'count' => 0];
+        }
 
         foreach ($allData as $item) {
-            if (isset($item->hypertension) && isset($item->heart_disease) && isset($item->stroke)) {
-                $hasHypertension = (int)$item->hypertension;
-                $hasHeartDisease = (int)$item->heart_disease;
-                $hasStroke = (int)$item->stroke;
+            if (isset($item->work_type) && isset($item->bmi)) {
+                $workType = (int)$item->work_type;
+                $bmi = (float)$item->bmi;
+                $label = $workTypeMap[$workType] ?? 'Lainnya/Tidak Diketahui';
 
-                if ($hasStroke === 1) {
-                    if ($hasHypertension === 1) $hypertensionStroke++;
-                    if ($hasHeartDisease === 1) $heartDiseaseStroke++;
-                } else { // No Stroke
-                    if ($hasHypertension === 1) $hypertensionNoStroke++;
-                    if ($hasHeartDisease === 1) $heartDiseaseNoStroke++;
-                }
+                $bmiPerWorkType[$label]['sum'] += $bmi;
+                $bmiPerWorkType[$label]['count']++;
             }
+        }
+
+        $avgBmiPerWorkType = [];
+        $workTypeLabels = array_values($workTypeMap); // Urutan label untuk chart
+        foreach ($workTypeLabels as $label) {
+            $avg = ($bmiPerWorkType[$label]['count'] > 0) ? 
+                   round($bmiPerWorkType[$label]['sum'] / $bmiPerWorkType[$label]['count'], 2) : 0;
+            $avgBmiPerWorkType[] = $avg;
         }
 
 
@@ -148,15 +176,13 @@ class AdminVisualisasi extends Controller
         // Mengirim semua data yang telah diolah ke view
         return view('admin.visualisasi.index', [
             'strokeCounts' => $strokeCounts,
-            'genderStrokeCounts' => $genderStrokeCounts,
-            'ageGroupLabelsForChart' => $ageGroupLabelsForChart,
-            'strokeIncidencePerAgeGroup' => $strokeIncidencePerAgeGroup,
-            'avgGlucoseStroke' => $avgGlucoseStroke, // Data baru untuk chart 4
-            'avgGlucoseNoStroke' => $avgGlucoseNoStroke, // Data baru untuk chart 4
-            'hypertensionStroke' => $hypertensionStroke, // Data baru untuk chart 5
-            'hypertensionNoStroke' => $hypertensionNoStroke, // Data baru untuk chart 5
-            'heartDiseaseStroke' => $heartDiseaseStroke, // Data baru untuk chart 5
-            'heartDiseaseNoStroke' => $heartDiseaseNoStroke, // Data baru untuk chart 5
+            'genderStrokeCounts' => $genderStrokeCounts, // Data baru untuk chart 2
+            'ageGroupLabelsForChart' => $ageGroupLabelsForChart, // Label untuk chart 3
+            'strokeIncidencePerAgeGroup' => $strokeIncidencePerAgeGroup, // Data baru untuk chart 3
+            'avgBmiStroke' => $avgBmiStroke, // Data baru untuk chart 4
+            'avgBmiNoStroke' => $avgBmiNoStroke, // Data baru untuk chart 4
+            'workTypeLabels' => $workTypeLabels, // Label untuk chart 5
+            'avgBmiPerWorkType' => $avgBmiPerWorkType, // Data baru untuk chart 5
             'correlationMatrix' => $correlationMatrix,
             'numericColumns' => $numericColumns,
         ]);

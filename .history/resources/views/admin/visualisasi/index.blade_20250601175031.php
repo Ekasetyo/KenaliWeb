@@ -6,105 +6,135 @@
     <div id="content">
 
         <!-- Begin Page Content -->
-       <div class="container-fluid mt-4">
+        <div class="container-fluid mt-4"> {{-- Ditambahkan mt-4 untuk margin top --}}
 
-    <h1 class="h3 mb-2 text-gray-800">Visualisasi Data</h1>
-    <p class="mb-4">Menampilkan grafik yang memvisualisasikan karakteristik dan hubungan antar variabel dalam data yang digunakan untuk melatih model Machine Learning.</p>
+            <h1 class="h3 mb-2 text-gray-800">Visualisasi Data Latih Machine Learning</h1>
+            <p class="mb-4">Bagian ini menampilkan berbagai grafik yang memvisualisasikan karakteristik dan hubungan antar
+                variabel dalam data yang digunakan untuk melatih model Machine Learning.</p>
 
-    <div class="row">
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">1. Distribusi Kasus Stroke</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="strokeDistributionChart"></canvas>
-                </div>
-                <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan berapa banyak pasien dalam data latih yang tercatat mengalami stroke dan berapa banyak yang tidak.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">2. Persentase Jenis Kelamin yang Berisiko Stroke</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="genderStrokeRiskChart"></canvas>
-                </div>
-                <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menampilkan persentase pasien laki-laki dan perempuan yang tercatat memiliki risiko stroke dalam data latih.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">3. Presentase Tingkat Resiko Stroke per Kelompok Usia</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="ageStrokeIncidenceChart"></canvas>
-                </div>
-                <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan persentase Resiko stroke untuk setiap kelompok usia dalam data latih. Anda dapat melihat bagaimana risiko stroke cenderung meningkat seiring bertambahnya usia.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">4. Rata-rata Kadar Glukosa Pasien Stroke vs. Non-Stroke</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="glucoseStrokeComparisonChart"></canvas>
-                </div>
-                <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini membandingkan rata-rata kadar glukosa antara pasien yang mengalami stroke dan yang tidak. Ini dapat memberikan wawasan tentang hubungan antara kadar glukosa dan risiko stroke.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-12 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">5. Prevalensi Hipertensi dan Penyakit Jantung berdasarkan Status Stroke</h6>
-                </div>
-                <div class="card-body">
-                    <canvas id="riskFactorPrevalenceChart"></canvas>
-                </div>
-                <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan jumlah pasien yang memiliki hipertensi atau penyakit jantung, dibagi berdasarkan apakah mereka mengalami stroke atau tidak. Ini membantu memahami seberapa umum faktor risiko ini pada kedua kelompok pasien.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-12 mb-4">
-            <div class="card shadow h-100 py-2">
-                <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">6. Heatmap Korelasi Antar Variabel Numerik</h6>
-                </div>
-                <div class="card-body d-flex justify-content-center align-items-start">
-                    <div id="correlationHeatmap" class="table-responsive flex-grow-1"></div>
-                    <div class="correlation-legend ms-3">
-                        <div class="legend-scale"></div>
-                        <div class="legend-labels d-flex flex-column justify-content-between h-100">
-                            <span>1 (Korelasi Sangat Positif)</span>
-                            <span>0 (Tidak Ada Korelasi)</span>
-                            <span>-1 (Korelasi Sangat Negatif)</span>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">1. Distribusi Kasus Stroke</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="strokeDistributionChart"></canvas>
+                        </div>
+                        <div class="card-footer text-muted small text-center">
+                            <p class="mb-0"><strong>Dasar:</strong> Grafik batang ini cocok untuk membandingkan jumlah
+                                data antar kategori diskrit (Stroke vs. Tidak Stroke).</p>
+                            <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan berapa banyak pasien dalam
+                                data latih yang tercatat mengalami stroke dan berapa banyak yang tidak. Ini penting untuk
+                                memahami keseimbangan data yang digunakan untuk melatih model.</p>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Heatmap ini menunjukkan seberapa kuat hubungan antara variabel-variabel numerik dalam data latih. Warna yang lebih gelap (biru untuk korelasi positif kuat, merah untuk negatif kuat) menunjukkan hubungan yang lebih erat. Angka di dalam kotak adalah nilai korelasinya, berkisar dari -1 (sangat berkebalikan) hingga 1 (sangat searah). Ini membantu mengidentifikasi variabel mana yang mungkin saling mempengaruhi.</p>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">2. Persentase Jenis Kelamin yang Berisiko Stroke
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="genderStrokeRiskChart"></canvas>
+                        </div>
+                        <div class="card-footer text-muted small text-center">
+                            <p class="mb-0"><strong>Dasar:</strong> Diagram lingkaran (pie chart) efektif untuk
+                                menunjukkan proporsi bagian dari keseluruhan.</p>
+                            <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menampilkan persentase pasien
+                                laki-laki dan perempuan yang tercatat mengalami stroke dalam data latih. Ini membantu
+                                melihat perbandingan risiko stroke antar jenis kelamin.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">3. Tingkat Kejadian Stroke per Kelompok Usia</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="ageStrokeIncidenceChart"></canvas>
+                        </div>
+                        <div class="card-footer text-muted small text-center">
+                            <p class="mb-0"><strong>Dasar:</strong> Grafik garis (line chart) sangat baik untuk
+                                menunjukkan tren atau perubahan nilai secara kontinu seiring bertambahnya usia.</p>
+                            <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan persentase kejadian stroke
+                                untuk setiap kelompok usia dalam data latih. Anda dapat melihat bagaimana risiko stroke
+                                cenderung meningkat seiring bertambahnya usia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 mb-4">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">4. Rata-rata BMI Pasien Stroke vs. Non-Stroke</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="bmiStrokeComparisonChart"></canvas>
+                        </div>
+                        <div class="card-footer text-muted small text-center">
+                            <p class="mb-0"><strong>Dasar:</strong> Grafik batang (bar chart) cocok untuk membandingkan
+                                nilai rata-rata antara dua kategori yang berbeda.</p>
+                            <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini membandingkan rata-rata Indeks Massa
+                                Tubuh (BMI) antara pasien yang mengalami stroke dan yang tidak. Ini dapat memberikan wawasan
+                                tentang hubungan antara BMI dan risiko stroke.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 mb-4">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">5. Rata-rata BMI Berdasarkan Tipe Pekerjaan</h6>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="avgBmiWorkTypeChart"></canvas>
+                        </div>
+                        <div class="card-footer text-muted small text-center">
+                            <p class="mb-0"><strong>Dasar:</strong> Grafik garis (line chart) atau batang (bar chart)
+                                dapat digunakan untuk menunjukkan tren atau perbandingan nilai rata-rata antar kategori.</p>
+                            <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menampilkan rata-rata Indeks Massa
+                                Tubuh (BMI) untuk setiap tipe pekerjaan yang ada dalam data latih. Ini dapat membantu
+                                mengidentifikasi apakah ada perbedaan BMI yang signifikan antar kelompok pekerjaan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 mb-4">
+                    <div class="card shadow h-100 py-2">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">6. Heatmap Korelasi Antar Variabel Numerik</h6>
+                        </div>
+                        <div class="card-body d-flex justify-content-center align-items-start"> {{-- Tambahkan d-flex untuk layout heatmap dan legenda --}}
+                            <div id="correlationHeatmap" class="table-responsive flex-grow-1"></div> {{-- flex-grow-1 agar tabel mengambil ruang yang tersedia --}}
+                            <div class="correlation-legend ms-3"> {{-- ms-3 untuk margin kiri --}}
+                                <div class="legend-scale"></div>
+                                <div class="legend-labels d-flex flex-column justify-content-between h-100">
+                                    <span>1 (Korelasi Sangat Positif)</span>
+                                    <span>0 (Tidak Ada Korelasi)</span>
+                                    <span>-1 (Korelasi Sangat Negatif)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted small text-center">
+                            <p class="mb-0"><strong>Dasar:</strong> Heatmap digunakan untuk memvisualisasikan matriks
+                                data, di mana intensitas warna mewakili nilai. Dalam kasus ini, intensitas warna menunjukkan
+                                kekuatan korelasi.</p>
+                            <p class="mb-0"><strong>Penjelasan:</strong> Heatmap ini menunjukkan seberapa kuat hubungan
+                                antara variabel-variabel numerik dalam data latih. Warna yang lebih gelap (biru untuk
+                                korelasi positif kuat, merah untuk negatif kuat) menunjukkan hubungan yang lebih erat. Angka
+                                di dalam kotak adalah nilai korelasinya, berkisar dari -1 (sangat berkebalikan) hingga 1
+                                (sangat searah). Ini membantu mengidentifikasi variabel mana yang mungkin saling
+                                mempengaruhi.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
         <!-- End of Main Content -->
 
     </div>
@@ -145,12 +175,10 @@
         const genderStrokeCounts = {!! json_encode($genderStrokeCounts) !!};
         const ageGroupLabelsForChart = {!! json_encode($ageGroupLabelsForChart) !!};
         const strokeIncidencePerAgeGroup = {!! json_encode($strokeIncidencePerAgeGroup) !!};
-        const avgGlucoseStroke = {!! json_encode($avgGlucoseStroke) !!};
-        const avgGlucoseNoStroke = {!! json_encode($avgGlucoseNoStroke) !!};
-        const hypertensionStroke = {!! json_encode($hypertensionStroke) !!};
-        const hypertensionNoStroke = {!! json_encode($hypertensionNoStroke) !!};
-        const heartDiseaseStroke = {!! json_encode($heartDiseaseStroke) !!};
-        const heartDiseaseNoStroke = {!! json_encode($heartDiseaseNoStroke) !!};
+        const avgBmiStroke = {!! json_encode($avgBmiStroke) !!};
+        const avgBmiNoStroke = {!! json_encode($avgBmiNoStroke) !!};
+        const workTypeLabels = {!! json_encode($workTypeLabels) !!};
+        const avgBmiPerWorkType = {!! json_encode($avgBmiPerWorkType) !!};
         const correlationMatrix = {!! json_encode($correlationMatrix) !!};
         const numericColumns = {!! json_encode($numericColumns) !!};
 
@@ -223,7 +251,7 @@
                     labels: ['Perempuan Stroke', 'Laki-laki Stroke'],
                     datasets: [{
                         label: 'Jumlah Pasien Stroke',
-                        data: [genderStrokeCounts['Perempuan Stroke'], genderStrokeCounts['Laki-laki Stroke']],
+                        data: [genderStrokeCounts['Perempuan'], genderStrokeCounts['Laki-laki']],
                         backgroundColor: ['rgba(255, 192, 203, 0.8)', 'rgba(54, 162, 235, 0.8)'],
                         borderColor: ['rgba(255, 192, 203, 1)', 'rgba(54, 162, 235, 1)'],
                         borderWidth: 1
@@ -236,17 +264,13 @@
                         legend: { position: 'bottom' },
                         tooltip: {
                             callbacks: {
-                                // Menampilkan persentase dan jumlah pada tooltip
                                 label: function(context) {
                                     let label = context.label || '';
                                     if (label) {
                                         label += ': ';
                                     }
                                     if (context.parsed !== null) {
-                                        const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-                                        const value = context.parsed;
-                                        const percentage = (value / total * 100).toFixed(2);
-                                        label += `${value} (${percentage}%)`;
+                                        label += context.parsed + ' (' + context.percent.toFixed(2) + '%)';
                                     }
                                     return label;
                                 }
@@ -284,7 +308,7 @@
                             max: 100, // Maksimal 100%
                             title: {
                                 display: true,
-                                text: 'Persentase Tingkat Stroke (%)'
+                                text: 'Persentase Kejadian Stroke (%)'
                             },
                             ticks: {
                                 callback: function(value) {
@@ -316,16 +340,16 @@
             });
         }
 
-        // --- Chart 4: Rata-rata Kadar Glukosa Pasien Stroke vs. Non-Stroke (Bar Chart) ---
-        const glucoseStrokeComparisonCanvas = document.getElementById('glucoseStrokeComparisonChart');
-        if (glucoseStrokeComparisonCanvas) {
-            new Chart(glucoseStrokeComparisonCanvas.getContext('2d'), {
+        // --- Chart 4: Rata-rata BMI Pasien Stroke vs. Non-Stroke (Bar Chart) ---
+        const bmiStrokeComparisonCanvas = document.getElementById('bmiStrokeComparisonChart');
+        if (bmiStrokeComparisonCanvas) {
+            new Chart(bmiStrokeComparisonCanvas.getContext('2d'), {
                 type: 'bar',
                 data: {
                     labels: ['Tidak Stroke', 'Stroke'],
                     datasets: [{
-                        label: 'Rata-rata Kadar Glukosa',
-                        data: [avgGlucoseNoStroke, avgGlucoseStroke],
+                        label: 'Rata-rata BMI',
+                        data: [avgBmiNoStroke, avgBmiStroke],
                         backgroundColor: ['rgba(100, 149, 237, 0.8)', 'rgba(255, 69, 0, 0.8)'], // CornflowerBlue vs Red Orange
                         borderColor: ['rgba(100, 149, 237, 1)', 'rgba(255, 69, 0, 1)'],
                         borderWidth: 1
@@ -339,10 +363,10 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Rata-rata Kadar Glukosa'
+                                text: 'Rata-rata BMI'
                             },
                             grid: { display: false },
-                            ticks: { precision: 2 } // Kadar glukosa bisa desimal
+                            ticks: { precision: 2 } // BMI bisa desimal
                         },
                         x: {
                             grid: { display: false }
@@ -353,33 +377,23 @@
             });
         }
 
-        // --- Chart 5: Prevalensi Hipertensi dan Penyakit Jantung berdasarkan Status Stroke (Grouped Bar Chart) ---
-        const riskFactorPrevalenceCanvas = document.getElementById('riskFactorPrevalenceChart');
-        if (riskFactorPrevalenceCanvas) {
-            new Chart(riskFactorPrevalenceCanvas.getContext('2d'), {
-                type: 'bar',
+        // --- Chart 5: Rata-rata BMI Berdasarkan Tipe Pekerjaan (Line Chart) ---
+        const avgBmiWorkTypeCanvas = document.getElementById('avgBmiWorkTypeChart');
+        if (avgBmiWorkTypeCanvas) {
+            new Chart(avgBmiWorkTypeCanvas.getContext('2d'), {
+                type: 'line',
                 data: {
-                    labels: ['Tidak Stroke', 'Stroke'],
-                    datasets: [
-                        {
-                            label: 'Memiliki Hipertensi',
-                            data: [hypertensionNoStroke, hypertensionStroke],
-                            backgroundColor: 'rgba(75, 192, 192, 0.8)', // Hijau kebiruan
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
-                            categoryPercentage: 0.6, // Lebar kelompok bar
-                            barPercentage: 0.7 // Lebar bar dalam kelompok
-                        },
-                        {
-                            label: 'Memiliki Penyakit Jantung',
-                            data: [heartDiseaseNoStroke, heartDiseaseStroke],
-                            backgroundColor: 'rgba(255, 99, 132, 0.8)', // Merah muda
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            categoryPercentage: 0.6,
-                            barPercentage: 0.7
-                        }
-                    ]
+                    labels: workTypeLabels,
+                    datasets: [{
+                        label: 'Rata-rata BMI',
+                        data: avgBmiPerWorkType,
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointHoverRadius: 5
+                    }]
                 },
                 options: {
                     responsive: true,
@@ -387,18 +401,31 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            precision: 0,
                             title: {
                                 display: true,
-                                text: 'Jumlah Pasien'
+                                text: 'Rata-rata BMI'
                             },
-                            grid: { display: false }
+                            grid: { display: false },
+                            ticks: { precision: 2 }
                         },
                         x: {
+                            title: {
+                                display: true,
+                                text: 'Tipe Pekerjaan'
+                            },
                             grid: { display: false }
                         }
                     },
-                    plugins: { legend: { position: 'bottom' } }
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y;
+                                }
+                            }
+                        }
+                    }
                 }
             });
         }

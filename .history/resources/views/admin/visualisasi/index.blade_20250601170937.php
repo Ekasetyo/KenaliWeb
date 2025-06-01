@@ -1,15 +1,12 @@
 @extends('admin.dashboard-admin')
 
-@section('title', 'Data Visualisasi')
+@section('title', 'Visualisasi Data')
 
 @section('content')
-    <div id="content">
+<div class="container-fluid mt-4">
 
-        <!-- Begin Page Content -->
-       <div class="container-fluid mt-4">
-
-    <h1 class="h3 mb-2 text-gray-800">Visualisasi Data</h1>
-    <p class="mb-4">Menampilkan grafik yang memvisualisasikan karakteristik dan hubungan antar variabel dalam data yang digunakan untuk melatih model Machine Learning.</p>
+    <h1 class="h3 mb-2 text-gray-800">Visualisasi Data Latih Machine Learning</h1>
+    <p class="mb-4">Bagian ini menampilkan berbagai grafik yang memvisualisasikan karakteristik dan hubungan antar variabel dalam data yang digunakan untuk melatih model Machine Learning.</p>
 
     <div class="row">
         <div class="col-lg-6 mb-4">
@@ -21,7 +18,8 @@
                     <canvas id="strokeDistributionChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan berapa banyak pasien dalam data latih yang tercatat mengalami stroke dan berapa banyak yang tidak.</p>
+                    <p class="mb-0"><strong>Dasar:</strong> Grafik batang ini cocok untuk membandingkan jumlah data antar kategori diskrit (Stroke vs. Tidak Stroke).</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan berapa banyak pasien dalam data latih yang tercatat mengalami stroke dan berapa banyak yang tidak. Ini penting untuk memahami keseimbangan data yang digunakan untuk melatih model.</p>
                 </div>
             </div>
         </div>
@@ -29,13 +27,14 @@
         <div class="col-lg-6 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">2. Persentase Jenis Kelamin yang Berisiko Stroke</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">2. Proporsi Jenis Kelamin Pasien</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="genderStrokeRiskChart"></canvas>
+                    <canvas id="genderProportionChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menampilkan persentase pasien laki-laki dan perempuan yang tercatat memiliki risiko stroke dalam data latih.</p>
+                    <p class="mb-0"><strong>Dasar:</strong> Diagram lingkaran (pie chart) sangat baik untuk menunjukkan proporsi bagian dari keseluruhan.</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini memperlihatkan perbandingan persentase jumlah pasien laki-laki dan perempuan yang ada di dalam data latih. Ini memberikan gambaran tentang representasi gender dalam data.</p>
                 </div>
             </div>
         </div>
@@ -43,13 +42,14 @@
         <div class="col-lg-6 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">3. Presentase Tingkat Resiko Stroke per Kelompok Usia</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">3. Distribusi Usia Pasien</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="ageStrokeIncidenceChart"></canvas>
+                    <canvas id="ageDistributionChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan persentase Resiko stroke untuk setiap kelompok usia dalam data latih. Anda dapat melihat bagaimana risiko stroke cenderung meningkat seiring bertambahnya usia.</p>
+                    <p class="mb-0"><strong>Dasar:</strong> Histogram (disimulasikan dengan bar chart) digunakan untuk menunjukkan distribusi frekuensi dari variabel numerik kontinu.</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan bagaimana usia pasien tersebar dalam data latih. Batang-batang menunjukkan kelompok usia, dan tinggi batang menunjukkan berapa banyak pasien yang berada dalam kelompok usia tersebut.</p>
                 </div>
             </div>
         </div>
@@ -57,13 +57,14 @@
         <div class="col-lg-6 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">4. Rata-rata Kadar Glukosa Pasien Stroke vs. Non-Stroke</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">4. Hubungan Usia dan Rata-rata Kadar Glukosa</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="glucoseStrokeComparisonChart"></canvas>
+                    <canvas id="ageGlucoseScatterChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini membandingkan rata-rata kadar glukosa antara pasien yang mengalami stroke dan yang tidak. Ini dapat memberikan wawasan tentang hubungan antara kadar glukosa dan risiko stroke.</p>
+                    <p class="mb-0"><strong>Dasar:</strong> Diagram sebar (scatter plot) ideal untuk memvisualisasikan hubungan antara dua variabel numerik.</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Setiap titik pada grafik ini mewakili satu pasien. Posisi horizontal titik menunjukkan usia pasien, dan posisi vertikal menunjukkan rata-rata kadar glukosa mereka. Ini bisa membantu melihat apakah ada pola atau hubungan antara usia dan kadar glukosa.</p>
                 </div>
             </div>
         </div>
@@ -71,13 +72,14 @@
         <div class="col-lg-12 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">5. Prevalensi Hipertensi dan Penyakit Jantung berdasarkan Status Stroke</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">5. Hubungan Status Merokok dan Kejadian Stroke berdasarkan Jenis Kelamin</h6>
                 </div>
                 <div class="card-body">
-                    <canvas id="riskFactorPrevalenceChart"></canvas>
+                    <canvas id="smokingGenderStrokeChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan jumlah pasien yang memiliki hipertensi atau penyakit jantung, dibagi berdasarkan apakah mereka mengalami stroke atau tidak. Ini membantu memahami seberapa umum faktor risiko ini pada kedua kelompok pasien.</p>
+                    <p class="mb-0"><strong>Dasar:</strong> Grafik batang bertumpuk (stacked bar chart) cocok untuk membandingkan komposisi kategori dalam kelompok yang berbeda.</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan jumlah pasien berdasarkan status merokok mereka dan apakah mereka mengalami stroke atau tidak, yang kemudian dibagi lagi berdasarkan jenis kelamin. Ini membantu melihat pola hubungan antara kebiasaan merokok, jenis kelamin, dan risiko stroke.</p>
                 </div>
             </div>
         </div>
@@ -99,17 +101,16 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted small text-center">
+                    <p class="mb-0"><strong>Dasar:</strong> Heatmap digunakan untuk memvisualisasikan matriks data, di mana intensitas warna mewakili nilai. Dalam kasus ini, intensitas warna menunjukkan kekuatan korelasi.</p>
                     <p class="mb-0"><strong>Penjelasan:</strong> Heatmap ini menunjukkan seberapa kuat hubungan antara variabel-variabel numerik dalam data latih. Warna yang lebih gelap (biru untuk korelasi positif kuat, merah untuk negatif kuat) menunjukkan hubungan yang lebih erat. Angka di dalam kotak adalah nilai korelasinya, berkisar dari -1 (sangat berkebalikan) hingga 1 (sangat searah). Ini membantu mengidentifikasi variabel mana yang mungkin saling mempengaruhi.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-        <!-- End of Main Content -->
 
-    </div>
 
-    @push('scripts')
+@push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* CSS untuk Legenda Heatmap */
@@ -142,15 +143,14 @@
     <script>
         // Data dari Controller PHP yang di-encode ke JSON
         const strokeCounts = {!! json_encode($strokeCounts) !!};
-        const genderStrokeCounts = {!! json_encode($genderStrokeCounts) !!};
-        const ageGroupLabelsForChart = {!! json_encode($ageGroupLabelsForChart) !!};
-        const strokeIncidencePerAgeGroup = {!! json_encode($strokeIncidencePerAgeGroup) !!};
-        const avgGlucoseStroke = {!! json_encode($avgGlucoseStroke) !!};
-        const avgGlucoseNoStroke = {!! json_encode($avgGlucoseNoStroke) !!};
-        const hypertensionStroke = {!! json_encode($hypertensionStroke) !!};
-        const hypertensionNoStroke = {!! json_encode($hypertensionNoStroke) !!};
-        const heartDiseaseStroke = {!! json_encode($heartDiseaseStroke) !!};
-        const heartDiseaseNoStroke = {!! json_encode($heartDiseaseNoStroke) !!};
+        const genderCounts = {!! json_encode($genderCounts) !!};
+        const ageDataRaw = {!! json_encode($ageDataRaw) !!};
+        const ageGlucoseData = {!! json_encode($ageGlucoseData) !!};
+        const smokingLabels = {!! json_encode($smokingLabels) !!};
+        const lakiLakiStroke = {!! json_encode($lakiLakiStroke) !!};
+        const lakiLakiNoStroke = {!! json_encode($lakiLakiNoStroke) !!};
+        const perempuanStroke = {!! json_encode($perempuanStroke) !!};
+        const perempuanNoStroke = {!! json_encode($perempuanNoStroke) !!};
         const correlationMatrix = {!! json_encode($correlationMatrix) !!};
         const numericColumns = {!! json_encode($numericColumns) !!};
 
@@ -202,11 +202,11 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            precision: 0,
-                            grid: { display: false }
+                            precision: 0, // Pastikan tidak ada desimal
+                            grid: { display: false } // Menghilangkan garis grid
                         },
                         x: {
-                            grid: { display: false }
+                            grid: { display: false } // Menghilangkan garis grid
                         }
                     },
                     plugins: { legend: { display: false } }
@@ -214,17 +214,17 @@
             });
         }
 
-        // --- Chart 2: Persentase Jenis Kelamin yang Berisiko Stroke (Pie Chart) ---
-        const genderStrokeRiskCanvas = document.getElementById('genderStrokeRiskChart');
-        if (genderStrokeRiskCanvas) {
-            new Chart(genderStrokeRiskCanvas.getContext('2d'), {
+        // --- Chart 2: Proporsi Jenis Kelamin (Pie Chart) ---
+        const genderProportionCanvas = document.getElementById('genderProportionChart');
+        if (genderProportionCanvas) {
+            new Chart(genderProportionCanvas.getContext('2d'), {
                 type: 'pie',
                 data: {
-                    labels: ['Perempuan Stroke', 'Laki-laki Stroke'],
+                    labels: ['Perempuan', 'Laki-laki'],
                     datasets: [{
-                        label: 'Jumlah Pasien Stroke',
-                        data: [genderStrokeCounts['Perempuan Stroke'], genderStrokeCounts['Laki-laki Stroke']],
-                        backgroundColor: ['rgba(255, 192, 203, 0.8)', 'rgba(54, 162, 235, 0.8)'],
+                        label: 'Jumlah Pasien',
+                        data: [genderCounts[0], genderCounts[1]],
+                        backgroundColor: ['rgba(255, 192, 203, 0.8)', 'rgba(54, 162, 235, 0.8)'], // Warna berbeda
                         borderColor: ['rgba(255, 192, 203, 1)', 'rgba(54, 162, 235, 1)'],
                         borderWidth: 1
                     }]
@@ -236,17 +236,14 @@
                         legend: { position: 'bottom' },
                         tooltip: {
                             callbacks: {
-                                // Menampilkan persentase dan jumlah pada tooltip
+                                // Menampilkan persentase pada tooltip
                                 label: function(context) {
                                     let label = context.label || '';
                                     if (label) {
                                         label += ': ';
                                     }
                                     if (context.parsed !== null) {
-                                        const total = context.dataset.data.reduce((sum, val) => sum + val, 0);
-                                        const value = context.parsed;
-                                        const percentage = (value / total * 100).toFixed(2);
-                                        label += `${value} (${percentage}%)`;
+                                        label += context.parsed + ' (' + context.percent.toFixed(2) + '%)';
                                     }
                                     return label;
                                 }
@@ -257,77 +254,34 @@
             });
         }
 
-        // --- Chart 3: Tingkat Kejadian Stroke per Kelompok Usia (Line Chart) ---
-        const ageStrokeIncidenceCanvas = document.getElementById('ageStrokeIncidenceChart');
-        if (ageStrokeIncidenceCanvas) {
-            new Chart(ageStrokeIncidenceCanvas.getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: ageGroupLabelsForChart,
-                    datasets: [{
-                        label: 'Persentase Kejadian Stroke',
-                        data: strokeIncidencePerAgeGroup,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        fill: true,
-                        tension: 0.3,
-                        pointRadius: 3,
-                        pointHoverRadius: 5
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100, // Maksimal 100%
-                            title: {
-                                display: true,
-                                text: 'Persentase Tingkat Stroke (%)'
-                            },
-                            ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                },
-                                precision: 0
-                            },
-                            grid: { display: false }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Kelompok Usia'
-                            },
-                            grid: { display: false }
-                        }
-                    },
-                    plugins: {
-                        legend: { display: true },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + context.parsed.y + '%';
-                                }
-                            }
-                        }
-                    }
-                }
+        // --- Chart 3: Distribusi Usia Pasien (Histogram/Bar Chart) ---
+        const ageDistributionCanvas = document.getElementById('ageDistributionChart');
+        if (ageDistributionCanvas) {
+            const ageBins = {};
+            // Mengelompokkan usia ke dalam bin 10 tahun (misal: 0-9, 10-19, dst.)
+            for (const age of ageDataRaw) {
+                const binStart = Math.floor(age / 10) * 10;
+                const binEnd = binStart + 9;
+                const binLabel = `${binStart}-${binEnd}`;
+                ageBins.hasOwnProperty(binLabel) ? ageBins[binLabel]++ : ageBins[binLabel] = 1;
+            }
+            // Mengurutkan label usia agar tampil berurutan
+            const ageLabels = Object.keys(ageBins).sort((a, b) => {
+                const startA = parseInt(a.split('-')[0]);
+                const startB = parseInt(b.split('-')[0]);
+                return startA - startB;
             });
-        }
+            const ageCounts = ageLabels.map(label => ageBins[label]);
 
-        // --- Chart 4: Rata-rata Kadar Glukosa Pasien Stroke vs. Non-Stroke (Bar Chart) ---
-        const glucoseStrokeComparisonCanvas = document.getElementById('glucoseStrokeComparisonChart');
-        if (glucoseStrokeComparisonCanvas) {
-            new Chart(glucoseStrokeComparisonCanvas.getContext('2d'), {
+            new Chart(ageDistributionCanvas.getContext('2d'), {
                 type: 'bar',
                 data: {
-                    labels: ['Tidak Stroke', 'Stroke'],
+                    labels: ageLabels,
                     datasets: [{
-                        label: 'Rata-rata Kadar Glukosa',
-                        data: [avgGlucoseNoStroke, avgGlucoseStroke],
-                        backgroundColor: ['rgba(100, 149, 237, 0.8)', 'rgba(255, 69, 0, 0.8)'], // CornflowerBlue vs Red Orange
-                        borderColor: ['rgba(100, 149, 237, 1)', 'rgba(255, 69, 0, 1)'],
+                        label: 'Jumlah Pasien',
+                        data: ageCounts,
+                        backgroundColor: 'rgba(153, 102, 255, 0.8)',
+                        borderColor: 'rgba(153, 102, 255, 1)',
                         borderWidth: 1
                     }]
                 },
@@ -337,15 +291,15 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Rata-rata Kadar Glukosa'
-                            },
-                            grid: { display: false },
-                            ticks: { precision: 2 } // Kadar glukosa bisa desimal
+                            precision: 0, // Pastikan tidak ada desimal
+                            grid: { display: false } // Menghilangkan garis grid
                         },
                         x: {
-                            grid: { display: false }
+                            title: {
+                                display: true,
+                                text: 'Rentang Usia'
+                            },
+                            grid: { display: false } // Menghilangkan garis grid
                         }
                     },
                     plugins: { legend: { display: false } }
@@ -353,49 +307,88 @@
             });
         }
 
-        // --- Chart 5: Prevalensi Hipertensi dan Penyakit Jantung berdasarkan Status Stroke (Grouped Bar Chart) ---
-        const riskFactorPrevalenceCanvas = document.getElementById('riskFactorPrevalenceChart');
-        if (riskFactorPrevalenceCanvas) {
-            new Chart(riskFactorPrevalenceCanvas.getContext('2d'), {
-                type: 'bar',
+        // --- Chart 4: Hubungan Usia dan Rata-rata Kadar Glukosa (Scatter Plot) ---
+        const ageGlucoseScatterCanvas = document.getElementById('ageGlucoseScatterChart');
+        if (ageGlucoseScatterCanvas) {
+            new Chart(ageGlucoseScatterCanvas.getContext('2d'), {
+                type: 'scatter',
                 data: {
-                    labels: ['Tidak Stroke', 'Stroke'],
-                    datasets: [
-                        {
-                            label: 'Memiliki Hipertensi',
-                            data: [hypertensionNoStroke, hypertensionStroke],
-                            backgroundColor: 'rgba(75, 192, 192, 0.8)', // Hijau kebiruan
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
-                            categoryPercentage: 0.6, // Lebar kelompok bar
-                            barPercentage: 0.7 // Lebar bar dalam kelompok
-                        },
-                        {
-                            label: 'Memiliki Penyakit Jantung',
-                            data: [heartDiseaseNoStroke, heartDiseaseStroke],
-                            backgroundColor: 'rgba(255, 99, 132, 0.8)', // Merah muda
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1,
-                            categoryPercentage: 0.6,
-                            barPercentage: 0.7
-                        }
-                    ]
+                    datasets: [{
+                        label: 'Kadar Glukosa vs. Usia',
+                        data: ageGlucoseData,
+                        backgroundColor: 'rgba(255, 206, 86, 0.8)',
+                        borderColor: 'rgba(255, 206, 86, 1)',
+                        pointRadius: 5
+                    }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            precision: 0,
+                        x: {
+                            type: 'linear',
+                            position: 'bottom',
                             title: {
                                 display: true,
-                                text: 'Jumlah Pasien'
+                                text: 'Usia (Tahun)'
                             },
-                            grid: { display: false }
+                            grid: { display: false } // Menghilangkan garis grid
                         },
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Rata-rata Kadar Glukosa'
+                            },
+                            grid: { display: false } // Menghilangkan garis grid
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // --- Chart 5: Hubungan Merokok dan Stroke per Jenis Kelamin (Stacked Bar Chart) ---
+        const smokingGenderStrokeCanvas = document.getElementById('smokingGenderStrokeChart');
+        if (smokingGenderStrokeCanvas) {
+            new Chart(smokingGenderStrokeCanvas.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: smokingLabels,
+                    datasets: [{
+                        label: 'Laki-laki (Stroke)',
+                        data: lakiLakiStroke,
+                        backgroundColor: 'rgba(54, 162, 235, 0.8)', // Biru gelap
+                    }, {
+                        label: 'Laki-laki (Tidak Stroke)',
+                        data: lakiLakiNoStroke,
+                        backgroundColor: 'rgba(54, 162, 235, 0.4)', // Biru muda
+                    }, {
+                        label: 'Perempuan (Stroke)',
+                        data: perempuanStroke,
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)', // Merah gelap
+                    }, {
+                        label: 'Perempuan (Tidak Stroke)',
+                        data: perempuanNoStroke,
+                        backgroundColor: 'rgba(255, 99, 132, 0.4)', // Merah muda
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
                         x: {
-                            grid: { display: false }
+                            stacked: true, // Batang bertumpuk
+                            title: { display: true, text: 'Status Merokok' },
+                            grid: { display: false } // Menghilangkan garis grid
+                        },
+                        y: {
+                            stacked: true, // Batang bertumpuk
+                            beginAtZero: true,
+                            precision: 0, // Pastikan tidak ada desimal
+                            title: { display: true, text: 'Jumlah Pasien' },
+                            grid: { display: false } // Menghilangkan garis grid
                         }
                     },
                     plugins: { legend: { position: 'bottom' } }
@@ -408,29 +401,34 @@
         if (heatmapContainer) {
             let heatmapHTML = '<table class="table table-bordered table-sm text-center" style="min-width: 600px;">';
             heatmapHTML += '<thead><tr><th></th>';
+            // Membuat header kolom
             numericColumns.forEach(col => {
+                // Memformat nama kolom agar lebih mudah dibaca (misal: avg_glucose_level -> Avg Glucose Level)
                 heatmapHTML += `<th>${col.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</th>`;
             });
             heatmapHTML += '</tr></thead><tbody>';
 
+            // Mengisi baris dan sel tabel
             numericColumns.forEach(rowCol => {
                 heatmapHTML += `<tr><th>${rowCol.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}</th>`;
                 numericColumns.forEach(colCol => {
                     let correlation = correlationMatrix[rowCol][colCol];
                     let bgColor = '';
-                    let textColor = 'text-dark';
+                    let textColor = 'text-dark'; // Warna teks default
 
                     if (correlation !== null) {
-                        bgColor = getColorForCorrelation(correlation);
+                        bgColor = getColorForCorrelation(correlation); // Menggunakan fungsi warna baru
+                        // Tentukan warna teks berdasarkan kecerahan warna latar belakang
+                        // Ini adalah perkiraan sederhana, untuk akurasi lebih baik bisa pakai perhitungan luminansi
                         const r = parseInt(bgColor.substring(4, bgColor.indexOf(',')));
                         const g = parseInt(bgColor.substring(bgColor.indexOf(',') + 1, bgColor.lastIndexOf(',')));
                         const b = parseInt(bgColor.substring(bgColor.lastIndexOf(',') + 1, bgColor.length - 1));
                         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-                        textColor = (brightness > 180) ? 'text-dark' : 'text-white';
+                        textColor = (brightness > 180) ? 'text-dark' : 'text-white'; // Jika terang, pakai teks gelap; jika gelap, pakai teks terang
                     } else {
-                        bgColor = 'rgb(108, 117, 125)';
+                        bgColor = 'rgb(108, 117, 125)'; // Warna abu-abu untuk N/A
                         textColor = 'text-white';
-                        correlation = 'N/A';
+                        correlation = 'N/A'; // Tampilkan N/A jika korelasi tidak tersedia
                     }
 
                     heatmapHTML += `<td style="background-color: ${bgColor};" class="${textColor}">${correlation}</td>`;
@@ -442,4 +440,3 @@
         }
     </script>
 @endpush
-@endsection

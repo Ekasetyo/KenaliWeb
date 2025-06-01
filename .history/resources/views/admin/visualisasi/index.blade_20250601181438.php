@@ -35,7 +35,7 @@
                     <canvas id="genderStrokeRiskChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menampilkan persentase pasien laki-laki dan perempuan yang tercatat memiliki risiko stroke dalam data latih.</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menampilkan persentase pasien laki-laki dan perempuan yang tercatat memiliki risiko data latih. Ini membantu melihat perbandingan risiko stroke antar jenis kelamin.</p>
                 </div>
             </div>
         </div>
@@ -43,13 +43,14 @@
         <div class="col-lg-6 mb-4">
             <div class="card shadow h-100 py-2">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">3. Presentase Tingkat Resiko Stroke per Kelompok Usia</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">3. Tingkat Kejadian Stroke per Kelompok Usia</h6>
                 </div>
                 <div class="card-body">
                     <canvas id="ageStrokeIncidenceChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
-                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan persentase Resiko stroke untuk setiap kelompok usia dalam data latih. Anda dapat melihat bagaimana risiko stroke cenderung meningkat seiring bertambahnya usia.</p>
+                    <p class="mb-0"><strong>Dasar:</strong> Grafik garis (line chart) sangat baik untuk menunjukkan tren atau perubahan nilai secara kontinu seiring bertambahnya usia.</p>
+                    <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan persentase kejadian stroke untuk setiap kelompok usia dalam data latih. Anda dapat melihat bagaimana risiko stroke cenderung meningkat seiring bertambahnya usia.</p>
                 </div>
             </div>
         </div>
@@ -63,6 +64,7 @@
                     <canvas id="glucoseStrokeComparisonChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
+                    <p class="mb-0"><strong>Dasar:</strong> Grafik batang (bar chart) cocok untuk membandingkan nilai rata-rata antara dua kategori yang berbeda.</p>
                     <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini membandingkan rata-rata kadar glukosa antara pasien yang mengalami stroke dan yang tidak. Ini dapat memberikan wawasan tentang hubungan antara kadar glukosa dan risiko stroke.</p>
                 </div>
             </div>
@@ -77,6 +79,7 @@
                     <canvas id="riskFactorPrevalenceChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
+                    <p class="mb-0"><strong>Dasar:</strong> Grafik batang berkelompok (grouped bar chart) efektif untuk membandingkan beberapa kategori dalam kelompok yang berbeda.</p>
                     <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan jumlah pasien yang memiliki hipertensi atau penyakit jantung, dibagi berdasarkan apakah mereka mengalami stroke atau tidak. Ini membantu memahami seberapa umum faktor risiko ini pada kedua kelompok pasien.</p>
                 </div>
             </div>
@@ -99,6 +102,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted small text-center">
+                    <p class="mb-0"><strong>Dasar:</strong> Heatmap digunakan untuk memvisualisasikan matriks data, di mana intensitas warna mewakili nilai. Dalam kasus ini, intensitas warna menunjukkan kekuatan korelasi.</p>
                     <p class="mb-0"><strong>Penjelasan:</strong> Heatmap ini menunjukkan seberapa kuat hubungan antara variabel-variabel numerik dalam data latih. Warna yang lebih gelap (biru untuk korelasi positif kuat, merah untuk negatif kuat) menunjukkan hubungan yang lebih erat. Angka di dalam kotak adalah nilai korelasinya, berkisar dari -1 (sangat berkebalikan) hingga 1 (sangat searah). Ini membantu mengidentifikasi variabel mana yang mungkin saling mempengaruhi.</p>
                 </div>
             </div>
@@ -284,7 +288,7 @@
                             max: 100, // Maksimal 100%
                             title: {
                                 display: true,
-                                text: 'Persentase Tingkat Stroke (%)'
+                                text: 'Persentase Kejadian Stroke (%)'
                             },
                             ticks: {
                                 callback: function(value) {

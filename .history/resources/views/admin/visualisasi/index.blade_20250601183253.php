@@ -77,6 +77,7 @@
                     <canvas id="riskFactorPrevalenceChart"></canvas>
                 </div>
                 <div class="card-footer text-muted small text-center">
+                    <p class="mb-0"><strong>Dasar:</strong> Grafik batang berkelompok (grouped bar chart) efektif untuk membandingkan beberapa kategori dalam kelompok yang berbeda.</p>
                     <p class="mb-0"><strong>Penjelasan:</strong> Grafik ini menunjukkan jumlah pasien yang memiliki hipertensi atau penyakit jantung, dibagi berdasarkan apakah mereka mengalami stroke atau tidak. Ini membantu memahami seberapa umum faktor risiko ini pada kedua kelompok pasien.</p>
                 </div>
             </div>
@@ -99,6 +100,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted small text-center">
+                    <p class="mb-0"><strong>Dasar:</strong> Heatmap digunakan untuk memvisualisasikan matriks data, di mana intensitas warna mewakili nilai. Dalam kasus ini, intensitas warna menunjukkan kekuatan korelasi.</p>
                     <p class="mb-0"><strong>Penjelasan:</strong> Heatmap ini menunjukkan seberapa kuat hubungan antara variabel-variabel numerik dalam data latih. Warna yang lebih gelap (biru untuk korelasi positif kuat, merah untuk negatif kuat) menunjukkan hubungan yang lebih erat. Angka di dalam kotak adalah nilai korelasinya, berkisar dari -1 (sangat berkebalikan) hingga 1 (sangat searah). Ini membantu mengidentifikasi variabel mana yang mungkin saling mempengaruhi.</p>
                 </div>
             </div>
@@ -284,7 +286,7 @@
                             max: 100, // Maksimal 100%
                             title: {
                                 display: true,
-                                text: 'Persentase Tingkat Stroke (%)'
+                                text: 'Persentase Kejadian Stroke (%)'
                             },
                             ticks: {
                                 callback: function(value) {
