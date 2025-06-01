@@ -60,8 +60,8 @@
                             </td>
                             <td class="text-center">{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') : '-' }}</td>
                             <td class="text-center">
-                                <a href="{{ route('admin.hasil-prediksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm btn-circle" title="Detail">
-                                    <i class="fas fa-eye"></i>
+                                <a href="{{ route('user.riwayat-deteksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-eye mr-1"></i> Detail
                                 </a>
                             </td>
                         </tr>
@@ -82,21 +82,15 @@
 </div>
 
 <style>
-    .table {
+     .table {
         font-size: 0.9rem;
     }
     .badge {
         font-size: 0.85rem;
         font-weight: 500;
     }
-    .btn-circle {
-        width: 30px;
-        height: 30px;
-        padding: 0;
-        border-radius: 50%;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+    .card-header {
+        background-color: #f8f9fc;
     }
     .thead-light th {
         background-color: #f8f9fc;
@@ -104,6 +98,11 @@
     }
     .table-hover tbody tr:hover {
         background-color: #f8f9fa;
+    }
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8rem;
+        line-height: 1.5;
     }
 </style>
 

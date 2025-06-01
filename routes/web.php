@@ -91,7 +91,7 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
     Route::get('/dashboard', [UserDashboard::class, 'dashboard'])->name('user.dashboard');
 
     // Konsultasi
-    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('user.konsultasi.index');
+    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('konsultasi.index');
     Route::post('/konsultasi', [UserKonsultasi::class, 'store'])->name('konsultasi.store');
     Route::get('/konsultasi/create', [UserKonsultasi::class, 'create'])->name('konsultasi.create');
     Route::get('/konsultasi/{id}', [UserKonsultasi::class, 'show'])->name('konsultasi.show');
