@@ -29,7 +29,7 @@ Route::get('/', [ArtikelController::class, 'landing']);
 // Login & Register
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterUserController::class, 'showRegistrationForm'])->name('register.form');
 Route::post('/register', [RegisterUserController::class, 'register'])->name('register');
 
@@ -39,12 +39,12 @@ Route::get('/dashboard/tables', fn() => view('dashboard-form.tables'))->name('da
 Route::get('/dashboard/riwayat', fn() => view('dashboard-form.riwayat'))->name('dashboard.riwayat');
 
 // Route Dashboard User (Backup / Fallback)
-Route::get('/dashboard', function () {
-    if (session('user')) {
-        return view('dashboard-form.dashboard');
-    }
-    return redirect('/login');
-})->name('user.dashboard');
+// Route::get('/dashboard', function () {
+//     if (session('user')) {
+//         return view('dashboard-form.dashboard');
+//     }
+//     return redirect('/login');
+// })->name('user.dashboard');
 
 // ==============================
 // Admin Routes
@@ -93,7 +93,7 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
     Route::post('/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password')->middleware('auth');
 
     // Konsultasi
-    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('konsultasi.index');
+    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('user.konsultasi.index');
     Route::post('/konsultasi', [UserKonsultasi::class, 'store'])->name('konsultasi.store');
     Route::get('/konsultasi/create', [UserKonsultasi::class, 'create'])->name('konsultasi.create');
     Route::get('/konsultasi/{id}', [UserKonsultasi::class, 'show'])->name('konsultasi.show');
@@ -105,9 +105,9 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
     Route::delete('/riwayat-deteksi/{id}', [UserRiwayatPrediksiController::class, 'delete'])->name('user.riwayat-deteksi.delete');
 });
 
-// Route publik / umum
-Route::get('/laporan', [UserController::class, 'laporan']);
-Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
+// // Route publik / umum
+// Route::get('/laporan', [UserController::class, 'laporan']);
+// Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
 
 
 // Tampilan input nama (Forgot)
@@ -123,8 +123,8 @@ Route::get('password/reset-form', [ResetPasswordController::class, 'showResetFor
 // Simpan password baru
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-// pengaturan profile   
-Route::middleware('login.session')->group(function () {
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
-});
+// Update Profil
+Route::post('/profil/update', [ProfileController::class, 'update'])->name('profile.update');
+
+// Update Password
+Route::post('/profil/update-password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
