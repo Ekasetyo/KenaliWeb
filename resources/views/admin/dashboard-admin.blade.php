@@ -24,6 +24,8 @@
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="icon" type="image/png" href="{{ asset('dashboard-assets/img/Logo_Kenali_1.png') }}">
 </head>
 
 <body id="page-top">

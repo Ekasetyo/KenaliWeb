@@ -30,6 +30,8 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('landing-assets/css/style.css') }}" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="{{ asset('landing-assets/img/Logo_Kenali_1.png') }}">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">

@@ -93,7 +93,7 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
     Route::post('/ubah-password', [UserController::class, 'ubahPassword'])->name('user.ubah-password')->middleware('auth');
 
     // Konsultasi
-    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('user.konsultasi.index');
+    Route::get('/konsultasi', [UserKonsultasi::class, 'index'])->name('konsultasi.index');
     Route::post('/konsultasi', [UserKonsultasi::class, 'store'])->name('konsultasi.store');
     Route::get('/konsultasi/create', [UserKonsultasi::class, 'create'])->name('konsultasi.create');
     Route::get('/konsultasi/{id}', [UserKonsultasi::class, 'show'])->name('konsultasi.show');

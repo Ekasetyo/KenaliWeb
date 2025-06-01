@@ -60,8 +60,8 @@
                             </td>
                             <td class="text-center">{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') : '-' }}</td>
                             <td class="text-center">
-                                <a href="{{ route('admin.hasil-prediksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm btn-circle" title="Detail">
-                                    <i class="fas fa-eye"></i>
+                                <a href="{{ route('user.riwayat-deteksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm btn-circle" title="Detail">
+                                    <i class="fas fa-eye mr-1"></i> Detail
                                 </a>
                             </td>
                         </tr>

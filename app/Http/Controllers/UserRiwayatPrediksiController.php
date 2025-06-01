@@ -12,7 +12,7 @@ class UserRiwayatPrediksiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['login.session', 'role:user']);
+        $this->middleware(['login.session']);
     }
 
     public function dataPrediksi(Request $request)

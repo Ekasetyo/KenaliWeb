@@ -21,6 +21,8 @@
     <link href="{{ asset('dashboard-assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('konsultasi-assets/css/konsultasi.css') }}" rel="stylesheet">
     <link href="{{ asset('data-deteksi-assets/css/deteksi.css') }}" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="{{ asset('dashboard-assets/img/Logo_Kenali_1.png') }}">
 </head>
 
 <body id="page-top">
