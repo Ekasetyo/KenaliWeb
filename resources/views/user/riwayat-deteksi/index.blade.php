@@ -4,12 +4,12 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1 class="h3 mb-2 text-gray-800">Data Hasil Deteksi</h1>
+    <h1 class="h3 mb-4 text-gray-800">Data Hasil Deteksi Risiko Stroke</h1>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Deteksi</h6>
-            <form action="{{ route('user.riwayat-deteksi') }}" method="GET" class="form-inline search-form">
+        <div class="card-header py-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <h6 class="m-0 font-weight-bold text-primary mb-2 mb-md-0">Daftar Deteksi Pengguna</h6>
+            <form action="{{ route('admin.hasil-prediksi') }}" method="GET" class="mt-2 mt-md-0">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Cari nama pengguna..." 
                            value="{{ htmlspecialchars(request('search')) }}">
@@ -23,111 +23,88 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
                         <tr>
-                            <th>No</th>
-                            <th>Usia</th>
-                            <th>Hasil Deteksi</th>
-                            <th>Tanggal Deteksi</th>
-                            <th>Aksi</th>
+                            <th class="text-center" style="width: 50px;">No</th>
+                            <th>Nama Akun</th>
+                            <th class="text-center" style="width: 100px;">Usia</th>
+                            <th class="text-center" style="width: 200px;">Hasil Deteksi</th>
+                            <th class="text-center" style="width: 150px;">Tanggal Deteksi</th>
+                            <th class="text-center" style="width: 100px;">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($data as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ is_numeric($item->age) ? $item->age . ' tahun' : $item->age }}</td>
-                            <td>
-                                <span class="badge {{ str_contains(strtolower($item->prediction ?? ''), 'beresiko') ? 'badge-danger' : 'badge-success' }}">
-                                    {{ $item->prediction ?? 'Tidak ada data' }}
-                                </span>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td>{{ $item->name ?? '-' }}</td>
+                            <td class="text-center">{{ is_numeric($item->age) ? $item->age . ' tahun' : $item->age }}</td>
+                            <td class="text-center">
+                                @php
+                                    $predictionText = strtolower($item->prediction ?? '');
+                                @endphp
+                                @if ($predictionText === 'anda beresiko terkena stroke')
+                                    <span class="badge badge-pill badge-danger py-2 px-3">
+                                        <i class="fas fa-exclamation-triangle mr-1"></i> {{ $item->prediction }}
+                                    </span>
+                                @elseif ($predictionText === 'anda tidak beresiko')
+                                    <span class="badge badge-pill badge-success py-2 px-3">
+                                        <i class="fas fa-check-circle mr-1"></i> {{ $item->prediction }}
+                                    </span>
+                                @else
+                                    <span class="badge badge-pill badge-secondary py-2 px-3">
+                                        <i class="fas fa-question-circle mr-1"></i> {{ $item->prediction ?? 'Tidak ada data' }}
+                                    </span>
+                                @endif
                             </td>
-                            <td>{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') : '-' }}</td>
-                            <td>
-                                <div class="d-flex">
-                                    <a href="{{ route('user.riwayat-deteksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm mr-1">
-                                        <i class="fas fa-eye"></i> Detail
-                                    </a>
-                                    <form action="{{ route('user.riwayat-deteksi.delete', ['id' => $item->_id]) }}" method="POST" class="delete-form">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="btn btn-danger btn-sm btn-delete">
-                                            <i class="fas fa-trash"></i> Hapus
-                                        </button>
-                                    </form>
-                                </div>
+                            <td class="text-center">{{ $item->created_at ? \Carbon\Carbon::parse($item->created_at)->format('d/m/Y H:i') : '-' }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('admin.hasil-prediksi.show', ['id' => $item->_id]) }}" class="btn btn-info btn-sm btn-circle" title="Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada data Deteksi</td>
+                            <td colspan="6" class="text-center py-4">Tidak ada data deteksi yang ditemukan</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
             </div>
             
-            <div class="d-flex justify-content-center mt-3">
-                {{ $data->links() }}
+            <div class="d-flex justify-content-center mt-4">
+                {{ $data->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
 </div>
-@endsection
 
-@section('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Tangani klik tombol hapus
-            document.querySelectorAll('.btn-delete').forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const form = this.closest('form');
-                    const url = form.action;
+<style>
+    .table {
+        font-size: 0.9rem;
+    }
+    .badge {
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+    .btn-circle {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .thead-light th {
+        background-color: #f8f9fc;
+        font-weight: 600;
+    }
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+</style>
 
-                    Swal.fire({
-                        title: 'Apakah Anda yakin?',
-                        text: 'Data ini akan dihapus secara permanen!',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#3085d6',
-                        confirmButtonText: 'Ya, hapus!',
-                        cancelButtonText: 'Batal'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: url,
-                                method: 'POST',
-                                data: $(form).serialize(),
-                                success: function (response) {
-                                    Swal.fire('Berhasil', 'Data berhasil dihapus.', 'success');
-                                    location.reload(); // Reload halaman untuk memperbarui tabel
-                                },
-                                error: function (xhr) {
-                                    Swal.fire('Error', 'Terjadi kesalahan saat menghapus data.', 'error');
-                                }
-                            });
-                        }
-                    });
-                });
-            });
-
-            // Tangani form pencarian
-            document.querySelectorAll('.search-form').forEach(form => {
-                form.addEventListener('submit', function (event) {
-                    event.preventDefault();
-                    const url = this.action + '?' + $(this).serialize();
-                    window.location.href = url; // Redirect untuk pencarian
-                });
-            });
-
-            // Tangani paginasi
-            $(document).on('click', '.pagination a', function (e) {
-                e.preventDefault();
-                window.location.href = $(this).attr('href'); // Redirect untuk paginasi
-            });
-        });
-    </script>
 @endsection

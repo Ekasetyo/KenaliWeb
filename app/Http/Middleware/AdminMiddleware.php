@@ -1,21 +1,19 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminMiddleware
 {
     public function handle($request, Closure $next)
-
     {
-        $user = session('user');
-        if ($user && $user['status'] === 'admin') {
-            return $next($request);
+        $user = Session::get('user');
+        
+        if (!$user || $user['status'] !== 'admin') {
+            abort(403, 'Unauthorized access');
         }
-        return redirect('/login')->with('error', 'Akses hanya untuk admin!');
+
+        return $next($request);
     }
-};
-
-
+}

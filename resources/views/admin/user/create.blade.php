@@ -29,7 +29,8 @@
                         <div class="input-group">
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Masukkan password" required
-                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$">
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                oninput="validatePassword(this.value)">
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <i id="togglePassword" class="fa fa-eye" style="cursor: pointer;"></i>
@@ -39,17 +40,18 @@
                         <small class="form-text text-muted">
                             Password harus mengandung:
                             <ul id="passwordRequirements" class="pl-3 mb-0">
-                                <li id="length"><span class="indicator">✗</span> Minimal 8 karakter</li>
-                                <li id="capital"><span class="indicator">✗</span> Huruf kapital (A-Z)</li>
-                                <li id="number"><span class="indicator">✗</span> Angka (0-9)</li>
-                                <li id="special"><span class="indicator">✗</span> Karakter khusus (@$!%*?&)</li>
+                                <li id="length"><span class="indicator" style="color: red;">✗</span> Minimal 8 karakter</li>
+                                <li id="capital"><span class="indicator" style="color: red;">✗</span> Huruf kapital (A-Z)</li>
+                                <li id="number"><span class="indicator" style="color: red;">✗</span> Angka (0-9)</li>
+                                <li id="special"><span class="indicator" style="color: red;">✗</span> Karakter khusus (@$!%*?&)</li>
                             </ul>
                         </small>
                     </div>
                     <div class="form-group">
                         <label for="password_confirmation">Konfirmasi Password:</label>
                         <input type="password" class="form-control" id="password_confirmation" 
-                            name="password_confirmation" placeholder="Masukkan ulang password" required>
+                            name="password_confirmation" placeholder="Masukkan ulang password" required
+                            oninput="checkPasswordMatch()">
                         <div id="passwordMatch" class="invalid-feedback" style="display: none;">Password tidak cocok</div>
                     </div>
                     <div class="form-group">
@@ -100,7 +102,6 @@
         position: relative;
         padding-left: 1.5em;
         margin-bottom: 5px;
-        transition: color 0.3s ease;
     }
     #passwordRequirements .indicator {
         position: absolute;
@@ -108,18 +109,6 @@
         width: 20px;
         display: inline-block;
         text-align: center;
-    }
-    #passwordRequirements li.valid {
-        color: #28a745;
-    }
-    #passwordRequirements li.valid .indicator {
-        color: #28a745;
-    }
-    #passwordRequirements li.invalid {
-        color: #dc3545;
-    }
-    #passwordRequirements li.invalid .indicator {
-        color: #dc3545;
     }
 </style>
 
@@ -145,49 +134,46 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Password validation
-    if (password) {
-        password.addEventListener('input', function() {
-            const value = this.value;
-            
-            // Validate each requirement
-            const requirements = {
-                length: value.length >= 8,
-                capital: /[A-Z]/.test(value),
-                number: /[0-9]/.test(value),
-                special: /[@$!%*?&]/.test(value)
-            };
-            
-            // Update UI for each requirement
-            Object.keys(requirements).forEach(key => {
-                const element = document.getElementById(key);
-                if (element) {
-                    if (requirements[key]) {
-                        element.classList.add('valid');
-                        element.classList.remove('invalid');
-                        const indicator = element.querySelector('.indicator');
-                        if (indicator) indicator.textContent = '✓';
-                    } else {
-                        element.classList.add('invalid');
-                        element.classList.remove('valid');
-                        const indicator = element.querySelector('.indicator');
-                        if (indicator) indicator.textContent = '✗';
-                    }
-                }
-            });
-        });
+    // Password validation function
+    function validatePassword(value) {
+        // Validate each requirement
+        const isLengthValid = value.length >= 8;
+        const hasCapital = /[A-Z]/.test(value);
+        const hasNumber = /[0-9]/.test(value);
+        const hasSpecialChar = /[@$!%*?&]/.test(value);
+        
+        // Update indicators
+        updateIndicator('length', isLengthValid);
+        updateIndicator('capital', hasCapital);
+        updateIndicator('number', hasNumber);
+        updateIndicator('special', hasSpecialChar);
+        
+        // Also check password match when password changes
+        checkPasswordMatch();
+    }
+    
+    // Function to update individual indicator
+    function updateIndicator(id, isValid) {
+        const element = document.getElementById(id);
+        if (element) {
+            const indicator = element.querySelector('.indicator');
+            if (indicator) {
+                indicator.style.color = isValid ? 'green' : 'red';
+                indicator.textContent = isValid ? '✓' : '✗';
+            }
+        }
     }
     
     // Password confirmation validation
-    if (passwordConfirmation) {
-        passwordConfirmation.addEventListener('input', function() {
-            const isMatch = this.value === password.value;
-            this.classList.toggle('is-invalid', !isMatch);
+    function checkPasswordMatch() {
+        if (password && passwordConfirmation) {
+            const isMatch = passwordConfirmation.value === password.value;
+            passwordConfirmation.classList.toggle('is-invalid', !isMatch);
             const matchElement = document.getElementById('passwordMatch');
             if (matchElement) {
                 matchElement.style.display = isMatch ? 'none' : 'block';
             }
-        });
+        }
     }
     
     // Form submission validation
@@ -217,15 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
             form.reset();
             
             // Reset password validation indicators
-            const passwordRequirements = document.querySelectorAll('#passwordRequirements li');
-            passwordRequirements.forEach(li => {
-                li.classList.remove('valid');
-                li.classList.add('invalid');
-                const indicator = li.querySelector('.indicator');
-                if (indicator) {
-                    indicator.textContent = '✗';
-                    indicator.style.color = '#dc3545';
-                }
+            const indicators = document.querySelectorAll('#passwordRequirements .indicator');
+            indicators.forEach(indicator => {
+                indicator.style.color = 'red';
+                indicator.textContent = '✗';
             });
             
             // Reset password confirmation

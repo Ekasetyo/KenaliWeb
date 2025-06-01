@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -22,66 +21,44 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        // Cek apakah sudah ada sesi aktif, jika ada, hapus sesi sebelumnya
+        // Clear previous session if exists
         if (Session::has('user')) {
-            $currentUser = Session::get('user');
             Session::forget('user');
-            Log::info('Sesi sebelumnya dihapus untuk user:', ['email' => $currentUser['email']]);
         }
 
         try {
-            // Koneksi ke MongoDB
             $mongoClient = new MongoClient(env('DB_CONNECTION_STRING'));
             $db = $mongoClient->kenali;
             $collection = $db->users;
 
-            // Cari user berdasarkan email
             $user = $collection->findOne(['email' => $request->email]);
 
             if (!$user) {
-                $response = ['message' => 'Email tidak ditemukan'];
-                return $request->wantsJson() ? response()->json($response, 404) : back()->with('error', $response['message']);
+                return back()->with('error', 'Email tidak ditemukan');
             }
 
-            // Verifikasi password menggunakan Hash::check
             if (Hash::check($request->password, $user->password)) {
-                // Simpan data user di session
-                Session::put('user', [
+                $userData = [
                     'id' => (string)$user->_id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'status' => $user->status
-                ]);
-                Session::save();
-                Log::info('Login successful, session user:', [Session::get('user')]);
-
-                $response = [
-                    'message' => 'Login berhasil',
-                    'user' => [
-                        'id' => (string)$user->_id,
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'status' => $user->status
-                    ]
+                    'status' => $user->status // Pastikan field status ada di koleksi users
                 ];
-
+                
+                Session::put('user', $userData);
+                
                 // Redirect berdasarkan status
                 if ($user->status === 'admin') {
-                    return $request->wantsJson()
-                        ? response()->json($response, 200)
-                        : redirect()->route('admin.dashboard')->with('success', 'Login berhasil sebagai admin!');
-                } else {
-                    return $request->wantsJson()
-                        ? response()->json($response, 200)
-                        : redirect()->route('user.dashboard')->with('success', 'Login berhasil!');
+                    return redirect()->route('admin.dashboard')->with('success', 'Login berhasil sebagai admin!');
                 }
-            } else {
-                $response = ['message' => 'Password salah'];
-                return $request->wantsJson() ? response()->json($response, 401) : back()->with('error', $response['message']);
+                    return redirect()->route('user.dashboard');
             }
+
+            return back()->with('error', 'Password salah');
+
         } catch (\Exception $e) {
-            $response = ['message' => 'Terjadi kesalahan: ' . $e->getMessage()];
-            return $request->wantsJson() ? response()->json($response, 500) : back()->with('error', $response['message']);
+            Log::error('Login error: '.$e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan sistem');
         }
     }
 

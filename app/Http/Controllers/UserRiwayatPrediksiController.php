@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
@@ -11,29 +10,31 @@ use Carbon\Carbon;
 
 class UserRiwayatPrediksiController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['login.session', 'role:user']);
+    }
+
     public function dataPrediksi(Request $request)
     {
-        // Ambil id user yang sedang login dari sesi
         $user = Session::get('user');
-        if (!$user || !isset($user['id'])) {
-            Log::error('User session not found or invalid');
-            return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
+        if (!$user || $user['status'] !== 'user') {
+            Log::error('Unauthorized access attempt');
+            abort(403, 'Unauthorized access');
         }
+
         Log::info('User session:', [$user]);
         $userId = (string)$user['id'];
 
         $search = $request->input('search');
 
-        // Ambil data dari hasil_deteksi berdasarkan user_id yang login
         $query = ['user_id' => $userId];
         $dataCursor = DB::connection('mongodb')
             ->getMongoDB()
             ->selectCollection('hasil_deteksi')
             ->find($query);
         $dataArray = iterator_to_array($dataCursor);
-        Log::info('Hasil deteksi:', $dataArray);
 
-        // Ambil data dari users untuk user yang login
         try {
             $usersCursor = DB::connection('mongodb')
                 ->getMongoDB()
@@ -47,27 +48,22 @@ class UserRiwayatPrediksiController extends Controller
                 ->find(['_id' => $userId]);
         }
         $usersArray = iterator_to_array($usersCursor);
-        Log::info('Users data:', $usersArray);
 
         $usersMap = [];
         foreach ($usersArray as $userData) {
             $usersMap[(string)$userData->_id] = $userData;
         }
 
-        // Gabungkan data
         foreach ($dataArray as $item) {
             $item->user = $usersMap[(string)$item->user_id] ?? null;
-            Log::info('Item user_id:', [(string)$item->user_id, 'user' => $item->user]);
         }
 
-        // Filter berdasarkan pencarian
         if ($search) {
             $dataArray = array_filter($dataArray, function ($item) use ($search) {
                 return stripos($item->user->name ?? '', $search) !== false;
             });
         }
 
-        // Proses data untuk menambahkan usia
         foreach ($dataArray as $item) {
             $item->name = $item->user->name ?? '-';
             $item->age = $item->age ?? '-';
@@ -77,12 +73,10 @@ class UserRiwayatPrediksiController extends Controller
                     $item->age = Carbon::parse($item->user->tanggal_lahir)->age;
                 } catch (\Exception $e) {
                     Log::error('Error parsing tanggal_lahir: ' . $e->getMessage());
-                    $item->age = $item->age;
                 }
             }
         }
 
-        // Buat objek paginasi
         $data = new \Illuminate\Pagination\LengthAwarePaginator(
             $dataArray,
             count($dataArray),
@@ -98,21 +92,19 @@ class UserRiwayatPrediksiController extends Controller
                     'name' => $item->name,
                     'tanggal_lahir' => $item->user->tanggal_lahir ?? null
                 ]];
-            })
+            }),
+            'layout' => 'user'
         ]);
     }
 
     public function showDetail($id)
     {
-        // Ambil id user yang sedang login dari sesi
         $user = Session::get('user');
-        if (!$user || !isset($user['id'])) {
-            Log::error('User session not found or invalid');
-            return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
+        if (!$user || $user['status'] !== 'user') {
+            abort(403, 'Unauthorized access');
         }
         $userId = (string)$user['id'];
 
-        // Ambil data dari hasil_deteksi berdasarkan _id dan user_id
         try {
             $data = DB::connection('mongodb')
                 ->getMongoDB()
@@ -127,7 +119,6 @@ class UserRiwayatPrediksiController extends Controller
             return redirect()->route('user.riwayat-deteksi')->with('error', 'Data tidak ditemukan atau Anda tidak memiliki akses.');
         }
 
-        // Ambil data pengguna
         try {
             $userData = DB::connection('mongodb')
                 ->getMongoDB()
@@ -141,17 +132,17 @@ class UserRiwayatPrediksiController extends Controller
         $data->user = $userData;
         $data->name = $userData->name ?? '-';
 
-        return view('user.riwayat-deteksi.detail', ['data' => $data]);
+        return view('user.riwayat-deteksi.detail', [
+            'data' => $data,
+            'layout' => 'user'
+        ]);
     }
 
     public function delete(Request $request, $id)
     {
-        // Ambil id user yang sedang login dari sesi
         $user = Session::get('user');
-
-        if (!$user || !isset($user['id'])) {
-            Log::error('User session not found or invalid');
-            return redirect('/login')->with('error', 'Silakan login terlebih dahulu.');
+        if (!$user || $user['status'] !== 'user') {
+            abort(403, 'Unauthorized access');
         }
         $userId = (string)$user['id'];
 

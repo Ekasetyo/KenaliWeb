@@ -42,12 +42,15 @@
 
     <!-- Nav Item - Logout -->
     <li class="nav-item">
-        <form method="POST" action="{{ route('logout') }}">
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
         <button type="submit" class="nav-link btn btn-link logout-button focus:outline-none focus:ring-0" style="color: white; text-align: left;">
             <i class="fas fa-fw fa-sign-out-alt"></i>
             <span>Logout</span>
         </button>
-    </li>
+    </form>
+</li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
