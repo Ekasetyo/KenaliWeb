@@ -65,7 +65,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2025</span>
+                        <span>Copyright &copy; Kenali 2025</span>
                     </div>
                 </div>
             </footer>
@@ -87,35 +87,7 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('dashboard-assets/js/sb-admin-2.min.js') }}"></script>
 
-    <script>
-        // Data untuk grafik (ganti dengan data Anda)
-        const labels = ['Umur', 'Tekanan Darah', 'Kolesterol', 'Diabetes', 'Merokok'];
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Pengaruh terhadap Risiko Stroke',
-                data: [75, 60, 90, 50, 80], // Ganti dengan data sebenarnya
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        };
-        const config = {
-            type: 'bar',
-            data: data,
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        };
-        const strokeRiskChart = new Chart(
-            document.getElementById('strokeRiskChart'),
-            config
-        );
-    </script>
+    
 
     @stack('scripts') {{-- Untuk halaman jika ingin menambahkan script khusus --}}
     @include('sweetalert::alert')
