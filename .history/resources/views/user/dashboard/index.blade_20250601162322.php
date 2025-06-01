@@ -168,10 +168,11 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            grid: {
+                            grid: { // Hapus garis horizontal
                                 display: false
                             },
                             ticks: {
+                                // Mengatur agar nilai sumbu Y tidak memiliki koma
                                 callback: function(value, index, values) {
                                     if (Number.isInteger(value)) {
                                         return value;
@@ -206,8 +207,8 @@
                     datasets: [{
                         label: 'Jumlah Pasien',
                         data: Object.values(genderCounts),
-                        backgroundColor: ['rgba(54, 162, 235, 0.8)', 'rgba(255, 99, 132, 0.8)'],
-                        borderColor: ['rgba(54, 162, 235, 1)', 'rgba(255, 99, 132, 1)'],
+                        backgroundColor: ['rgba(255, 99, 132, 0.8)', 'rgba(54, 162, 235, 0.8)'],
+                        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
                         borderWidth: 1,
                     }]
                 },
