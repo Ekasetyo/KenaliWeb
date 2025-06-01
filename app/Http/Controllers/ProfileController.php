@@ -4,65 +4,76 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('login.session'); // Ganti middleware ke login.session
+        $this->middleware('login.session'); // Proteksi hanya untuk yang sudah login
     }
 
+    /**
+     * Update data profil user (nama, email, dll)
+     */
     public function update(Request $request)
     {
-        // Ambil data pengguna dari sesi (sesuaikan dengan logika login.session)
+        // Ambil data user dari session
         $user = session('user');
 
-        // Jika sesi tidak ada, arahkan ke halaman login
         if (!$user) {
-            \Log::warning('User session invalid during profile update');
+            Log::warning('User session invalid during profile update');
             return redirect()->route('login')->with('error', 'Sesi Anda telah habis. Silakan login kembali.');
         }
 
         // Validasi input
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $user['id'], // Sesuaikan dengan struktur data sesi
-            'jenis_kelamin' => 'nullable|string|in:Laki-laki,Perempuan',
-            'tanggal_lahir' => 'nullable|date',
-            'no_telepon' => 'nullable|string',
-            'alamat' => 'nullable|string',
+            'name'           => 'required|string|max:255',
+            'email'          => 'required|email|max:255|unique:users,email,' . $user['id'],
+            'jenis_kelamin'  => 'nullable|string|in:Laki-laki,Perempuan',
+            'tanggal_lahir'  => 'nullable|date',
+            'no_telepon'     => 'nullable|string|max:20',
+            'alamat'         => 'nullable|string|max:255',
         ], [
-            'name.required' => 'Nama wajib diisi.',
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Email tidak valid.',
-            'email.unique' => 'Email sudah digunakan.',
-            'tanggal_lahir.date' => 'Tanggal lahir harus dalam format yang valid.',
+            'name.required'       => 'Nama wajib diisi.',
+            'email.required'      => 'Email wajib diisi.',
+            'email.email'         => 'Email tidak valid.',
+            'email.unique'        => 'Email sudah digunakan.',
+            'tanggal_lahir.date'  => 'Tanggal lahir harus format valid.',
         ]);
 
         try {
-            // Update data pengguna di database
-            $userModel = \App\Models\User::find($user['id']); // Sesuaikan dengan struktur data sesi
+            // Temukan user di database
+            $userModel = User::find($user['id']);
+            if (!$userModel) {
+                return back()->with('error', 'Data pengguna tidak ditemukan.');
+            }
+
+            // Simpan perubahan
             $userModel->update($validated);
 
-            // Update data di sesi
+            // Update session user
             $updatedUser = array_merge($user, $validated);
             session(['user' => $updatedUser]);
 
-            return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+            return back()->with('success', 'Profil berhasil diperbarui.');
         } catch (\Exception $e) {
-            \Log::error('Error updating profile: ' . $e->getMessage());
-            return redirect()->back()->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
+            Log::error('Error updating profile: ' . $e->getMessage());
+            return back()->with('error', 'Gagal memperbarui profil: ' . $e->getMessage());
         }
     }
 
+    /**
+     * Update password user
+     */
     public function updatePassword(Request $request)
     {
-        // Ambil data pengguna dari sesi
+        // Ambil user dari session
         $user = session('user');
 
-        // Jika sesi tidak ada, arahkan ke halaman login
         if (!$user) {
-            \Log::warning('User session invalid during password update');
+            Log::warning('User session invalid during password update');
             return redirect()->route('login')->with('error', 'Sesi Anda telah habis. Silakan login kembali.');
         }
 
@@ -73,34 +84,37 @@ class ProfileController extends Controller
                 'required',
                 'string',
                 'min:8',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*?&]/',
-                'confirmed',
+                'regex:/[A-Z]/',       // huruf kapital
+                'regex:/[0-9]/',       // angka
+                'regex:/[@$!%*?&]/',   // karakter khusus
+                'confirmed',           // new_password_confirmation harus cocok
             ],
         ], [
             'current_password.required' => 'Password lama wajib diisi.',
-            'new_password.regex' => 'Password harus mengandung huruf kapital, angka, dan karakter khusus (@$!%*?&).',
-            'new_password.min' => 'Password minimal 8 karakter.',
-            'new_password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'new_password.regex'        => 'Password harus mengandung huruf kapital, angka, dan karakter khusus (@$!%*?&).',
+            'new_password.min'          => 'Password minimal 8 karakter.',
+            'new_password.confirmed'    => 'Konfirmasi password tidak cocok.',
         ]);
 
-        // Ambil data pengguna dari database untuk memverifikasi password
-        $userModel = \App\Models\User::find($user['id']);
+        // Ambil user dari database
+        $userModel = User::find($user['id']);
+        if (!$userModel) {
+            return back()->with('error', 'Data pengguna tidak ditemukan.');
+        }
 
-        // Periksa password lama
+        // Verifikasi password lama
         if (!Hash::check($request->current_password, $userModel->password)) {
             return back()->with('error', 'Password lama tidak cocok.');
         }
 
         try {
-            // Update password di database
+            // Update password
             $userModel->password = Hash::make($request->new_password);
             $userModel->save();
 
             return back()->with('success', 'Password berhasil diperbarui.');
         } catch (\Exception $e) {
-            \Log::error('Error updating password: ' . $e->getMessage());
+            Log::error('Error updating password: ' . $e->getMessage());
             return back()->with('error', 'Gagal memperbarui password: ' . $e->getMessage());
         }
     }

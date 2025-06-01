@@ -8,7 +8,7 @@
     <meta name="description" content="Dashboard">
     <meta name="author" content="">
 
-    <title>@yield('title', 'Dashboard')</title>
+    <title>@yield('title', 'Dashboard User')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('dashboard-assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet"

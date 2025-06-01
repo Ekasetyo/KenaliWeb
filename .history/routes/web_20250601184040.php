@@ -104,8 +104,8 @@ Route::middleware(['login.session'])->prefix('user')->group(function () {
 });
 
 // Route publik / umum
-//Route::get('/laporan', [UserController::class, 'laporan']);
-//Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
+Route::get('/laporan', [UserController::class, 'laporan']);
+Route::get('/riwayat-prediksi', [UserRiwayatPrediksiController::class, 'index'])->name('riwayat.prediksi');
 
 
 // Tampilan input nama (Forgot)
