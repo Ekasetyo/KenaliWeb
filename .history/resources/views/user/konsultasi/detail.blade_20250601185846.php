@@ -131,7 +131,7 @@
                 @else
                     <div></div> <!-- Empty div for spacing -->
                 @endif
-                <a href="{{ route('user.konsultasi.index') }}" class="btn btn-outline-secondary px-4">
+                <a href="{{ route('konsultasi.index') }}" class="btn btn-outline-secondary px-4">
                     <i class="fas fa-arrow-left mr-2"></i>Kembali
                 </a>
             </div>

@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <!-- Header with back button -->
             <div class="d-flex align-items-center mb-4">
-                <a href="{{ route('user.konsultasi.index') }}" class="btn btn-circle btn-light mr-3 shadow-sm">
+                <a href="{{ route('konsultasi.user.index') }}" class="btn btn-circle btn-light mr-3 shadow-sm">
                     <i class="fas fa-arrow-left text-primary"></i>
                 </a>
                 <h1 class="h4 mb-0 text-gray-800">
@@ -131,7 +131,7 @@
                 @else
                     <div></div> <!-- Empty div for spacing -->
                 @endif
-                <a href="{{ route('user.konsultasi.index') }}" class="btn btn-outline-secondary px-4">
+                <a href="{{ route('konsultasi.index') }}" class="btn btn-outline-secondary px-4">
                     <i class="fas fa-arrow-left mr-2"></i>Kembali
                 </a>
             </div>
