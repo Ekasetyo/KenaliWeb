@@ -67,29 +67,10 @@
                 </button>
             </div>
 
-            <form method="POST" action="{{ route('password.update') }}" id="passwordForm">
+            <form method="POST" action="{{ route('profile.update-password') }}" id="passwordForm">
                 @csrf
-                @method('PUT')
-
+                
                 <div class="modal-body py-4">
-                    @if(session('success_password'))
-                        <div class="alert alert-success alert-dismissible fade show">
-                            <i class="fas fa-check-circle mr-2"></i>{{ session('success_password') }}
-                            <button type="button" class="close" data-dismiss="alert">
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
-                    @if(session('error_password'))
-                        <div class="alert alert-danger alert-dismissible fade show">
-                            <i class="fas fa-exclamation-circle mr-2"></i>{{ session('error_password') }}
-                            <button type="button" class="close" data-dismiss="alert">
-                                <span>&times;</span>
-                            </button>
-                        </div>
-                    @endif
-
                     <div class="form-group">
                         <label class="font-weight-bold">Password Lama</label>
                         <div class="input-group">
@@ -114,7 +95,7 @@
                                 </button>
                             </div>
                         </div>
-                        <small class="form-text text-muted">Minimal 8 karakter</small>
+                        <small class="form-text text-muted">Minimal 8 karakter, mengandung huruf kapital, angka, dan karakter khusus</small>
                     </div>
                     
                     <div class="form-group mb-0">
@@ -207,30 +188,59 @@ function confirmLogout() {
 }
 
 // Password form submission
-const passwordForm = document.getElementById('passwordForm');
-if (passwordForm) {
-    passwordForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Konfirmasi Perubahan Password',
-            text: 'Anda yakin ingin mengubah password?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#4e73df',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Ya, Ubah Password',
-            cancelButtonText: 'Batal',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.submit();
-                document.getElementById('btnUpdatePassword').disabled = true;
-                document.getElementById('btnUpdatePassword').innerHTML = 
-                    '<span class="spinner-border spinner-border-sm mr-2" role="status"></span> Memproses...';
+document.getElementById('passwordForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const btn = document.getElementById('btnUpdatePassword');
+    const originalBtnText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm mr-2"></span> Memproses...';
+    
+    try {
+        const formData = new FormData(this);
+        
+        // Client-side validation
+        if (formData.get('new_password') !== formData.get('new_password_confirmation')) {
+            throw new Error('Konfirmasi password tidak cocok');
+        }
+        
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
             }
         });
-    });
-}
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+            throw new Error(data.message || 'Gagal mengubah password');
+        }
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'Berhasil!',
+            text: data.message || 'Password berhasil diubah',
+            timer: 3000,
+            showConfirmButton: false
+        }).then(() => {
+            $('#changePasswordModal').modal('hide');
+            this.reset();
+        });
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: error.message,
+            confirmButtonText: 'OK'
+        });
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalBtnText;
+    }
+});
 
 // Show success/error messages
 @if(session('success_password'))
@@ -303,4 +313,6 @@ Swal.fire({
         border-color: #4e73df !important;
         box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
     }
+
+    
 </style>
