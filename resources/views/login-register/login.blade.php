@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group form-button" style="text-align: center;">
                                 <div class="form-actions">
-                                    <a href="{{ route('password.request') }}" class="forgot-password">Lupa password?</a>
+                                    <!-- <a href="{{ route('password.request') }}" class="forgot-password">Lupa password?</a> -->
                                     <button type="submit" name="signin" id="signin" class="form-submit">Login</button>
                                 </div>
                             </div>

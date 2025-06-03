@@ -7,7 +7,6 @@
 
         <!-- Begin Page Content -->
        <div class="container-fluid mt-4">
-
     <h1 class="h3 mb-2 text-gray-800">Visualisasi Data</h1>
     <p class="mb-4">Menampilkan grafik yang memvisualisasikan karakteristik dan hubungan antar variabel dalam data yang digunakan untuk melatih model Machine Learning.</p>
 
