@@ -73,22 +73,20 @@
                 <div class="container px-lg-5">
                     <div class="row g-5"> 
                        <div class="col-lg-8 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">Solusi Cerdas Untuk Apa?</h1>
-                            <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
-                            <a href="#contact" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Hubungi Kami</a>
-                        </div>
-                        <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp"
-                            data-wow-delay="0.3s">
-                            <div class="owl-carousel screenshot-carousel">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_depan.png') }}"
+                            <h1 class="text-white mb-4 animated slideInDown">Apa itu Kenali?</h1>
+                            <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Kenali adalah aplikasi untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
+                            <a href="https://github.com/Ekasetyo/KenaliApp.git" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Download Disini</a>
+                            </div>
+                        <div class="owl-carousel screenshot-carousel">
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/gambar1.png') }}"
                                     alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_aplikasi.png') }}"
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/gambar2.png') }}"
                                     alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_login.png') }}"
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/gambar3.png') }}"
                                     alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_register.png') }}"
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/gambar4.png') }}"
                                     alt="">
-                                <img class="img-fluid" src="{{ asset('landing-assets/img/kenali_dashboard.png') }}"
+                                <img class="img-fluid" src="{{ asset('landing-assets/img/gambar5.png') }}"
                                     alt="">
                             </div>
                         </div>
@@ -102,8 +100,7 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h5 class="text-primary-gradient fw-medium">Tentang Kenali</h5>
-                        <h1 class="mb-4">#1 </h1>
+                        <h5 class="text-primary-gradient fw-medium">Tentang Stroke</h5>
                         <p class="mb-4" style="text-align: justify;">Stroke merupakan penyakit tidak menular yang menjadi penyebab utama kematian dan kecacatan, dan sering kali terjadi secara tiba-tiba tanpa gejala awal yang jelas. Sayangnya, masih banyak masyarakat yang belum menyadari risiko mereka terhadap penyakit ini, serta kurangnya akses terhadap layanan deteksi dini yang cepat dan efisien, terutama di wilayah terpencil. Pengembangan sistem ini diharapkan dapat membantu tenaga medis dalam proses skrining, meningkatkan kesadaran masyarakat akan pentingnya pencegahan stroke, dan pada akhirnya menurunkan angka kejadian stroke melalui deteksi dini berbasis data.</p>
                         <div class="row g-4 mb-4"></div>
                     </div>
@@ -113,63 +110,43 @@
         <!-- About End -->
 
         <!-- Features Start -->
-        <div class="container-xxl py-5" id="feature">
-            <div class="container py-5 px-lg-5">
-                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Fitur Aplikasi</h5>
-                    <h1 class="mb-5">Fitur Unggulan</h1>
-                </div>
-                <div class="row g-4">
-                    <!-- ... fitur ... -->
-                    <!-- (kode fitur tidak diubah, tetap seperti sebelumnya) -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-eye text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Login & Autentikasi</h5>
-                            <p class="m-0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim veniam esse consequatur vel animi nemo, tempora deserunt sapiente, nostrum dignissimos recusandae consectetur amet incidunt quae at. Tempore voluptate doloremque quia.</p>
-                        </div>
+       <div class="container-xxl py-5" id="feature">
+    <div class="container py-5 px-lg-5">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h5 class="text-primary-gradient fw-medium">Fitur Aplikasi</h5>
+            <h1 class="mb-5">Fitur Keunggulan</h1>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="feature-item bg-light rounded p-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa fa-eye text-white fs-4"></i>
                     </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-layer-group text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Dashboard Mobile ( Ringkasan Data )</h5>
-                            <p class="m-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi rerum iusto fugit rem ipsum labore, doloribus a sunt repellat, voluptates suscipit sed delectus voluptas hic, quae dicta consectetur quaerat? Alias?</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-edit text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">List & Detail Transaksi</h5>
-                            <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque deserunt optio sapiente dolore enim amet numquam odio provident voluptatem inventore culpa, incidunt qui soluta nisi consequuntur, distinctio necessitatibus voluptate ipsa?</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-cloud text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Dashboard Web</h5>
-                            <p class="m-0"> sit amet consectetur adipisicing elit. Perferendis esse aperiam libero magni qui enim ullam, ex ipsam nesciunt ut, modi et itaque mollitia sint unde officiis ipsa earum accusamus!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="feature-item bg-light rounded p-4">
-                            <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-mobile-alt text-white fs-4"></i>
-                            </div>
-                            <h5 class="mb-3">Laporan & Notifikasi</h5>
-                            <p class="m-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Modi alias expedita natus atque voluptates vero placeat illo officia at totam ducimus eum autem et, tenetur iste! Aliquid quas molestias quae.</p>
-                        </div>
-                    </div>
+                    <h5 class="mb-3">Login & Autentikasi</h5>
+                    <p class="m-0" style="text-align: justify;">Gerbang utama yang aman untuk masuk ke dalam aplikasi. Ini memastikan bahwa hanya pengguna yang terdaftar dan terverifikasi (melalui nama pengguna dan kata sandi) yang dapat mengakses dan menggunakan fitur-fitur serta data pribadi mereka di dalam sistem, menjaga keamanan dan integritas informasi. Pada platform web, pengguna juga memiliki kemampuan untuk melakukan proses pendaftaran (register), memungkinkan mereka untuk membuat akun baru sebelum dapat login dan memulai penggunaan aplikasi.</p>
                 </div>
             </div>
-        </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="feature-item bg-light rounded p-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa fa-layer-group text-white fs-4"></i>
+                    </div>
+                    <h5 class="mb-3">Dashboard Web & Mobile (Ringkasan Data)</h5>
+                    <p class="m-0" style="text-align: justify;">"Kenali" adalah ekosistem terintegrasi yang memungkinkan deteksi dini risiko stroke yang mudah diakses pengguna melalui aplikasi mobile (lengkap dengan dashboard personal), sekaligus menyediakan alat manajemen dan pemantauan data yang kuat bagi administrator melalui platform web.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="feature-item bg-light rounded p-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
+                        <i class="fa fa-edit text-white fs-4"></i>
+                    </div>
+                    <h5 class="mb-3">Riwayat Deteksi</h5>
+                    <p class="m-0" style="text-align: justify;">Riwayat deteksi ini terdapat sebuah akses yaitu admin dan user. Untuk admin, terdapat fitur riwayat deteksi user yang menampilkan daftar hasil skrining risiko stroke dari berbagai pengguna. Sementara itu, untuk user, terdapat fitur riwayat deteksi di mana mereka akan memiliki akses ke subset fungsionalitas yang sama, namun terfokus pada riwayat deteksi pribadi mereka sendiri, memastikan privasi dan relevansi informasi.</p>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
         <!-- Features End -->
 
        <!-- BMI Calculator Start -->
