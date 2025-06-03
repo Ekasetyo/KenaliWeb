@@ -73,10 +73,10 @@
                 <div class="container px-lg-5">
                     <div class="row g-5"> 
                        <div class="col-lg-8 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">Solusi Cerdas Untuk Apa?</h1>
-                            <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
-                            <a href="#contact" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Download Disini</a>
-                        </div>
+                            <h1 class="text-white mb-4 animated slideInDown">Apa itu Kenali?</h1>
+                            <p class="text-white pb-3 animated slideInDown" style="text-align: justify;">Kenali adalah aplikasi untuk mengatasi deteksi dini risiko stroke menjadi sangat penting untuk menekan angka kejadian dan mencegah komplikasi serius. Saat ini, skrining risiko stroke umumnya masih mengandalkan pemeriksaan klinis manual dan kuesioner sederhana yang rentan subjektivitas. Selain itu, sumber daya medis di banyak wilayah masih terbatas, sehingga akses ke screening yang komprehensif tidak merata.</p>
+                            <a href="https://github.com/Ekasetyo/KenaliApp.git" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Download Disini</a>
+                            </div>
                         <div class="owl-carousel screenshot-carousel">
                                 <img class="img-fluid" src="{{ asset('landing-assets/img/gambar1.png') }}"
                                     alt="">
@@ -100,8 +100,7 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h5 class="text-primary-gradient fw-medium">Tentang Kenali</h5>
-                        <h1 class="mb-4">#1 </h1>
+                        <h5 class="text-primary-gradient fw-medium">Tentang Stroke</h5>
                         <p class="mb-4" style="text-align: justify;">Stroke merupakan penyakit tidak menular yang menjadi penyebab utama kematian dan kecacatan, dan sering kali terjadi secara tiba-tiba tanpa gejala awal yang jelas. Sayangnya, masih banyak masyarakat yang belum menyadari risiko mereka terhadap penyakit ini, serta kurangnya akses terhadap layanan deteksi dini yang cepat dan efisien, terutama di wilayah terpencil. Pengembangan sistem ini diharapkan dapat membantu tenaga medis dalam proses skrining, meningkatkan kesadaran masyarakat akan pentingnya pencegahan stroke, dan pada akhirnya menurunkan angka kejadian stroke melalui deteksi dini berbasis data.</p>
                         <div class="row g-4 mb-4"></div>
                     </div>

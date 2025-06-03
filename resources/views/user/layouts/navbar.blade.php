@@ -74,12 +74,11 @@
                 </ul>
 
                 <div class="tab-content px-4 pt-4 pb-3 border-left border-right border-bottom rounded-bottom">
-                    <!-- Edit Profile Tab -->
+               <!-- Edit Profile Tab -->
                     <div class="tab-pane fade show active" id="edit-profile" role="tabpanel">
                         <form method="POST" action="{{ route('profile.update') }}" id="profileForm">
                             @csrf
-                            @method('PUT')
-
+                
                             @if(session('success'))
                                 <div class="alert alert-success alert-dismissible fade show">
                                     {{ session('success') }}
@@ -181,9 +180,8 @@
                     
                     <!-- Change Password Tab -->
                     <div class="tab-pane fade" id="change-password" role="tabpanel">
-                        <form method="POST" action="{{ route('password.update') }}" id="passwordForm">
+                        <form method="POST" action="{{ route('profile.update-password') }}" id="passwordForm">
                             @csrf
-                            @method('PUT')
 
                             @if(session('success_password'))
                                 <div class="alert alert-success alert-dismissible fade show">
@@ -273,6 +271,7 @@
         </div>
     </div>
 </div>
+
 @endif
 
 <!-- JavaScript -->
