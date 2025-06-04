@@ -10,7 +10,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-column flex-md-row justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Daftar Deteksi Pengguna</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Daftar Deteksi Keseluruhan Pengguna</h6>
             <form action="{{ route('admin.hasil-prediksi') }}" method="GET" class="mt-2 mt-md-0">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control border-primary" placeholder="Cari nama pengguna..." 
@@ -66,6 +66,7 @@
                                     <i class="fas fa-eye mr-1"></i> Detail
                                 </a>
                             </td>
+                            
                         </tr>
                         @empty
                         <tr>

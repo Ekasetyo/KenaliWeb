@@ -71,6 +71,8 @@ Route::middleware(['login.session', 'admin'])->prefix('admin')->group(function (
     // Data Prediksi
     Route::get('/hasil-prediksi', [AdminDataPrediksi::class, 'dataPrediksi'])->name('admin.hasil-prediksi');
     Route::get('/hasil-prediksi/{id}', [AdminDataPrediksi::class, 'showDetail'])->name('admin.hasil-prediksi.show');
+    Route::delete('/admin/hasil-prediksi/{id}', [AdminController::class, 'destroy'])->name('admin.hasil-prediksi.destroy');
+
 
     // Data Visualisasi
     Route::get('/visualisasi', [AdminVisualisasi::class, 'visualisasi'])->name('admin.visualisasi');

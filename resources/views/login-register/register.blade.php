@@ -15,7 +15,6 @@
 <body>
 
     <div class="main">
-
         <!-- Sign up form -->
         <section class="signup">
             <div class="container">
@@ -23,7 +22,7 @@
                     <div class="signup-form">
                         <h2 class="form-title">Sign Up</h2>
 
-                        <!-- FORM BARU -->
+                        <!-- FORM -->
                         <form method="POST" action="{{ route('register') }}" class="register-form" id="register-form">
                             @csrf
 
@@ -51,8 +50,8 @@
                                 <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
                             </div>
                         </form>
-
                     </div>
+
                     <div class="signup-image">
                         <figure><img src="{{ asset('login-assets/images/sign_up.png') }}" alt="sign up image"></figure>
                         <a href="{{ url('/login') }}" class="signup-image-link">Back to Login</a>
@@ -60,39 +59,67 @@
                 </div>
             </div>
         </section>
-
     </div>
-<script>
-    document.getElementById("register-form").addEventListener("submit", function (e) {
-        const password = document.getElementById("password").value;
-        const passwordConfirm = document.getElementById("password_confirmation").value;
-        let errorMessages = [];
 
-        if (password.length < 8) {
-            errorMessages.push("Password minimal 8 karakter.");
-        }
-        if (!/[A-Z]/.test(password)) {
-            errorMessages.push("Password harus mengandung huruf kapital (A-Z).");
-        }
-        if (!/[0-9]/.test(password)) {
-            errorMessages.push("Password harus mengandung angka (0-9).");
-        }
-        if (!/[@$!%*?&]/.test(password)) {
-            errorMessages.push("Password harus mengandung karakter khusus (@$!%*?&).");
-        }
-        if (password !== passwordConfirm) {
-            errorMessages.push("Konfirmasi password tidak cocok.");
+    <!-- Custom Modal Style Pop-Up -->
+    <div id="popup-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; border-radius: 16px; padding: 40px 30px; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 5px 25px rgba(0,0,0,0.2);">
+            <div style="margin-bottom: 20px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: #ffe0b2; display: flex; justify-content: center; align-items: center; margin: auto;">
+                    <span style="font-size: 40px; color: #ff0000;">&#9888;</span> <!-- Ikon Warning -->
+                </div>
+            </div>
+            <h2 style="margin-bottom: 15px; color: #444;">Konfirmasi</h2>
+            <div id="popup-message" style="color: #666; font-size: 16px;"></div>
+            <button onclick="closePopup()" style="margin-top: 25px; padding: 10px 25px; background: #ff0000; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- JS Validasi dan Pop-Up -->
+    <script>
+        function showPopup(messages) {
+            const popup = document.getElementById("popup-modal");
+            const messageContainer = document.getElementById("popup-message");
+
+            messageContainer.innerHTML = messages.map(msg => `<p>${msg}</p>`).join("");
+            popup.style.display = "flex";
         }
 
-        if (errorMessages.length > 0) {
-            e.preventDefault(); // Menghentikan submit form
-            alert(errorMessages.join("\n"));
+        function closePopup() {
+            document.getElementById("popup-modal").style.display = "none";
         }
-    });
-</script>
 
-    <!-- JS -->
+        document.getElementById("register-form").addEventListener("submit", function (e) {
+            const password = document.getElementById("password").value;
+            const passwordConfirm = document.getElementById("password_confirmation").value;
+            let errorMessages = [];
+
+            if (password.length < 8) {
+                errorMessages.push("Password minimal 8 karakter.");
+            }
+            if (!/[A-Z]/.test(password)) {
+                errorMessages.push("Password harus mengandung huruf kapital (A-Z).");
+            }
+            if (!/[0-9]/.test(password)) {
+                errorMessages.push("Password harus mengandung angka (0-9).");
+            }
+            if (!/[@$!%*?&]/.test(password)) {
+                errorMessages.push("Password harus mengandung karakter khusus (@$!%*?&).");
+            }
+            if (password !== passwordConfirm) {
+                errorMessages.push("Konfirmasi password tidak cocok.");
+            }
+
+            if (errorMessages.length > 0) {
+                e.preventDefault(); // Stop form submission
+                showPopup(errorMessages);
+            }
+        });
+    </script>
+
+    <!-- Vendor JS -->
     <script src="{{ asset('login-assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('login-assets/js/main.js') }}"></script>
+
 </body>
 </html>

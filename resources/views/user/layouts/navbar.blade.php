@@ -66,11 +66,11 @@
                             <i class="fas fa-user-edit mr-2"></i>Edit Profil
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link py-3" id="change-password-tab" data-toggle="tab" href="#change-password" role="tab">
                             <i class="fas fa-key mr-2"></i>Ganti Password
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <div class="tab-content px-4 pt-4 pb-3 border-left border-right border-bottom rounded-bottom">
@@ -178,7 +178,7 @@
                         </form>
                     </div>
                     
-                    <!-- Change Password Tab -->
+                    <!-- Change Password Tab
                     <div class="tab-pane fade" id="change-password" role="tabpanel">
                         <form method="POST" action="{{ route('profile.update-password') }}" id="passwordForm">
                             @csrf
@@ -265,7 +265,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

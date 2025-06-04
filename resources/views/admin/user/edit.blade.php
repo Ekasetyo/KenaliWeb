@@ -30,9 +30,22 @@
             </select>
         </div>
 
+        @php
+            $tanggal = '';
+            if ($user->tanggal_lahir instanceof \MongoDB\BSON\UTCDateTime) {
+                $tanggal = $user->tanggal_lahir->toDateTime()->format('Y-m-d');
+            } elseif (is_string($user->tanggal_lahir)) {
+                try {
+                    $tanggal = \Carbon\Carbon::parse($user->tanggal_lahir)->format('Y-m-d');
+                } catch (\Exception $e) {
+                    $tanggal = '';
+                }
+            }
+        @endphp
+
         <div class="form-group">
             <label>Tanggal Lahir</label>
-            <input type="date" name="tanggal_lahir" value="{{ $user->tanggal_lahir->toDate()->format('Y-m-d') }}" class="form-control" required>
+            <input type="date" name="tanggal_lahir" value="{{ $tanggal }}" class="form-control" required>
         </div>
 
         <div class="form-group">
